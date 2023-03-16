@@ -22,8 +22,8 @@
     "wagmi": "~0.11.7"
   },
   "devDependencies": {
-    "@acme/tsconfig": "workspace:*",
-    "eslint-config-acme": "workspace:*",
+    "@daobox/tsconfig": "workspace:*",
+    "eslint-config-daobox": "workspace:*",
     "eslint": "^7.32.0",
     "tsup": "^5.10.1",
     "@types/react": "^18.0.28",

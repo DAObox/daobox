@@ -1,13 +1,13 @@
-import { Button } from "@acme/core";
-// import { useIsomorphicLayoutEffect } from "@acme/utils";
+import { Button } from "@daobox/core";
+// import { useIsomorphicLayoutEffect } from "@daobox/utils";
 
 export default function Docs() {
   // useIsomorphicLayoutEffect(() => {
-  //   console.log("Acme docs page");
+  //   console.log("daobox docs page");
   // }, []);
   return (
     <div>
-      <h1>Acme Documentation</h1>
+      <h1>daobox Documentation</h1>
       <Button>Click me</Button>
     </div>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "@acme/core",
+  "name": "@daobox/core",
   "version": "0.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -16,9 +16,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@acme/tsconfig": "workspace:*",
+    "@daobox/tsconfig": "workspace:*",
     "eslint": "^7.32.0",
-    "eslint-config-acme": "workspace:*",
+    "eslint-config-daobox": "workspace:*",
     "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
     "react": "^17.0.2",

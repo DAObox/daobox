@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "deploy": "vercel deploy dist --team=turborepo --confirm",
+    "dev": "vite --host 0.0.0.0 --port 3001 --clearScreen false",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\""
   },
   "dependencies": {
     "@daobox/use-aragon": "workspace:*",
-    "@acme/core": "workspace:*",
+    "@daobox/core": "workspace:*",
     "@emotion/react": "^11.10.6",
     "@mantine/carousel": "^6.0.0",
     "@mantine/core": "^6.0.0",
@@ -40,7 +42,7 @@
     "wagmi": "^0.11"
   },
   "devDependencies": {
-    "@acme/tsconfig": "workspace:*",
+    "@daobox/tsconfig": "workspace:*",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
