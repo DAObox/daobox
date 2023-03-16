@@ -1,1 +1,2 @@
-export * from './useFetchProposals';
+export * from "./useFetchProposals";
+export * from "./types";
