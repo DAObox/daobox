@@ -1,1 +1,2 @@
-export * from './useNewProposal';
+export * from "./useNewProposal";
+export * from "./types";
