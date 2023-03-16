@@ -1,1 +1,2 @@
-export * from './useFetchMembers';
+export * from "./useFetchMembers";
+export * from "./types";

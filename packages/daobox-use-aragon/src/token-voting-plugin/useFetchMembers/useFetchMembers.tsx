@@ -1,24 +1,25 @@
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
-import { useAragon } from '../../context';
+import { useQuery } from "react-query";
+import { useAragon } from "../../context";
+import { FetchMembersReturnType, UseFetchMembersOptions } from "./types";
 
 /**
- * Fetches members of a DAO
- * @param pluginAddress Address of the plugin
- * @param options useQuery options
- * @returns Array of member addresses
+ * Custom hook to fetch members of a voting plugin.
+ * @param {string | undefined} pluginAddress - The plugin address to fetch members from.
+ * @param {UseFetchMembersOptions | undefined} options - Optional query options.
+ * @returns {FetchMembersReturnType} - A query result object containing the members array and other query metadata.
  */
 export function useFetchMembers(
-  pluginAddress?: string | undefined,
-  options?: UseQueryOptions<string[] | null, unknown, string[] | null, QueryKey>
-) {
+  pluginAddress?: string,
+  options?: UseFetchMembersOptions
+): FetchMembersReturnType {
   const { tokenVotingClient: client, context } = useAragon();
 
   return useQuery<string[] | null>({
-    queryKey: ['members', pluginAddress],
-    queryFn: async () => client.methods.getMembers(pluginAddress),
+    queryKey: ["members", pluginAddress],
+    queryFn: async () => client!.methods.getMembers(pluginAddress!),
     enabled: !!client && !!pluginAddress,
     refetchOnReconnect: true,
-    onError: error => {
+    onError: (error) => {
       console.error({ error, context });
     },
     ...options,
