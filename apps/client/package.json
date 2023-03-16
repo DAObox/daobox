@@ -10,12 +10,11 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {
+    "@daobox/use-aragon": "workspace:*",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/next-js": "^2.0.1",
     "@chakra-ui/pro-theme": "^0.0.64",
     "@chakra-ui/react": "^2.5.1",
-    "@daobox/ui": "workspace:*",
-    "@daobox/use-aragon": "workspace:*",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/inter": "^4.5.15",
