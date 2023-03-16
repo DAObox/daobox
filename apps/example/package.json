@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@daobox/use-aragon": "workspace:*",
-    "@daobox/core": "workspace:*",
+    "@daobox/ui": "workspace:*",
     "@emotion/react": "^11.10.6",
     "@mantine/carousel": "^6.0.0",
     "@mantine/core": "^6.0.0",

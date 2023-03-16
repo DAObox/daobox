@@ -1,4 +1,4 @@
-import { Button } from "@daobox/core";
+import { Button } from "@daobox/ui";
 // import { useIsomorphicLayoutEffect } from "@daobox/utils";
 
 export default function Docs() {

@@ -9,7 +9,7 @@ This Turborepo includes the following:
 ### Apps and Packages
 
 - `docs`: A placeholder documentation site powered by [Next.js](https://nextjs.org/)
-- `@daobox/core`: core React components
+- `@daobox/ui`: core React components
 - `@daobox/utils`: shared React utilities
 - `@daobox/tsconfig`: shared `tsconfig.json`s used throughout the monorepo
 - `eslint-config-daobox`: ESLint preset

@@ -12,14 +12,14 @@ importers:
     devDependencies:
       '@changesets/cli': 2.26.0
       eslint: 7.32.0
-      eslint-config-daobox: link:packages/eslint-config-acme
+      eslint-config-daobox: link:packages/eslint-config-daobox
       prettier: 2.8.4
       turbo: 1.8.3
 
   apps/docs:
     specifiers:
-      '@daobox/core': workspace:*
       '@daobox/tsconfig': workspace:*
+      '@daobox/ui': workspace:*
       '@daobox/use-aragon': workspace:*
       '@types/node': ^17.0.12
       '@types/react': ^18.0.22
@@ -30,23 +30,23 @@ importers:
       react-dom: ^18.2.0
       typescript: ^4.5.4
     dependencies:
-      '@daobox/core': link:../../packages/acme-core
-      '@daobox/use-aragon': link:../../packages/acme-utils
+      '@daobox/ui': link:../../packages/daobox-ui
+      '@daobox/use-aragon': link:../../packages/daobox-use-aragon
       next: 13.2.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@daobox/tsconfig': link:../../packages/acme-tsconfig
+      '@daobox/tsconfig': link:../../packages/daobox-tsconfig
       '@types/node': 17.0.45
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
-      eslint-config-daobox: link:../../packages/eslint-config-acme
+      eslint-config-daobox: link:../../packages/eslint-config-daobox
       typescript: 4.9.5
 
   apps/example:
     specifiers:
-      '@daobox/core': workspace:*
       '@daobox/tsconfig': workspace:*
+      '@daobox/ui': workspace:*
       '@daobox/use-aragon': workspace:*
       '@emotion/react': ^11.10.6
       '@mantine/carousel': ^6.0.0
@@ -81,8 +81,8 @@ importers:
       vite: ^4.1.0
       wagmi: ^0.11
     dependencies:
-      '@daobox/core': link:../../packages/acme-core
-      '@daobox/use-aragon': link:../../packages/acme-utils
+      '@daobox/ui': link:../../packages/daobox-ui
+      '@daobox/use-aragon': link:../../packages/daobox-use-aragon
       '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
       '@mantine/carousel': 6.0.2_qkf4nktw6nri354b3oj6t5zzay
       '@mantine/core': 6.0.2_md2nfwiomeeos7ogkicwnxcafa
@@ -111,14 +111,17 @@ importers:
       react-router-dom: 6.9.0_biqbaboplfbrettd7655fr4n2y
       wagmi: 0.11.7_ab23u2x7qiegbqrvposuj42sgm
     devDependencies:
-      '@daobox/tsconfig': link:../../packages/acme-tsconfig
+      '@daobox/tsconfig': link:../../packages/daobox-tsconfig
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       '@vitejs/plugin-react': 3.1.0_vite@4.2.0
       typescript: 4.9.5
       vite: 4.2.0_@types+node@17.0.45
 
-  packages/acme-core:
+  packages/daobox-tsconfig:
+    specifiers: {}
+
+  packages/daobox-ui:
     specifiers:
       '@daobox/tsconfig': workspace:*
       '@types/react': ^17.0.13
@@ -129,19 +132,16 @@ importers:
       tsup: ^5.10.1
       typescript: ^4.5.3
     devDependencies:
-      '@daobox/tsconfig': link:../acme-tsconfig
+      '@daobox/tsconfig': link:../daobox-tsconfig
       '@types/react': 17.0.53
       '@types/react-dom': 17.0.19
       eslint: 7.32.0
-      eslint-config-daobox: link:../eslint-config-acme
+      eslint-config-daobox: link:../eslint-config-daobox
       react: 17.0.2
       tsup: 5.12.9_typescript@4.9.5
       typescript: 4.9.5
 
-  packages/acme-tsconfig:
-    specifiers: {}
-
-  packages/acme-utils:
+  packages/daobox-use-aragon:
     specifiers:
       '@aragon/sdk-client': ^1.0.2
       '@daobox/tsconfig': workspace:*
@@ -164,11 +164,11 @@ importers:
       react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
       wagmi: 0.11.7_ab23u2x7qiegbqrvposuj42sgm
     devDependencies:
-      '@daobox/tsconfig': link:../acme-tsconfig
+      '@daobox/tsconfig': link:../daobox-tsconfig
       '@types/react': 18.0.28
       '@types/react-dom': 18.0.11
       eslint: 7.32.0
-      eslint-config-daobox: link:../eslint-config-acme
+      eslint-config-daobox: link:../eslint-config-daobox
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       size-limit: 8.2.4
@@ -176,7 +176,7 @@ importers:
       tsup: 5.12.9_typescript@4.9.5
       typescript: 4.9.5
 
-  packages/eslint-config-acme:
+  packages/eslint-config-daobox:
     specifiers:
       eslint-config-next: latest
       eslint-config-prettier: ^8.3.0

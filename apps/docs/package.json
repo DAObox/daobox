@@ -10,7 +10,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {
-    "@daobox/core": "workspace:*",
+    "@daobox/ui": "workspace:*",
     "@daobox/use-aragon": "workspace:*",
     "next": "latest",
     "react": "^18.2.0",
