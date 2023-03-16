@@ -11,11 +11,14 @@
     "release": "turbo run build --filter=docs^... && changeset publish"
   },
   "devDependencies": {
-    "eslint-config-daobox": "workspace:*",
     "@changesets/cli": "^2.22.0",
     "eslint": "^7.32.0",
+    "eslint-config-daobox": "workspace:*",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@7.15.0"
+  "packageManager": "pnpm@7.15.0",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
 }
