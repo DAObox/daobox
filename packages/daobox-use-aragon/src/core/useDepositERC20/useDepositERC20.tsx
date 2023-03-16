@@ -1,20 +1,40 @@
-import { useState } from 'react';
-import { Client } from '@aragon/sdk-client';
-import { DaoDepositSteps, DepositParams } from '@aragon/sdk-client';
-import { useMutation, UseMutationOptions } from 'react-query';
+import { useState } from "react";
+import { DaoDepositSteps, DepositParams } from "@aragon/sdk-client";
+import { useMutation } from "react-query";
 
-import { useAragon } from '../../context';
-import { DepositERC20Status } from './types';
+import {
+  useAragon,
+  validateData,
+  DepositERC20Status,
+  UseDepositERC20Options,
+  UseDepositERC20ReturnType,
+  depositParamsSchema,
+} from "../../";
 
-export function useDepositERC20(depositParams: DepositParams, options?: UseMutationOptions) {
+/**
+ * Custom hook to deposit ERC20 tokens.
+ * @param {DepositParams | undefined} depositParams - Optional deposit parameters.
+ * @param {UseDepositERC20Options | undefined} options - Optional mutation options.
+ * @returns {UseDepositERC20ReturnType} - An object containing the allowance, updateAllowanceTxid, depositTxid, depositStatus, and the mutation.
+ */
+export function useDepositERC20(
+  depositParams?: DepositParams,
+  options?: UseDepositERC20Options
+): UseDepositERC20ReturnType {
   const [allowance, setAllowance] = useState<bigint | null>(null);
-  const [updateAllowanceTxid, setUpdateAllowanceTxid] = useState<string | null>(null);
+  const [updateAllowanceTxid, setUpdateAllowanceTxid] = useState<string | null>(
+    null
+  );
   const [depositTxid, setDepositTxid] = useState<string | null>(null);
-  const [depositStatus, setDepositStatus] = useState<DepositERC20Status>(DepositERC20Status.IDLE);
+  const [depositStatus, setDepositStatus] = useState<DepositERC20Status>(
+    DepositERC20Status.IDLE
+  );
 
   const { baseClient: client } = useAragon();
 
-  const deposit = async (client: Client, depositParams: DepositParams) => {
+  const deposit = async (depositParams: DepositParams) => {
+    if (!client) throw new Error("No Aragon Client found");
+    validateData(depositParamsSchema, depositParams);
     try {
       const steps = client.methods.deposit(depositParams);
       setDepositStatus(DepositERC20Status.WAITING_FOR_SIGNER);
@@ -52,8 +72,8 @@ export function useDepositERC20(depositParams: DepositParams, options?: UseMutat
     depositTxid,
     depositStatus,
     ...useMutation({
-      mutationKey: ['depositEth', depositParams.daoAddressOrEns],
-      mutationFn: async () => await deposit(client, depositParams),
+      mutationKey: ["depositEth", depositParams?.daoAddressOrEns],
+      mutationFn: async () => await deposit(depositParams!),
       ...options,
     }),
   };
