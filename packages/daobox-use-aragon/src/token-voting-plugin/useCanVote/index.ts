@@ -1,1 +1,2 @@
-export * from './useCanVote';
+export * from "./useCanVote";
+export * from "./types";
