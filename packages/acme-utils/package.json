@@ -1,5 +1,5 @@
 {
-  "name": "@acme/utils",
+  "name": "@daobox/use-aragon",
   "version": "0.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -15,15 +15,24 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
+  "dependencies": {
+    "@aragon/sdk-client": "^1.0.2",
+    "ethers": "^5.7.2",
+    "react-query": "^3.39.3",
+    "wagmi": "~0.11.7"
+  },
   "devDependencies": {
     "@acme/tsconfig": "workspace:*",
-    "@types/react": "^17.0.13",
-    "@types/react-dom": "^17.0.8",
-    "eslint": "^7.32.0",
     "eslint-config-acme": "workspace:*",
-    "react": "^17.0.2",
+    "eslint": "^7.32.0",
     "tsup": "^5.10.1",
-    "typescript": "^4.5.3"
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "size-limit": "^8.2.4",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public"
