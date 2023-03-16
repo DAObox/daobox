@@ -6,11 +6,8 @@ import { Box, Stack } from "@chakra-ui/react";
 import { ValidatedInput } from "../atoms/form/ValidatedInput";
 import { ValidatedTextarea } from "../atoms/form/ValidatedTextarea";
 import { ValidatedSlider } from "../atoms/form/ValidatedSlider";
-import {
-  CreateMajorityVotingProposalParams,
-  ProposalMetadata,
-  useNewProposal,
-} from "@daobox/use-aragon";
+import { useFetchDao, useNewProposal } from "@daobox/use-aragon";
+import { useRouter } from "next/router";
 
 const FormSchema: ZodSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -22,10 +19,12 @@ const FormSchema: ZodSchema = z.object({
 type FormData = z.infer<typeof FormSchema>;
 
 const SignalVoteForm: React.FC<{ id: string }> = ({ id }) => {
-  const { mutate: createProposal } = useNewProposal<
-    CreateMajorityVotingProposalParams,
-    ProposalMetadata
-  >();
+  const { mutate: createProposal } = useNewProposal();
+  const { dao: daoAddress } = useRouter().query;
+
+  // this logic seems unnecessary, make a hook to get the plugin address
+  const { data } = useFetchDao(daoAddress as string);
+  const pluginAddress = data?.plugins[0]?.instanceAddress as string;
 
   const {
     handleSubmit,
@@ -34,19 +33,19 @@ const SignalVoteForm: React.FC<{ id: string }> = ({ id }) => {
   } = useForm<FormData>({ resolver: zodResolver(FormSchema) });
 
   const onSubmit = (data: FormData) => {
-    const proposalMetadata: ProposalMetadata = {
-      title: data.title,
-      summary: data.summary,
-      description: data.description || "",
-      resources: [],
+    const args = {
+      proposalMetadata: {
+        resources: [],
+        ...data,
+      },
+      proposalParams: {
+        startDate: new Date(0),
+        endDate: new Date(Date.now() + data.duration * 24 * 60 * 60 * 1000),
+        pluginAddress,
+      },
     };
-
-    const proposalParams: CreateMajorityVotingProposalParams = {
-      metadata: proposalMetadata,
-      endDate: new Date(Date.now() + data.duration * 24 * 60 * 60 * 1000),
-    };
-
-    createProposal(proposalParams);
+    console.log(args);
+    createProposal(args);
   };
 
   return (
