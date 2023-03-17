@@ -1,20 +1,24 @@
-import { GasFeeEstimation } from '@aragon/sdk-client';
-import { DepositParams } from '@aragon/sdk-client';
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
+import { GasFeeEstimation } from "@aragon/sdk-client";
+import { DepositParams } from "@aragon/sdk-client";
+import { useQuery } from "react-query";
+import { UseEstimateDepositEthOptions } from ".";
 
-import { useAragon } from '../../context';
+import { useAragon } from "../../context";
+import useConnectedWallet from "../../context/useConnectedWallet";
 
 export function useEstimateDeposit(
   depositParams: DepositParams,
-  options?: UseQueryOptions<GasFeeEstimation | null, unknown, GasFeeEstimation | null, QueryKey>
+  options?: UseEstimateDepositEthOptions
 ) {
   const { baseClient: client } = useAragon();
+  const { signer } = useConnectedWallet();
 
   return useQuery<GasFeeEstimation | null>({
-    queryKey: ['estimateDepositEth', depositParams.daoAddressOrEns],
-    queryFn: async () => client.estimation.deposit(depositParams),
+    queryKey: ["estimateDepositEth", depositParams.daoAddressOrEns],
+    queryFn: async () => client!.estimation.deposit(depositParams),
     enabled: !!(
-      client?.web3?.getSigner() &&
+      signer &&
+      client &&
       depositParams.daoAddressOrEns &&
       Object.values(depositParams).every(Boolean)
     ),

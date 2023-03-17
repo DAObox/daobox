@@ -1,1 +1,2 @@
-export * from './useEstimateDeposit';
+export * from "./useEstimateDeposit";
+export * from "./types";
