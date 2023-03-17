@@ -6,7 +6,10 @@ export function validateData<T>(schema: ZodSchema<T>, data: unknown): T {
   } catch (error) {
     if (error instanceof ZodError) {
       const errorMessage = error.errors
-        .map((err) => `${err.path.join(".")} - ${err.message}`)
+        .map((err) => {
+          const fieldPath = err.path.join(".");
+          return fieldPath ? `${fieldPath} - ${err.message}` : `${err.message}`;
+        })
         .join("; ");
 
       throw new Error(`Invalid data: ${errorMessage}`);
