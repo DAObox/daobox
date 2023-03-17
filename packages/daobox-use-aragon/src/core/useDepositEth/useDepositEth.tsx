@@ -1,27 +1,56 @@
-import { Client } from '@aragon/sdk-client';
-import { DepositParams } from '@aragon/sdk-client';
-import { useState } from 'react';
-import { useMutation, UseMutationOptions } from 'react-query';
+import { DaoDepositSteps } from "@aragon/sdk-client";
+import { DepositParams } from "@aragon/sdk-client";
+import { useState } from "react";
+import { useMutation } from "react-query";
 
-import { useAragon } from '../../context';
-import { DepositEthStatus } from './types';
+import {
+  DepositEthStatus,
+  UseDepositEthOptions,
+  UseDepositEthReturnType,
+  useAragon,
+} from "../../";
 
-export function useDepositEth(depositParams: DepositParams, options?: UseMutationOptions) {
+/**
+ * Hook for depositing ETH to an Aragon DAO.
+ *
+ * @param {DepositParams} depositParams - The deposit parameters.
+ * @param {UseDepositEthOptions} options - The mutation options.
+ * @returns {UseDepositEthReturnType} The deposit transaction ID, deposit status, and useMutation result.
+ */
+export function useDepositEth(
+  depositParams?: DepositParams,
+  options?: UseDepositEthOptions
+): UseDepositEthReturnType {
   const [depositTxid, setDepositTxid] = useState<string | null>(null);
-  const [depositStatus, setDepositStatus] = useState<DepositEthStatus>(DepositEthStatus.IDLE);
+  const [depositStatus, setDepositStatus] = useState<DepositEthStatus>(
+    DepositEthStatus.IDLE
+  );
 
   const { baseClient: client } = useAragon();
 
-  const deposit = async (client: Client, depositParams: DepositParams) => {
+  /**
+   * Function for depositing ETH to an Aragon DAO.
+   *
+   * @param {DepositParams} depositParams - The deposit parameters.
+   * @returns {Promise<void>}
+   */
+  const deposit = async (depositParams: DepositParams): Promise<void> => {
+    if (!client) throw new Error("No Aragon Client found");
+    // TODO: validateData(depositParamsSchema, depositParams);
     try {
-      const steps = client.methods.deposit(depositParams);
       setDepositStatus(DepositEthStatus.WAITING_FOR_SIGNER);
-
-      setDepositTxid((await steps?.next()).value.txHash);
-      setDepositStatus(DepositEthStatus.CONFIRMING);
-
-      await steps?.next();
-      setDepositStatus(DepositEthStatus.SUCCESS);
+      const steps = client.methods.deposit(depositParams);
+      for await (const step of steps) {
+        switch (step.key) {
+          case DaoDepositSteps.DEPOSITING:
+            setDepositTxid(step.txHash);
+            setDepositStatus(DepositEthStatus.CONFIRMING);
+            break;
+          case DaoDepositSteps.DONE:
+            setDepositStatus(DepositEthStatus.SUCCESS);
+            break;
+        }
+      }
     } catch (err) {
       setDepositStatus(DepositEthStatus.ERROR);
       console.error(err);
@@ -31,10 +60,11 @@ export function useDepositEth(depositParams: DepositParams, options?: UseMutatio
   return {
     depositTxid,
     depositStatus,
-    ...useMutation({
-      mutationKey: ['depositEth', depositParams.daoAddressOrEns],
-      mutationFn: async () => await deposit(client, depositParams),
-      ...options,
-    }),
+    ...useMutation(
+      // Zod validation is checking the depositParams
+      ["depositEth", depositParams?.daoAddressOrEns],
+      async () => await deposit(depositParams!),
+      options
+    ),
   };
 }
