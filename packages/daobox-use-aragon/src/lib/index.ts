@@ -1,2 +1,3 @@
-export * from "./validation";
+export * from "./validatData";
 export * from "./regex";
+export * from "./validators";
