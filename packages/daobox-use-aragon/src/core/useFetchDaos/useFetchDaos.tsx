@@ -1,25 +1,21 @@
-import { DaoDetails, IDaoQueryParams, SortDirection } from '@aragon/sdk-client';
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
-import { useAragon } from '../../context';
+import { DaoListItem, IDaoQueryParams } from "@aragon/sdk-client";
+import { useQuery } from "react-query";
+import { UseFetchDaosOptions, UseFetchDaosResults } from ".";
+import { useAragon } from "../../context";
 
 export function useFetchDaos(
-  queryParams?: IDaoQueryParams,
-  options?: UseQueryOptions<DaoDetails[] | null, unknown, DaoDetails[] | null, QueryKey>
-) {
+  queryParams: IDaoQueryParams,
+  options?: UseFetchDaosOptions
+): UseFetchDaosResults {
   const { baseClient: client } = useAragon();
 
-  return useQuery<DaoDetails[] | null>({
-    queryKey: ['dao', queryParams],
+  return useQuery<DaoListItem[] | null, unknown>({
+    queryKey: ["dao", queryParams],
     queryFn: async () =>
-      client?.methods.getDaos({
-        skip: 0,
-        limit: 10,
-        direction: SortDirection.ASC,
+      client!.methods.getDaos({
         ...queryParams,
       }),
     enabled: !!client,
-    cacheTime: 100000,
-    refetchOnReconnect: false,
     ...options,
   });
 }

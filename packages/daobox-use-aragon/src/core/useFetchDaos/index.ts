@@ -1,1 +1,2 @@
-export * from './useFetchDaos';
+export * from "./useFetchDaos";
+export * from "./types";
