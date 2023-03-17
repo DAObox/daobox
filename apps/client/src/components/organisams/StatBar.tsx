@@ -1,25 +1,27 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { FiUsers, FiMail, FiSend } from "react-icons/fi";
+import { BsCash, BsCashCoin } from "react-icons/bs";
 import { Stat } from "../atoms/Stat";
+import { SiCashapp } from "react-icons/si";
+import { RiMoneyDollarBoxFill, RiMoneyDollarCircleLine } from "react-icons/ri";
+import { ImUsers } from "react-icons/im";
+import { FaVoteYea } from "react-icons/fa";
 
 export const stats = [
   {
-    icon: FiUsers,
-    label: "Total Subscribers",
-    value: "71,887",
-    delta: { value: "320", isUpwardsTrend: true },
+    icon: ImUsers,
+    label: "Total Members",
+    value: "12",
   },
   {
-    icon: FiMail,
-    label: "Avg. Open Rate",
-    value: "56.87%",
-    delta: { value: "2.3%", isUpwardsTrend: true },
+    icon: FaVoteYea,
+    label: "Total Proposals",
+    value: "2",
   },
   {
-    icon: FiSend,
-    label: "Avg. Click Rate",
-    value: "12.87%",
-    delta: { value: "0.1%", isUpwardsTrend: false },
+    icon: RiMoneyDollarBoxFill,
+    label: "Vault Value",
+    value: "$42,069",
   },
 ];
 

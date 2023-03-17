@@ -7,8 +7,11 @@ import { TwoThirdSplitLayout } from "../../components/templates/TwoThirdSplitLay
 import { useDrawer } from "../../components/providers/DrawProvider";
 import SignalVoteForm from "../../components/organisams/SignalVoteForm";
 
+import { useFetchDao } from "@daobox/use-aragon";
+
 export default function Home() {
   const { onOpen } = useDrawer();
+  console.log({ d: useFetchDao("0xb76f8d3512497040a96e77141c951a5374f24eb9") });
 
   const openDrawerWithContent = () => {
     onOpen({
