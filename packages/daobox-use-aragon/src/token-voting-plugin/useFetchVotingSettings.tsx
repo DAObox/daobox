@@ -1,10 +1,11 @@
 import { VotingSettings } from "@aragon/sdk-client";
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
 import {
-  UseFetchVotingSettingsOptions,
-  FetchVotingSettingsReturnType,
-} from "./types";
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Custom hook to fetch voting settings of a given plugin address.
@@ -25,3 +26,15 @@ export function useFetchVotingSettings(
     ...options,
   });
 }
+
+export type FetchVotingSettingsReturnType = UseQueryResult<
+  VotingSettings | null,
+  unknown
+>;
+
+export type UseFetchVotingSettingsOptions = UseQueryOptions<
+  VotingSettings | null,
+  unknown,
+  VotingSettings | null,
+  QueryKey
+>;
