@@ -1,11 +1,12 @@
 import { Erc20TokenDetails } from "@aragon/sdk-client";
 import { Erc721TokenDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
 import {
-  UseFetchVotingTokenOptions,
-  FetchVotingTokenReturnType,
-} from "../useFetchVotingToken";
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Custom hook to fetch the voting token for a given plugin address.
@@ -26,3 +27,15 @@ export function useFetchVotingToken(
     ...options,
   });
 }
+
+export type FetchVotingTokenReturnType = UseQueryResult<
+  Erc20TokenDetails | Erc721TokenDetails | null,
+  unknown
+>;
+
+export type UseFetchVotingTokenOptions = UseQueryOptions<
+  Erc20TokenDetails | Erc721TokenDetails | null,
+  unknown,
+  Erc20TokenDetails | Erc721TokenDetails | null,
+  QueryKey
+>;
