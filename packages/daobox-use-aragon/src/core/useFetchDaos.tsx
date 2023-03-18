@@ -10,7 +10,7 @@ import { useAragon } from "../context";
  * @returns {UseFetchDaosResults} - The result of the DAOs fetching query.
  */
 export function useFetchDaos(
-  queryParams: IDaoQueryParams,
+  queryParams?: IDaoQueryParams,
   options?: UseFetchDaosOptions
 ): UseFetchDaosResults {
   const { baseClient: client } = useAragon();
