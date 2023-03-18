@@ -1,6 +1,10 @@
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
-import { FetchMembersReturnType, UseFetchMembersOptions } from "./types";
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Custom hook to fetch members of a voting plugin.
@@ -25,3 +29,12 @@ export function useFetchMembers(
     ...options,
   });
 }
+
+export type FetchMembersReturnType = UseQueryResult<string[] | null, unknown>;
+
+export type UseFetchMembersOptions = UseQueryOptions<
+  string[] | null,
+  unknown,
+  string[] | null,
+  QueryKey
+>;
