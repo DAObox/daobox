@@ -1,50 +1,57 @@
-import { Button, Flex, Stack } from "@mantine/core";
+import { Button, Flex, Loader, Stack } from "@mantine/core";
 import { useDepositERC20, TokenType } from "@daobox/use-aragon";
-import { DataCard, QueryType } from "../components/cards/DataCard";
+
 import { ExampleCard } from "../components/cards/ExampleCard";
+import * as React from "react";
+import { notifications } from "@mantine/notifications";
 
 export function UseDepositERC20() {
-  const demoCode = ``;
-
-  const deposit = useDepositERC20({
-    daoAddressOrEns: "0x13c6e4f17bbe606fed867a5cd6389a504724e805",
-    type: TokenType.ERC20,
-    amount: 888n,
-    tokenAddress: "0x74445e9F3699CDEbf6FbcEF660c573bda2bBb68C",
-  });
+  const { mutate, allowance, depositAmount, depositStatus, depositTxHash, updateAllowanceTxHash } =
+    useDepositERC20({
+      daoAddressOrEns: "0x13c6e4f17bbe606fed867a5cd6389a504724e805",
+      amount: 888n,
+      tokenAddress: "0x74445e9F3699CDEbf6FbcEF660c573bda2bBb68C",
+      onAllowanceTransaction(txHash) {
+        notifications.show({
+          title: "allowance txHash",
+          message: txHash,
+        });
+      },
+      onDepositTransaction(txHash) {
+        notifications.show({
+          title: "deposit txHash",
+          message: txHash,
+        });
+      },
+      onSuccess(data) {
+        notifications.show({
+          title: "success",
+          message: `
+          allowance txHash: ${JSON.stringify(data.updateAllowanceTxHash?.toString())} 
+          deposit txHash: ${JSON.stringify(data.depositTxHash?.toString())} 
+          amount: ${JSON.stringify(data.depositAmount?.toString())}`,
+        });
+      },
+      onError(error, variables, context) {
+        notifications.show({
+          title: "error",
+          message: error.message,
+        });
+        console.error({ error: { error, variables, context } });
+      },
+    });
 
   return (
     <Stack spacing="xl" align="center">
-      <h1>useDepositERC20</h1>
-      <Flex
-        mih={50}
-        miw="100%"
-        px={6}
-        gap="md"
-        justify="flex-end"
-        align="center"
-        direction="row"
-        wrap="wrap"
-      >
-        <Button onClick={() => deposit?.mutate()}>Deposit 777 GWEI</Button>
-        {/* <Button
-          onClick={() =>
-            deposit.mutateAsync({
-              daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
-              type: TokenType.ERC20,
-              tokenAddress: '0x74445e9F3699CDEbf6FbcEF660c573bda2bBb68C',
-              amount: 420n,
-            })
-          }
-        >
-          Deposit 420 GWEI Async
-        </Button> */}
-      </Flex>
-      <ExampleCard name="Example" type={QueryType.query} data={demoCode} />
-      {deposit && <h3>{deposit.depositStatus}</h3>}
-      {deposit?.depositTxid && <h3>{deposit.depositTxid}</h3>}
+      <Button onClick={() => mutate?.()} disabled={!["idle", "success"].includes(depositStatus)}>
+        {["idle", "success", "error"].includes(depositStatus) ? "Deposit ERC20" : <Loader />}
+      </Button>
 
-      {/* <DataCard name="Response" data={estimates} /> */}
+      <ExampleCard name="status" data={depositStatus} />
+      <ExampleCard name="allowance" data={allowance?.toString()} />
+      <ExampleCard name="depositAmount" data={depositAmount?.toString()} />
+      <ExampleCard name="updateAllowanceTxHash" data={updateAllowanceTxHash} />
+      <ExampleCard name="depositTxHash" data={depositTxHash} />
     </Stack>
   );
 }

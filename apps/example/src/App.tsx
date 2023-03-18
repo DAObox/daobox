@@ -1,6 +1,6 @@
-import { AppLayout } from './components/layout';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { HeroTitle } from './components/hero';
+import { AppLayout } from "./components/layout";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { HeroTitle } from "./components/hero";
 
 import {
   UseFetchDaos,
@@ -9,9 +9,13 @@ import {
   UseFetchTransfers,
   UseFetchDaoBalances,
   UseEstimateDeposit,
-} from './pages';
-import { UseDepositEth } from './pages/UseDepositEth';
-import { UseDepositERC20 } from './pages/UseDepositERC20';
+  UseNewProposal,
+} from "./pages";
+import { UseDepositEth } from "./pages/UseDepositEth";
+import { UseDepositERC20 } from "./pages/UseDepositERC20";
+import * as React from "react";
+import { UseNewDao } from "./pages/UseNewDao";
+import { UseFetchProposals } from "./pages/UseFetchProposals";
 
 export default function App() {
   return (
@@ -26,6 +30,7 @@ export default function App() {
           <Route path="use-estimate-deposit" element={<UseEstimateDeposit />} />
           <Route path="use-deposit-eth" element={<UseDepositEth />} />
           <Route path="use-deposit-erc20" element={<UseDepositERC20 />} />
+          <Route path="test" element={<UseFetchProposals />} />
           <Route path="*" element={<NotFoundTitle />} />
         </Routes>
       </AppLayout>
