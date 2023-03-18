@@ -94,6 +94,7 @@ export function useDepositERC20({
     } catch (err) {
       setDepositStatus(DepositERC20Status.ERROR);
       console.error(err);
+      throw new Error("Error depositing ERC20 tokens");
     }
     return {
       allowance,

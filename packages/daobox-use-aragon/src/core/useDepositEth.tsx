@@ -76,7 +76,7 @@ export function useDepositEth({
     } catch (error) {
       // Set the deposit status to error if an exception is thrown.
       setDepositStatus(DepositEthStatus.ERROR);
-      throw error;
+      throw new Error("Error depositing ETH");
     }
 
     // Return the transaction hash and deposited amount.
