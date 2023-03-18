@@ -1,7 +1,11 @@
-import { CanVoteParams } from "@aragon/sdk-client";
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
-import { UseCanVoteOptions, CanVoteReturnType } from "./types";
+import { CanVoteParams, TokenVotingProposalListItem } from "@aragon/sdk-client";
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Custom hook to check if an address can vote.
@@ -22,3 +26,24 @@ export function useCanVote(
     ...options,
   });
 }
+
+export type CanVoteReturnType = UseQueryResult<boolean | null, unknown>;
+
+export type UseCanVoteOptions = UseQueryOptions<
+  boolean | null,
+  unknown,
+  boolean | null,
+  QueryKey
+>;
+
+export type FetchProposalsReturnType = UseQueryResult<
+  TokenVotingProposalListItem[] | null,
+  unknown
+>;
+
+export type UseFetchProposalsOptions = UseQueryOptions<
+  TokenVotingProposalListItem[] | null,
+  unknown,
+  TokenVotingProposalListItem[] | null,
+  QueryKey
+>;
