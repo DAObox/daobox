@@ -1,7 +1,11 @@
 import { DaoDetails } from "@aragon/sdk-client";
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
-import { UseFetchDaoOptions, UseFetchDaoResult } from "./types";
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Fetches the details of a DAO.
@@ -27,3 +31,12 @@ export function useFetchDao(
     ...options,
   });
 }
+
+export type UseFetchDaoOptions = UseQueryOptions<
+  DaoDetails | null,
+  unknown,
+  DaoDetails | null,
+  QueryKey
+>;
+
+export type UseFetchDaoResult = UseQueryResult<DaoDetails | null, unknown>;
