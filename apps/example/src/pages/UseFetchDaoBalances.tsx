@@ -2,6 +2,7 @@ import { Stack } from "@mantine/core";
 import { useFetchDaoBalances } from "@daobox/use-aragon";
 import { DataCard, QueryType } from "../components/cards/DataCard";
 import { ExampleCard } from "../components/cards/ExampleCard";
+import * as React from "react";
 
 export function UseFetchDaoBalances() {
   const demoCode = `import {

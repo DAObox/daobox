@@ -1,24 +1,19 @@
-import { Text, Card, Group } from '@mantine/core';
-import { Prism } from '@mantine/prism';
-import { QueryObserverResult } from 'react-query';
+import { Text, Card, Group } from "@mantine/core";
+import { Prism } from "@mantine/prism";
+import * as React from "react";
+
 
 export enum QueryType {
-  query = 'useQuery',
-  mutation = 'useMutation',
+  query = "useQuery",
+  mutation = "useMutation",
 }
 interface DataCardProps {
   name: string;
-  data: QueryObserverResult;
+  data: any;
 }
 export function DataCard({ name, data }: DataCardProps) {
   return (
-    <Card
-      shadow="sm"
-      padding="lg"
-      radius="md"
-      withBorder
-      style={{ width: '700px', whiteSpace: 'pre-wrap' }}
-    >
+    <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: "700px", whiteSpace: "pre-wrap" }}>
       <>
         <Group position="apart" mt="md" mb="xs">
           <Text weight={500}>{name}</Text>
@@ -27,7 +22,7 @@ export function DataCard({ name, data }: DataCardProps) {
           <Prism language="tsx">
             {JSON.stringify(
               data?.data,
-              (key, value) => (typeof value === 'bigint' ? value.toString() : value),
+              (key, value) => (typeof value === "bigint" ? value.toString() : value),
               2
             )}
           </Prism>

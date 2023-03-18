@@ -1,9 +1,10 @@
-import { Header, Menu, Group, Center, Burger, Container, Text, Anchor } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown } from '@tabler/icons-react';
-import { useStyles } from './useStyles';
-import { ConnectKitButton } from 'connectkit';
-import { Link } from 'react-router-dom';
+import { Header, Menu, Group, Center, Burger, Container, Text, Anchor } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconChevronDown } from "@tabler/icons-react";
+import { useStyles } from "./useStyles";
+import { ConnectKitButton } from "connectkit";
+import { Link } from "react-router-dom";
+import * as React from "react";
 
 interface HeaderSearchProps {
   links: { link: string; label: string; links: { link: string; label: string }[] }[];
@@ -12,8 +13,8 @@ interface HeaderSearchProps {
 export function HeaderMenu({ links }: HeaderSearchProps) {
   const { classes } = useStyles();
 
-  const items = links.map(link => {
-    const menuItems = link.links?.map(item => {
+  const items = links.map((link) => {
+    const menuItems = link.links?.map((item) => {
       return (
         <Menu.Item component={Link} to={item.link} key={item.link}>
           {item.label}
@@ -40,7 +41,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
         key={link.label}
         href={link.link}
         className={classes.link}
-        onClick={event => event.preventDefault()}
+        onClick={(event) => event.preventDefault()}
       >
         {link.label}
       </a>
@@ -54,7 +55,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
           <Text
             component={Link}
             to="/"
-            sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+            sx={{ fontFamily: "Greycliff CF, sans-serif" }}
             ta="center"
             fz="xl"
             fw={700}

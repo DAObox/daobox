@@ -2,6 +2,7 @@ import { Stack } from "@mantine/core";
 import { useFetchDaos } from "@daobox/use-aragon";
 import { DataCard, QueryType } from "../components/cards/DataCard";
 import { ExampleCard } from "../components/cards/ExampleCard";
+import * as React from "react";
 
 export function UseFetchDaos() {
   const demoCode = `import { useFetchDaos, DaoSortBy, IDaoQueryParams, SortDirection } from '@daobox/use-aragon';
@@ -28,13 +29,13 @@ export function UseFetchDaos() {
       )
   }`;
 
-  const daos = useFetchDaos();
+  // const daos = useFetchDaos();
 
   return (
     <Stack spacing="xl" align="center">
       <h1>useFetchDao</h1>
       <ExampleCard name="Example" type={QueryType.query} data={demoCode} />
-      <DataCard name="Response" data={daos} />
+      {/* <DataCard name="Response" data={daos} /> */}
     </Stack>
   );
 }

@@ -1,4 +1,4 @@
-import { CanVoteParams, TokenVotingProposalListItem } from "@aragon/sdk-client";
+import { CanVoteParams } from "@aragon/sdk-client";
 import {
   QueryKey,
   useQuery,
@@ -33,17 +33,5 @@ export type UseCanVoteOptions = UseQueryOptions<
   boolean | null,
   unknown,
   boolean | null,
-  QueryKey
->;
-
-export type FetchProposalsReturnType = UseQueryResult<
-  TokenVotingProposalListItem[] | null,
-  unknown
->;
-
-export type UseFetchProposalsOptions = UseQueryOptions<
-  TokenVotingProposalListItem[] | null,
-  unknown,
-  TokenVotingProposalListItem[] | null,
   QueryKey
 >;

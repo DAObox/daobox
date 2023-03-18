@@ -5,6 +5,7 @@ import {
   TransferSortBy,
   TransferType,
 } from "@daobox/use-aragon";
+import * as React from "react";
 
 const queryParams: ITransferQueryParams = {
   sortBy: TransferSortBy.CREATED_AT,
@@ -26,11 +27,7 @@ const Demo = () => {
   if (transfers.isLoading) return <h1>Loading...</h1>;
   if (transfers.isError) return <h1>Error!!!</h1>;
 
-  return (
-    <div>
-      {transfers.data && <pre>{JSON.stringify(transfers.data, null, 2)}</pre>}
-    </div>
-  );
+  return <div>{transfers.data && <pre>{JSON.stringify(transfers.data, null, 2)}</pre>}</div>;
 };
 
 export default Demo;
