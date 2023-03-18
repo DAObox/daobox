@@ -10,35 +10,6 @@ import { useAragon } from "..";
 import { MutationConfig } from "../types";
 
 /**
- * @typedef {object} NewDaoParams
- * @property {MutationConfig<NewDaoReturnData, Error>} config - The configuration for the mutation.
- * @property {DaoMetadata} daoMetadata - The metadata for the new DAO.
- * @property {string} [daoUri] - The URI for the new DAO.
- * @property {string} ensSubdomain - The ENS subdomain for the new DAO.
- * @property {string} [trustedForwarder] - The trusted forwarder address for the new DAO.
- * @property {IPluginInstallItem[]} plugins - The plugins to be installed in the new DAO.
- * @property {(txHash: string) => void} [onCreateDaoTransaction] - A callback to be called when the DAO creation transaction is created.
- */
-export type NewDaoParams = MutationConfig<NewDaoReturnData, Error> & {
-  daoMetadata: DaoMetadata;
-  daoUri?: string;
-  ensSubdomain: string;
-  trustedForwarder?: string;
-  plugins: IPluginInstallItem[];
-  onCreateDaoTransaction?: (txHash: string) => void;
-};
-
-/**
- * @typedef {object} NewDaoReturnData
- * @property {string|null} daoAddress - The address of the created DAO.
- * @property {string|null} daoTxHash - The transaction hash of the created DAO.
- */
-export type NewDaoReturnData = {
-  daoAddress: string | null;
-  daoTxHash: string | null;
-};
-
-/**
  * @function useNewDao
  * @param {NewDaoParams} params - The parameters for creating a new DAO.
  * @returns {NewDaoReturnType} - The mutation object and the states of the new DAO creation process.
@@ -120,6 +91,35 @@ export function useNewDao({
     creationStatus,
   };
 }
+
+/**
+ * @typedef {object} NewDaoParams
+ * @property {MutationConfig<NewDaoReturnData, Error>} config - The configuration for the mutation.
+ * @property {DaoMetadata} daoMetadata - The metadata for the new DAO.
+ * @property {string} [daoUri] - The URI for the new DAO.
+ * @property {string} ensSubdomain - The ENS subdomain for the new DAO.
+ * @property {string} [trustedForwarder] - The trusted forwarder address for the new DAO.
+ * @property {IPluginInstallItem[]} plugins - The plugins to be installed in the new DAO.
+ * @property {(txHash: string) => void} [onCreateDaoTransaction] - A callback to be called when the DAO creation transaction is created.
+ */
+export type NewDaoParams = MutationConfig<NewDaoReturnData, Error> & {
+  daoMetadata: DaoMetadata;
+  daoUri?: string;
+  ensSubdomain: string;
+  trustedForwarder?: string;
+  plugins: IPluginInstallItem[];
+  onCreateDaoTransaction?: (txHash: string) => void;
+};
+
+/**
+ * @typedef {object} NewDaoReturnData
+ * @property {string|null} daoAddress - The address of the created DAO.
+ * @property {string|null} daoTxHash - The transaction hash of the created DAO.
+ */
+export type NewDaoReturnData = {
+  daoAddress: string | null;
+  daoTxHash: string | null;
+};
 
 /**
  * Enum representing the possible statuses of a new DAO creation process.
