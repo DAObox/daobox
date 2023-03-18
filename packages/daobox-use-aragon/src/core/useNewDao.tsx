@@ -64,6 +64,7 @@ export function useNewDao({
     } catch (err) {
       setCreationStatus(NewDaoStatus.ERROR);
       console.error(err);
+      throw new Error("DAO creation failed");
     }
     return { daoAddress, daoTxHash };
   };
