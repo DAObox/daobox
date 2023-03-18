@@ -2,9 +2,13 @@ import {
   IProposalQueryParams,
   TokenVotingProposalListItem,
 } from "@aragon/sdk-client";
-import { useQuery } from "react-query";
-import { useAragon } from "../../context";
-import { UseFetchProposalsOptions, FetchProposalsReturnType } from "./types";
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
+import { useAragon } from "../context";
 
 /**
  * Custom hook to fetch a list of proposals based on query parameters.
@@ -25,3 +29,15 @@ export function useFetchProposals(
     ...options,
   });
 }
+
+export type FetchProposalsReturnType = UseQueryResult<
+  TokenVotingProposalListItem[] | null,
+  unknown
+>;
+
+export type UseFetchProposalsOptions = UseQueryOptions<
+  TokenVotingProposalListItem[] | null,
+  unknown,
+  TokenVotingProposalListItem[] | null,
+  QueryKey
+>;
