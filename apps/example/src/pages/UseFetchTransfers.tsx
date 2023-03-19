@@ -2,6 +2,7 @@ import { Stack } from "@mantine/core";
 import { useFetchTransfers } from "@daobox/use-aragon";
 import { DataCard, QueryType } from "../components/cards/DataCard";
 import { ExampleCard } from "../components/cards/ExampleCard";
+import * as React from "react";
 
 export function UseFetchTransfers() {
   const demoCode = `import {

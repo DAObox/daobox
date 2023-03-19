@@ -2,6 +2,7 @@ import { Stack } from "@mantine/core";
 import { useEstimateDeposit, TokenType } from "@daobox/use-aragon";
 import { DataCard, QueryType } from "../components/cards/DataCard";
 import { ExampleCard } from "../components/cards/ExampleCard";
+import * as React from "react";
 
 export function UseEstimateDeposit() {
   const demoCode = `

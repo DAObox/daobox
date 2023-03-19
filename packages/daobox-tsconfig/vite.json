@@ -14,6 +14,7 @@
         "module": "ESNext",
         "noEmit": true,
         "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
         "skipLibCheck": false,
         "target": "ESNext",
         "types": [

@@ -1,7 +1,8 @@
-import { Container, Text, Button, Group } from '@mantine/core';
-import { GithubIcon } from '@mantine/ds';
-import { Link } from 'react-router-dom';
-import { useStyles } from './useStyles';
+import { Container, Text, Button, Group } from "@mantine/core";
+import { GithubIcon } from "@mantine/ds";
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { useStyles } from "./useStyles";
 
 export function HeroTitle() {
   const { classes } = useStyles();
@@ -10,16 +11,16 @@ export function HeroTitle() {
     <div className={classes.wrapper}>
       <Container size={700} className={classes.inner}>
         <h1 className={classes.title}>
-          An{' '}
-          <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
+          An{" "}
+          <Text component="span" variant="gradient" gradient={{ from: "blue", to: "cyan" }} inherit>
             Aragon OSx
-          </Text>{' '}
+          </Text>{" "}
           hooks and components library
         </h1>
 
         <Text className={classes.description} color="dimmed">
-          Build fully functional and performant DAOs with ease – useAragon includes more than 100
-          hooks to help you build your Aragon DAO.
+          Build fully functional and performant DAOs with ease – useAragon includes more than 100 hooks to
+          help you build your Aragon DAO.
         </Text>
 
         <Group className={classes.controls}>
@@ -29,7 +30,7 @@ export function HeroTitle() {
             size="xl"
             className={classes.control}
             variant="gradient"
-            gradient={{ from: 'blue', to: 'cyan' }}
+            gradient={{ from: "blue", to: "cyan" }}
           >
             Get started
           </Button>
