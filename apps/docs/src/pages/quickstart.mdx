@@ -1,0 +1,113 @@
+export const description = `This guide will get you all set up and ready to use the Use Aragon Library. We'll cover how to get started and how to make your first query`
+
+# Quickstart
+
+This guide will get you all set up and ready to use the Use Aragon Library. We'll cover how to get started and how to make your first querys. We'll also look at where to go next to find all the information you need to take full advantage of Aragon OSx. {{ className: 'lead' }}
+
+<Note>
+  The quickest way to get started with use-aragon is to use the [use-aragon]()
+  boilerplate.
+</Note>
+
+## Step 1: Bootstrap a react app
+
+first things first, set up your project. [WAGMI](https://wagmi.sh/cli/create-wagmi) has a great CLI that will get you up and running with wallet connectors. Use-Aragon works with any react app, but we recommend using [NextJS]() or [Vite]().
+
+<CodeGroup>
+```bash {{ title: 'npm' }}
+npm init wagmi --template next-rainbowkit
+````
+
+```bash {{ title: 'pnpm' }}
+pnpm create wagmi --template next-rainbowkit
+```
+
+```bash {{ title: 'yarn' }}
+yarn create wagmi --template next-rainbowkit
+```
+
+</CodeGroup>
+
+## Step 2: Install the library
+
+Install the library using your package manager of choice.
+
+<CodeGroup>
+
+```bash {{ title: 'npm' }}
+npm install @daobox/use-aragon
+```
+
+```bash {{ title: 'pnpm' }}
+pnpm install @daobox/use-aragon
+```
+
+```bash {{ title: 'yarn' }}
+yarn add @daobox/use-aragon
+```
+
+</CodeGroup>
+
+## Step 3: Setting up the provider
+
+After installing the library, you need to set up the provider. Ensure that you wrap your app in the `AragonProvider` component. This will allow you to use the `useAragon` hook in your app.
+
+```jsx {{ title: '_app.tsx' }}
+import { AragonProvider } from '@daobox/use-aragon'
+
+// ...
+function MyApp({ Component, pageProps }) {
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
+  return (
+    <WagmiConfig client={client}>
+      <RainbowKitProvider chains={chains}>
+        <AragonProvider>
+          {mounted && <Component {...pageProps} />}
+        </AragonProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
+  )
+}
+
+export default MyApp
+```
+
+<div className="not-prose">
+  <Button
+    href="/conversations"
+    variant="text"
+    arrow="right"
+    children="Read the docs for the Conversations endpoint"
+  />
+</div>
+
+## Step 4: Make your first query
+
+Now you can make your first query. All hooks are exported from the `@daobox/use-aragon` package. The `useFetchDao` hook is a great place to start. It will fetch the DAO's metadata and return it as a `DaoDetails` object.
+
+```jsx {{ title: 'index.tsx' }}
+import { useFetchDao } from '@daobox/use-aragon'
+
+function Demo() {
+  const { data: dao, isLoading, isError } = useFetchDao('aragon.dao.eth')
+
+  if (isLoading) return <Text>Loading...</Text>
+  if (isError) return <Text>Error!!!</Text>
+
+  return (
+    <>
+      <h1>aragon.dao.eth</h1>
+      {dao && <pre>{JSON.stringify(dao, null, 2)}</pre>}
+    </>
+  )
+}
+```
+
+## What's next?
+
+Great, you're now dApp is set up with the provider and have made your query. Here are a few links that might be handy as you venture further into the DAO Box:
+
+- [Checkout the guides section ](#)
+- [Jump straight in into the hooks ](#)
+- [Come and talk to us in discord](#)
