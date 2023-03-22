@@ -204,10 +204,10 @@ function SmallPrint() {
         <SocialLink href="#" icon={TwitterIcon}>
           Follow us on Twitter
         </SocialLink>
-        <SocialLink href="#" icon={GitHubIcon}>
+        <SocialLink href="https://github.com/DAObox/daobox" icon={GitHubIcon}>
           Follow us on GitHub
         </SocialLink>
-        <SocialLink href="#" icon={DiscordIcon}>
+        <SocialLink href="https://discord.gg/2YGMwxEH7C" icon={DiscordIcon}>
           Join our Discord server
         </SocialLink>
       </div>
