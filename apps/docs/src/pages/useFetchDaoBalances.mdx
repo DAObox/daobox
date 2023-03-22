@@ -1,0 +1,136 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description =
+  'Fetches the balances of the networks native asset and ERC20 tokens a DAO.'
+
+# useFetchDaoBalances <Tag variant="large" href="/useQueryOptions">QUERY</Tag>
+
+Fetches the balances of the networks native asset and ERC20 tokens a DAO.
+
+```typescript
+import {
+  useFetchDaoBalances,
+  AssetBalanceSortBy,
+  SortDirection,
+} from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useFetchDaoBalances } from '@daobox/use-aragon'
+function App() {
+  const { data, isLoading, isError } = useFetchDaoBalances({
+    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
+    sortBy: AssetBalanceSortBy.LAST_UPDATED, // optional default LAST_UPDATED
+    skip: number, // optional default 0
+    limit: number, // optional default 10
+    direction: SortDirection.ASC, // optional default ASC
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <pre style={{ whiteSpace: 'pre-wrap' }}>
+      {data.map((asset, index) => (
+        <div key={index}>
+          <h2>{asset.type === native ? 'ETH' : asset.symbol}</h2>
+          <p>{asset.balance.toString()}</p>
+        </div>
+      ))}
+    </pre>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="daoAddressOrEns" type="string">
+    The address or ENS name of the DAO.
+  </Property>
+</Properties>
+
+## Optional Parameters
+
+<Properties>
+  <Property name="sortBy" type="AssetBalanceSortBy">
+    The type of sort function, currently only `LAST_UPDATED`
+  </Property>
+  <Property name="direction" type="SortDirection">
+    The direction of the sort, either `ASC` or `DESC`
+  </Property>
+  <Property name="skip" type="number">
+    The number of items to skip.
+  </Property>
+  <Property name="limit" type="number">
+    The number of items to get
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: AssetBalance[]
+```
+
+## Return Data example
+
+```typescript
+{ AssetBalance:
+  [
+    {
+      type: "native",
+      balance: 100000n,
+      lastUpdate: <Date>
+    },
+    {
+      type: "erc20",
+      address: "0x1234567890123456789012345678901234567890"
+      name: "The Token",
+      symbol: "TOK",
+      decimals: 18,
+      balance: 200000n
+      lastUpdate: <Date>
+    },
+    ...
+  ]
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: AssetBalance[] | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

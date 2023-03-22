@@ -1,0 +1,94 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description =
+  'Hook for voting on a proposal on a `TokenVoting` plugin.'
+
+# useVoteOnProposal <Tag variant="large" color='rose' href="/useQueryOptions">MUTATION</Tag>
+
+Hook for voting on a proposal on a `TokenVoting` plugin.
+
+```typescript
+import { useVoteOnProposal } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useVoteOnProposal } from '@daobox/use-aragon'
+
+function App() {
+  const { mutate, VoteStatus, voteTxHash } = useVoteOnProposal({
+    // required
+    proposalId: '0x1234567890123456789012345678901234567890_0x0',
+    vote: VoteValues.YES, // other options: NO, ABSTAIN
+  })
+
+  return (
+    <>
+      <button onClick={() => mutate?.()}>"Create New Proposal"</button>
+      <p>{VoteStatus}</p>
+      <p>{voteTxHash}</p>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="proposalId" type="string">
+    The id of the proposal to vote on.
+  </Property>
+  <Property name="vote" type="VoteValues">
+    The vote to cast. Options: `VoteValues.YES`, `VoteValues.NO`,
+    `VoteValues.ABSTAIN`
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional mutation options"
+  />
+</div>
+
+## Return Values
+
+```typescript
+{
+  data: NewProposalReturnData | null,
+  error: Error | null,
+  voteTxHash: string | null,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isError: boolean,
+  reset: function,
+  mutate: function,
+  NewVoteStatus: 'idle' | 'pinningMetadata' | 'creatingProposal' | 'confirmingTransaction' | 'success' |'error',
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional mutation options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+{
+  voteTxHash: string | null,
+  voteStatus: VoteStatus | null,
+}
+```

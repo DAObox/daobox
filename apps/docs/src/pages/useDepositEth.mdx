@@ -1,13 +1,14 @@
 import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
 
 export const description = 'Hook for depositing ETH into a DAO'
 
-# useDepositEth
+# useDepositEth <Tag variant="large" color="rose" href="/useQueryOptions">MUTATION</Tag>
 
 Hook for depositing ETH into a DAO
 
 ```typescript
-import { useDepositEth } from '@aragon/sdk-client'
+import { useDepositEth } from '@daobox/use-aragon'
 ```
 
 <br />
@@ -15,11 +16,17 @@ import { useDepositEth } from '@aragon/sdk-client'
 # Usage
 
 ```typescript
-import { useDepositEth } from '@aragon/sdk-client'
+import { useDepositEth } from '@daobox/use-aragon'
 function App() {
   const { mutate, depositStatus, TxHash } = useDepositEth({
     daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
     amount: 69n,
+    onTransaction(txHash: string) {
+      alert(`Transaction hash: ${txHash}`)
+    },
+    onSuccess() {
+      alert(`Done!`)
+    },
   })
 
   return (
@@ -34,43 +41,51 @@ function App() {
 
 ---
 
-<Row>
-  <Col>
-  ## Required Parameters
-  <Properties>
-    <Property name="daoAddressOrEns" type="string">
-      The address or ENS name of the DAO to deposit ETH into.
-    </Property>
-    <Property name="amount" type="bigint">
-      The amount of ETH to deposit into the DAO.
-    </Property>
-  </Properties> 
-  </Col>
-  <Col>
-    ## Return Values
-    ```typescript
-    {
-      txHash: string | null,
-      depositAmount: bigint | null,
-      isLoading: boolean,
-      isSuccess: boolean,
-      isError: boolean,
-      error: Error | null,
-      data: DepositReturnData | null,
-      reset: function,
-      mutate: function,
-      depositStatus: 'idle' | 'waitingForSigner' | 'confirming' | 'success' | 'error',
-    }
-    ```
-    ## Return Data
-    ```typescript
-    {
-      txHash: string | null,
-      depositAmount: bigint | null,
-    }
-    ```
-  </Col>
-</Row>
+## Required Parameters
+
+<Properties>
+  <Property name="daoAddressOrEns" type="string">
+    The address or ENS name of the DAO to deposit ETH into.
+  </Property>
+  <Property name="amount" type="bigint">
+    The amount of ETH to deposit into the DAO.
+  </Property>
+</Properties>
+
+## Return Values
+
+```typescript
+{
+  txHash: string | null,
+  depositAmount: bigint | null,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isError: boolean,
+  error: Error | null,
+  data: DepositReturnData | null,
+  reset: function,
+  mutate: function,
+  depositStatus: 'idle' | 'waitingForSigner' | 'confirming' | 'success' | 'error',
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+{
+  txHash: string | null,
+  depositAmount: bigint | null,
+}
+```
 
 ---
 
@@ -94,66 +109,11 @@ callback function that is called when the transaction is submitted but before it
 }
 ```
 
-## onSuccess (optional)
-
-callback function that is called when the transaction is mined successfully
-
-```typescript {{ title: 'Example request with bearer token' }}
-{
-  const { mutate, depositStatus, TxHash } = useDepositEth({
-    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
-    amount: 69n,
-    onSuccess(txHash: string) {
-      alert(`Transaction hash: ${txHash}`)
-    },
-  })
-}
-```
-
-## onError (optional)
-
-callback function that is called when an error occurs
-
-```typescript {{ title: 'Example request with bearer token' }}
-{
-  const { mutate, depositStatus, TxHash } = useDepositEth({
-    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
-    amount: 69n,
-    onError(error: Error) {
-      alert(`something went wrong: ${error.message}`)
-    },
-  })
-}
-```
-
-## onMutate (optional)
-
-callback function that is called right before the actual mutation function is called. This callback is useful for performing any additional logic or side effects before the mutation starts, such as optimistic updates or data preprocessing.
-
-```typescript {{ title: 'Example request with bearer token' }}
-{
-  const { mutate, depositStatus, TxHash } = useDepositEth({
-    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
-    amount: 69n,
-    onMutate({ daoAddressOrEns, amount }) {
-      // Perform an optimistic update, assuming the mutation will succeed
-    },
-  })
-}
-```
-
-## onSettled (optional)
-
-a callback function that is called when the mutation has either succeeded or failed. This callback is useful for performing any additional logic or side effects after the mutation has completed.
-
-```typescript {{ title: 'Example request with bearer token' }}
-{
-  const { mutate, depositStatus, TxHash } = useDepositEth({
-    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
-    amount: 69n,
-    onSettled() {
-      // do stuff
-    },
-  })
-}
-```
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query result properties"
+  />
+</div>

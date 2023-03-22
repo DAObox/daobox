@@ -1,7 +1,10 @@
 import clsx from 'clsx'
+import Link from 'next/link'
 
 const variantStyles = {
   medium: 'rounded-lg px-1.5 ring-1 ring-inset',
+  large: 'rounded-lg px-2.5 py-1.5 ring-1 ring-inset',
+  xl: 'rounded-lg px-3 py-2 ring-1 ring-inset emerald',
 }
 
 const colorStyles = {
@@ -9,6 +12,9 @@ const colorStyles = {
     small: 'text-emerald-500 dark:text-emerald-400',
     medium:
       'ring-emerald-300 dark:ring-emerald-400/30 bg-emerald-400/10 text-emerald-500 dark:text-emerald-400',
+    large: 'ring-emerald-300 dark:ring-emerald-400/30 bg-emerald-400/10 text-emerald-500 dark:text-emerald-400',
+      xl: 'ring-emerald-300 dark:ring-emerald-400/30 bg-emerald-400/10 text-emerald-500 dark:text-emerald-400',
+    
   },
   sky: {
     small: 'text-sky-500',
@@ -24,6 +30,7 @@ const colorStyles = {
     small: 'text-red-500 dark:text-rose-500',
     medium:
       'ring-rose-200 bg-rose-50 text-red-500 dark:ring-rose-500/20 dark:bg-rose-400/10 dark:text-rose-400',
+      large: 'ring-rose-200 bg-rose-50 text-red-500 dark:ring-rose-500/20 dark:bg-rose-400/10 dark:text-rose-400',
   },
   zinc: {
     small: 'text-zinc-400 dark:text-zinc-500',
@@ -43,16 +50,21 @@ export function Tag({
   children,
   variant = 'medium',
   color = valueColorMap[children.toLowerCase()] ?? 'emerald',
+  href = null,
 }) {
+  let Component = href ? Link : 'button'
+
   return (
+    <Component href={href} style={{textDecoration: "none"}} >
     <span
       className={clsx(
-        'font-mono text-[0.625rem] font-semibold leading-6',
+        'font-mono text-[0.625rem] font-semibold leading-6 align-middle',
         variantStyles[variant],
         colorStyles[color][variant]
       )}
     >
       {children}
     </span>
+    </Component>
   )
 }
