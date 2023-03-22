@@ -1,0 +1,177 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Fetches a list of `TokenVoting` proposals.'
+
+# useFetchProposals <Tag variant="large"  href="/useQueryOptions">QUERY</Tag>
+
+Fetches a list of `TokenVoting` proposals.
+
+```typescript
+import { useFetchProposals } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useFetchProposals } from '@daobox/use-aragon'
+
+function App() {
+  const { data, isLoading, isError } = useFetchProposals({
+    // required
+    daoAddressOrEns: 'box.dao.eth',
+    // optional
+    skip: 0,
+    limit: 10,
+    direction: SortDirection.ASC, //  otherwise DESC ("descending")
+    sortBy: ProposalSortBy.CREATED_AT, //  otherwise NAME, VOTES (POPULARITY coming soon)
+    status: ProposalStatus.ACTIVE, //  otherwise PENDING, SUCCEEDED, EXECUTED, DEFEATED
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <>
+      {data.map((vote) => (
+        <div key={vote.id}>
+          <h1>{vote.metadata.title}</h1>
+          <p>{vote.metadata.summary}</p>
+        </div>
+      ))}
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="daoAddressOrEns" type="string">
+    The address of the DAO
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Optional Parameters
+
+<Properties>
+  <Property name="sortBy" type="ProposalSortBy">
+    The type of sort function to use. defaults to `CREATED_AT`, otherwise
+    `NAME`, `VOTES` (`POPULARITY` coming soon)
+  </Property>
+  <Property name="direction" type="SortDirection">
+    The direction of the sort, either `ASC` or `DESC`
+  </Property>
+  <Property name="status" type="ProposalStatus">
+    The status of the proposal. defaults to `ACTIVE` otherwise `PENDING`,
+    `SUCCEEDED`, `EXECUTED`, `DEFEATED`
+  </Property>
+  <Property name="skip" type="number">
+    The number of items to skip.
+  </Property>
+  <Property name="limit" type="number">
+    The number of items to get
+  </Property>
+</Properties>
+
+## Return Data
+
+```typescript
+data: TokenVotingProposalListItem[] | null
+```
+
+## Return Data example
+
+```typescript
+{ TokenVotingProposalListItem[]:
+  [
+    {
+      id: "0x12345...",
+      dao: {
+        address: "0x1234567890123456789012345678901234567890",
+        name: "Cool DAO"
+      },
+      creatorAddress: "0x1234567890123456789012345678901234567890",
+      metadata: {
+        title: "Test Proposal",
+        summary: "Test Proposal Summary"
+      },
+      startDate: <Date>,
+      endDate: <Date>,
+      status: "Executed",
+      token: {
+        address: "0x1234567890123456789012345678901234567890,
+        name: "The Token",
+        symbol: "TOK",
+        decimals: 18
+      },
+      results {
+        yes: 100000n,
+        no: 77777n,
+        abstain: 0n
+      }
+    },
+    {
+      id: "0x12345...",
+      dao: {
+        address: "0x1234567890123456789012345678901234567890",
+        name: "Cool DAO"
+      },
+      creatorAddress: "0x1234567890123456789012345678901234567890",
+      metadata: {
+        title: "Test Proposal 2",
+        summary: "Test Proposal Summary 2"
+      },
+      startDate: <Date>,
+      endDate: <Date>,
+      status: "Pending",
+      token: {
+        address: "0x1234567890123456789012345678901234567890,
+        name: "The Token",
+        symbol: "TOK",
+        decimals: 18
+      },
+      results {
+        yes: 100000n,
+        no: 77777n,
+        abstain: 0n
+      }
+    }
+  ]
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: TokenVotingProposalListItem[] | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

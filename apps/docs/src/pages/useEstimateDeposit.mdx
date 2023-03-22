@@ -1,0 +1,98 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Hook for depositing ETH into a DAO'
+
+# useDepositEth <Tag variant="large"  href="/useQueryOptions">QUERY</Tag>
+
+Hook for estimating the gas consumption for a deposit transaction.
+
+```typescript
+import { useDepositEth, TokenType } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useDepositEth } from '@daobox/use-aragon'
+function App() {
+  const { data, isLoading, isError } = useEstimateDeposit({
+    // required
+    daoAddressOrEns: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
+    type: TokenType.ERC20; // or TokenType.NATIVE
+    tokenAddress: '0x6b175474e89094c44da98b954eedeac495271d0f', // only required if type is ERC20
+    amount: 69n,
+  })
+
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+      <p>Max: {data.max}</p>
+      <p>Average: {data.average}</p>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="daoAddressOrEns" type="string">
+    The address or ENS name of the DAO to deposit ETH into.
+  </Property>
+  <Property name="amount" type="bigint">
+    The amount of `ETH` or `Tokens` to deposit into the DAO.
+  </Property>
+  <Property name="type" type="TokenType">
+    The type of token to deposit
+  </Property>
+  <Property name="address" type="string">
+    if `type` is `TokenType.ERC20` then this is the address of the token to
+    deposit
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: GasFeeEstimation{
+  average: bigint | null;
+  max: bigint | null;
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: GasFeeEstimation | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

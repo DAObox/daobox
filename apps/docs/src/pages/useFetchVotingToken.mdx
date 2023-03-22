@@ -1,0 +1,96 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'checks if an account can vote on a proposal'
+
+# useFetchVotingToken <Tag variant="large"  href="/useQueryOptions">QUERY</Tag>
+
+checks if an account can vote on a proposal
+
+```typescript
+import { useFetchVotingToken } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useFetchVotingToken } from '@daobox/use-aragon'
+
+function App() {
+  const { data, isLoading, isError } = useFetchVotingToken({
+    // required
+    pluginAddress: '0x1234567890123456789012345678901234567890_0x0',
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <>
+      <pre style={{ whiteSpace: 'pre-wrap' }}>
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="pluginAddress" type="string">
+    The address of the plugin.
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: tokenDetails | null
+```
+
+## Return Data example
+
+```typescript
+  tokenDetails {
+    address: "0x123456789000987654323112345678900987654321",
+    name: "Token",
+    symbol: "TOK",
+    decimals: 18
+  }
+```
+
+## Return Values
+
+```typescript
+{
+  data: tokenDetails | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

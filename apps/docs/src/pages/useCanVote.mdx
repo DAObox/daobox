@@ -1,0 +1,99 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'checks if an account can vote on a proposal'
+
+# useCanVote <Tag variant="large" href="/useQueryOptions">QUERY</Tag>
+
+checks if an account can vote on a proposal
+
+```typescript
+import { useCanVote } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useCanVote } from '@daobox/use-aragon'
+
+function App() {
+  const { data, isLoading, isError } = useCanVote({
+    // required
+    proposalId: '0x1234567890123456789012345678901234567890_0x0',
+    voterAddressOrEns: 'abuusama.eth', // your-plugin.plugin.dao.eth
+    vote: VoteValues.YES, // alternatively, could be  NO or ABSTAIN.
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <>
+      <div>Can vote: {data}</div>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="proposalId" type="string">
+    The ID of the proposal.
+  </Property>
+  <Property name="voterAddressOrEns" type="string">
+    The address or ENS name of the voter.
+  </Property>
+  <Property name="vote" type="VoteValues">
+    The vote, either `YES`, `NO` or `ABSTAIN`.
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: boolean | null
+```
+
+## Return Data example
+
+```typescript
+{
+  boolean: true | false
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: boolean | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

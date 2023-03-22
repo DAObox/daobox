@@ -1,0 +1,181 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Hook for creating a vote on a `TokenVoting` plugin'
+
+# useNewProposal <Tag variant="large" color='rose' href="/useQueryOptions">MUTATION</Tag>
+
+Hook for creating a vote on a `TokenVoting` plugin
+
+```typescript
+import { useNewProposal } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useNewProposal } from '@daobox/use-aragon'
+
+function App() {
+  const { mutate, proposalId, proposalStatus, proposalTxHash } = useNewProposal(
+    {
+      // required
+      pluginAddress: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
+      title: 'Some title',
+      summary: 'Some summary',
+      description: 'Some description',
+      endDate: new Date(0) + 1000 * 60 * 60 * 24 * 7,
+
+      // optional
+      actions: [someEncodedAction],
+      failSafeActions: [false],
+      startDate: new Date(0),
+      executeOnPass: true,
+      creatorVote: VoteValues.YES,
+      resources: [
+        {
+          name: 'Some link title',
+          url: 'https://some-link.com',
+        },
+      ],
+      media: [
+        {
+          header: 'Some link title',
+          logo: 'https://some-link.com',
+        },
+      ],
+    }
+  )
+
+  return (
+    <>
+      <button onClick={() => mutate?.()}>"Create New Proposal"</button>
+      <p>{proposalStatus}</p>
+      <p>{proposalTxHash}</p>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="pluginAddress" type="string">
+    The address of the `TokenVoting` plugin.
+  </Property>
+  <Property name="title" type="string">
+    The title of the proposal.
+  </Property>
+  <Property name="summary" type="string">
+    The summary of the proposal.
+  </Property>
+  <Property name="description" type="string">
+    The description of the proposal.
+  </Property>
+  <Property name="endDate" type="Date">
+    the time the proposal will end expressed as a Date object
+  </Property>
+</Properties>
+
+## Optional Parameters
+
+<Properties>
+  <Property name="actions" type="DaoAction[]">
+    an array of encoded actions to be executed if the proposal passes. Defaults
+    to an empty array
+  </Property>
+  <Property name="failSafeActions" type="boolean[]">
+    For every action item, denotes whether its execution could fail without
+    aborting the whole proposal execution. Defaults to an empty array
+  </Property>
+  <Property name="startDate" type="Date">
+    the time the proposal will start expressed as a Date object. Defaults to the
+    current time
+  </Property>
+  <Property name="executeOnPass" type="boolean">
+    whether the proposal should be executed automatically if it passes. Defaults
+    to true
+  </Property>
+  <Property name="creatorVote" type="VoteValues">
+    whether the creator of the proposal should vote. Defaults to `VoteValues.NO`
+  </Property>
+  <Property name="resources" type="Array<{url: string; name: string}>">
+    an array of resources to be linked to the proposal. Defaults to an empty
+    array
+  </Property>
+  <Property name="creatorVote" type="Array<{header: string; logo: string}>">
+    an array of media to be linked to the proposal. Defaults to an empty array
+  </Property>
+  <Property name="onProposalTransaction" type="function">
+    callback function that is called when the transaction is submitted but
+    before it is mined
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional mutation options"
+  />
+</div>
+
+## Return Values
+
+```typescript
+{
+  data: NewProposalReturnData | null,
+  error: Error | null,
+  proposalTxHash: string | null,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isError: boolean,
+  reset: function,
+  mutate: function,
+  NewProposalStatus: 'idle' | 'pinningMetadata' | 'creatingProposal' | 'confirmingTransaction' | 'success' |'error',
+}
+```
+
+---
+
+# Examples {{ className: 'lead' }}
+
+## Using status flags and callbacks
+
+callback function that is called when the transaction is submitted but before it is mined
+
+```typescript
+{
+  export function App() {
+    const { mutate, proposalStatus } = useNewProposal({
+      ...newPropsalParams,
+      // called when the transaction is submitted but before it is mined
+      onProposalTransaction: (txHash) => console.log('txHash', txHash),
+      onSuccess () => alert("Proposal created!"),
+      onError (error) => alert("Proposal creation failed: " + error.message),
+    })
+
+    return (
+      <Stack>
+        <Button
+          onClick={() => mutate?.()}
+          // disable the button while the proposal is being created
+          disabled={!['idle', 'success', 'error'].includes(proposalStatus)}
+          // show a loading indicator while the proposal is being created
+          loading={!['idle', 'success'].includes(proposalStatus)}
+        >
+          // if there is no action then the button label displays "New Proposal" otherwise it displays the current status
+          {['idle', 'success'].includes(proposalStatus)
+            ? 'New Proposal'
+            : proposalStatus}
+        </Button>
+      </Stack>
+    )
+  }
+}
+```

@@ -1,0 +1,192 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Hook for fetching a lisy of DAO objects'
+
+# useFetchDaos <Tag variant="large" href="/useQueryOptions">QUERY</Tag>
+
+Hook for fetching a list of DAO objects
+
+```jsx
+import { useFetchDaos } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage {{ anchor: false }}
+
+```jsx
+function Page() {
+  const { data, isLoading, isError } = useFetchDaos({
+    // All parameters are optional: if you don't pass any, it will fetch the first 10 DAOs
+    skip: 0,
+    limit: 10,
+    direction: SortDirection.ASC,
+    sortBy: DaoSortBy.CREATED_AT,
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <div className="flex flex-col">
+      <pre style={{ whiteSpace: 'pre-wrap' }}>
+        {data.map((dao) => (
+          <div key={dao.address}>
+            <h2>{dao.metadata.name}</h2>
+            <p>{dao.metadata.description}</p>
+          </div>
+        ))}
+      </pre>
+    </div>
+  )
+}
+
+export default Page
+```
+
+---
+
+## Required Parameters {{ anchor: false }}
+
+There are no required parameters for this hook. {{ className: 'lead' }}
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data example
+
+```typescript
+{
+  [
+      {
+      address: "0x12345...",
+      ensDomain: "test.dao.eth",
+      metadata: {
+          name: "Test",
+          description: "This is a description"
+      };
+      plugins: [
+          {
+          id: "token-voting.plugin.dao.eth",
+          instanceAddress: "0x12345..."
+          }
+      ]
+      },
+      {
+      address: "0x12345...",
+      ensDomain: "test-1.dao.eth",
+      metadata: {
+          name: "Test 1",
+          description: "This is a description 1"
+      };
+      plugins: [
+          {
+          id: "address-list-voting.plugin.dao.eth",
+          instanceAddress: "0x12345..."
+          }
+      ]
+      },
+      {
+      address: "0x12345...",
+      ensDomain: "test-2.dao.eth",
+      metadata: {
+          name: "Test 2",
+          description: "This is a description 2"
+      };
+      plugins: [
+          {
+          id: "token-voting.plugin.dao.eth",
+          instanceAddress: "0x12345..."
+          }
+      ]
+      }
+  ]
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: DaoListItem[] | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+  refetch: ({ throwOnError: boolean, cancelRefetch: boolean }) => Promise<UseQueryResult>,
+  remove: () => void
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query result properties"
+  />
+</div>
+
+---
+
+# Optional Parameters {{ className: 'lead' }}
+
+<br />
+
+### Skip {{ anchor: false }}
+
+Set skips the first n results of the query.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDaos({
+    skip: 0, // default value
+  })
+}
+```
+
+---
+
+### Limit {{ anchor: false }}
+
+sets the number of DAOs to fetch
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDaos({
+    limit: 1000, // default value: 10
+  })
+}
+```
+
+### Sort By {{ anchor: false }}
+
+sets the direction of the sort
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDaos({
+    sortBy: DaoSortBy.CREATED_AT, //optional, alternatively "SUBDOMAIN" (and "POPULARITY" coming soon)
+  })
+}
+```
+
+### Direction {{ anchor: false }}
+
+sets the direction of the sort
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDaos({
+    direction: SortDirection.ASC,
+  })
+}
+```

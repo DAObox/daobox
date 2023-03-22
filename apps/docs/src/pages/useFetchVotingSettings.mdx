@@ -1,0 +1,98 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Fetches the settings of a `TokenVoting` plugin.'
+
+# useFetchVotingSettings <Tag variant="large"  href="/useQueryOptions">QUERY</Tag>
+
+Fetches the settings of a `TokenVoting` plugin.
+
+```typescript
+import { useFetchVotingSettings } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import { useFetchVotingSettings } from '@daobox/use-aragon'
+
+function App() {
+  const { data, isLoading, isError } = useFetchVotingSettings({
+    // required
+    pluginAddress: '0x1234567890123456789012345678901234567890',
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <>
+      <pre style={{ whiteSpace: 'pre-wrap' }}>
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="pluginAddress" type="string">
+    The address of the `TokenVoting` plugin.
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: TokenVotingProposalListItem[] | null
+```
+
+## Return Data example
+
+```typescript
+{ VotingSettings: {
+    minDuration: 10000, // 10 seconds
+    minParticipation: 0.25, // 25%
+    supportThreshold: 0.5, // 50%
+    minProposerVotingPower: BigInt("5000"),
+    votingMode: "Standard"
+  }
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: VotingSettings | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>

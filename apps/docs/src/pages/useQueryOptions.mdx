@@ -1,0 +1,164 @@
+import { Code } from '@/components/Code'
+
+export const description =
+  'All Queries to the Aragon Client are handled by the useQuery hook. These hooks are essentially wrappers around the useQuery hook from React Query. Its the magic that allows us to fetch, cache and update asynchronous data in your React application'
+
+# UseQueryOptions {{ className: 'lead' }}
+
+All Queries to the Aragon Client are handled by the useQuery hook. These hooks are essentially wrappers around the useQuery hook from React Query. Its the magic that allows us to fetch, cache and update asynchronous data in your React application. The use-aragon library offers a range of practical default options, which cater to most scenarios, eliminating the need to utilize other available choices. Even in the case of event callbacks, it's rare to require them for queries. Nonetheless, these options are incorporated to ensure adaptability and customization for users who demand greater control. {{ className: 'lead' }}
+
+---
+
+### Enabled
+
+Set this to false to disable this query from automatically running. Internally each query hook has some condition that will disable it from running such as if the underlying client is not available any condition you add here is added to the underlying option with a logical conjunction{{ className: 'lead' }}
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    addressOrEns: 'box.dao.eth',
+    enabled: !!someCondition,
+  })
+}
+```
+
+---
+
+### Stale Time
+
+The time in milliseconds that unused/inactive cache data remains in memory. When a query's cache becomes unused or inactive, that cache data will be garbage collected after this duration. When different cache times are specified, the longest one will be used.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    addressOrEns: 'box.dao.eth',
+    staleTime: 5 * 60 * 1000, // default is 0,
+  })
+}
+```
+
+---
+
+### Cache Time
+
+how long the data should be kept in the cache after it becomes stale. While staleTime controls when the data becomes stale and needs to be refetched, cacheTime controls the period of time after which the data is removed from the cache entirely.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    addressOrEns: 'box.dao.eth',
+    cacheTime: 5 * 60 * 1000, // default is 5 minutes,
+  })
+}
+```
+
+---
+
+### Structural Sharing
+
+structuralSharing is an option provided by React Query that determines whether the library should attempt to share the same data structures when returning new query results. It is a performance optimization feature that can help reduce unnecessary re-renders and improve the overall performance of your application. For the vast majority of applications this option should be left enabled.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    addressOrEns: 'box.dao.eth',
+    structuralSharing: false, // default true,
+  })
+}
+```
+
+---
+
+### Suspence
+
+`structuralSharing` is an option provided by React Query that determines whether the library should attempt to share the same data structures when returning new query results. It is a performance optimization feature that can help reduce unnecessary re-renders and improve the overall performance of your application.
+in React Query, you can enable Suspense for a specific query by setting the suspense option to true. When suspense is enabled, React Query will throw a promise while fetching the data. This promise will be caught by the nearest Suspense boundary component, which will render a fallback UI until the promise is resolved.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    addressOrEns: 'box.dao.eth',
+    suspense: true, // default false,
+  })
+
+  return (
+    <div className="flex flex-col">
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      </React.Suspense>
+    </div>
+  )
+}
+```
+
+---
+
+### Select
+
+This option can be used to transform or select a part of the data returned by the query function. Because queries are cached, this function will only be called when the query is first fetched or when the query is refetched due to a change in the query key.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao({
+    daoAddressOrEns: 'box.dao.eth',
+    select: (dao) => {
+      const avatar = dao?.metadata?.avatar
+      return avatar
+        ? avatar.startsWith('ipfs://')
+          ? avatar.replace('ipfs://', 'https://ipfs.io/ipfs/')
+          : avatar
+        : 'https://placeholder.com/image.png'
+    },
+  })
+}
+```
+
+---
+
+### onSuccess
+
+callback function that is called when the query runs successfully
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao('box.dao.eth', {
+    onSuccess(data) {
+      console.log(data)
+    },
+  })
+}
+```
+
+---
+
+### onError
+
+callback function that is called when an error occurs
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao('box.dao.eth', {
+    onError(error: Error) {
+      alert(`something went wrong: ${error.message}`)
+    },
+  })
+}
+```
+
+---
+
+### onSettled
+
+a callback function that is called when the query has either succeeded or failed. This callback is useful for performing any additional logic or side effects after the query has completed.
+
+```typescript
+{
+  const { data, isLoading, isError } = useFetchDao('box.dao.eth', {
+    onSettled() {
+      // do stuff
+    },
+  })
+}
+```

@@ -194,29 +194,34 @@ export const navigation = [
   {
     title: 'Core Hooks',
     links: [
+      { title: 'useFetchDao', href: '/useFetchDao' },
+      { title: 'useFetchDaos', href: '/useFetchDaos' },
+      { title: 'useEstimateDeposit', href: '/useEstimateDeposit' },
       { title: 'useDepositEth', href: '/useDepositEth' },
       { title: 'useDepositERC20', href: '/useDepositERC20' },
-        // { title: 'useEstimateDeposit', href: '/useEstimateDeposit' },
-        // { title: 'useFetchDao', href: '/useFetchDao' },
-        // { title: 'useFetchDaoBalances', href: '/useFetchDaoBalances' },
-        // { title: 'useFetchDaos', href: '/useFetchDaos' },
-        // { title: 'useFetchTransfers', href: '/useFetchTransfers' },
-        // { title: 'useNewDao', href: '/useNewDao' },
-        // { title: 'usePluginInstance', href: '/usePluginInstance' },
+      { title: 'useFetchDaoBalances', href: '/useFetchDaoBalances' },
+      { title: 'useFetchTransfers', href: '/useFetchTransfers' },
+      { title: 'useNewDao', href: '/useNewDao' },
     ],
   },
   {
     title: 'Token Voting Hooks',
     links: [
-      // { title: 'useCanVote', href: '/useCanVote' },
-      // { title: 'useFetchMembers', href: '/useFetchMembers' },
-      // { title: 'useFetchProposal', href: '/useFetchProposal' },
-      // { title: 'useFetchProposals', href: '/useFetchProposals' },
-      // { title: 'useFetchVotingSettings', href: '/useFetchVotingSettings' },
-      // { title: 'useFetchVotingToken', href: '/useFetchVotingToken' },
-      // { title: 'useNewProposal', href: '/useNewProposal' },
-      // { title: 'useNewTokenVotingDao', href: '/useNewTokenVotingDao' },
-      // { title: 'useVoteOnProposal', href: '/useVoteOnProposal' },
+      { title: 'useCanVote', href: '/useCanVote' },
+      { title: 'useFetchMembers', href: '/useFetchMembers' },
+      { title: 'useFetchProposal', href: '/useFetchProposal' },
+      { title: 'useFetchProposals', href: '/useFetchProposals' },
+      { title: 'useFetchVotingSettings', href: '/useFetchVotingSettings' },
+      { title: 'useFetchVotingToken', href: '/useFetchVotingToken' },
+      { title: 'useNewProposal', href: '/useNewProposal' },
+      { title: 'useVoteOnProposal', href: '/useVoteOnProposal' },
+    ],
+  },
+  {
+    title: 'Common Options and Results',
+    links: [
+      { title: 'Query Options', href: '/useQueryOptions' },
+      { title: 'Query Results', href: '/useQueryResults' },
     ],
   },
 ]
@@ -225,9 +230,9 @@ export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="/">Github</TopLevelNavItem>
+        <TopLevelNavItem href="https://github.com/DAObox/daobox">Github</TopLevelNavItem>
         <TopLevelNavItem href="#">Guides</TopLevelNavItem>
-        <TopLevelNavItem href="#">Support</TopLevelNavItem>
+        <TopLevelNavItem href="https://discord.gg/2YGMwxEH7C">Support</TopLevelNavItem>
         {navigation.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}

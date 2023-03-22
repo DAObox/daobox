@@ -1,0 +1,116 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description = 'Hook for creating a new DAO'
+
+# useNewDao <Tag variant="large" color='rose' href="/useQueryOptions">MUTATION</Tag>
+
+Lower-level hook for creating a new DAO. It requires that you have already generated the encoded data for the plugins you want to install in the DAO. If you want to create a DAO with one of the official plugins, you can use the hook for that specific plugin instead.
+
+```jsx
+import { useNewDao } from '@daobox/use-aragon'
+```
+
+## Usage
+
+```jsx
+import { useNewDao } from '@daobox/use-aragon'
+function App() {
+  const installData: IPluginInstallItem = useGenerateInstallData({
+    pluginAddress: '0xPluginAddress',
+    pluginInitParams: { ... },
+  })
+
+  const { mutate, creationStatus, daoAddress, daoTxHash } = useNewDao({
+    daoMetadata: { name: 'My DAO', description: 'A great DAO' },
+    daoUri: 'https://my-dao.example.com',
+    ensSubdomain: 'mydao',
+    trustedForwarder: '0x1234...',
+    plugins: [installData],
+  })
+
+  return (
+    <>
+      <button onClick={() => mutate?.()}>"Create DAO"</button>
+      <p>{creationStatus}</p>
+      <p>{daoAddress}</p>
+      <p>{daoTxHash}</p>
+    </>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="daoMetadata" type="DaoMetadata">
+    The metadata for the new DAO.
+  </Property>
+  <Property name="ensSubdomain" type="string">
+    The ENS subdomain for the new DAO.
+  </Property>
+  <Property name="plugins" type="IPluginInstallItem[]">
+    The plugins to be installed in the new DAO. You must pass at least one
+    plugin.
+  </Property>
+</Properties>
+
+# Optional Parameters
+
+<Properties>
+  <Property name="daoUri" type="string">
+    The metadata for the new DAO.
+  </Property>
+  <Property name="trustedForwarder" type="address">
+    The address of the trusted forwarder, used for gasless transactions.
+  </Property>
+</Properties>
+
+## Return Data
+
+```typescript
+{
+  daoAddress: string | null,
+  daoTxHash: string | null,
+}
+```
+
+## Return Values
+
+```typescript
+{
+  mutate: function,
+  data: NewDaoReturnData | null,
+  error: Error | null,
+  creationStatus: 'idle' | 'pinningMetadata' | 'creatingDao' | 'success' | 'error',
+  daoAddress: string | null,
+  daoTxHash: string | null,
+  isLoading: boolean,
+  isSuccess: boolean,
+  isError: boolean,
+  reset: function,
+}
+```
+
+---
+
+<br />
+
+## onCreateDaoTransaction
+
+callback function that is called when the transaction is sent but not mined yet.
+
+```typescript
+const { mutate, creationStatus, daoAddress, daoTxHash } = useNewDao({
+  daoMetadata: { name: 'My DAO', description: 'A great DAO' },
+  daoUri: 'https://my-dao.example.com',
+  ensSubdomain: 'mydao',
+  trustedForwarder: '0xTrustedForwarderAddress',
+  plugins: ['0xPluginEncodedData'],
+  onCreateDaoTransation(txHash: string) {
+    alert(`Transaction hash: ${txHash}`)
+  },
+})
+```

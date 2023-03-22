@@ -1,0 +1,131 @@
+import { Code } from '@/components/Code'
+
+export const description =
+  'In adition to the data returned by the query, use-aragon hooks return an object with a multitude of status flags and functions. This object is called the UseQueryResult object.'
+
+# UseQueryOptions
+
+In adition to the data returned by the query, use-aragon hooks return an object with a multitude of status flags and functions. This object is called the UseQueryResult object.
+
+---
+
+### Kitchen Sink
+
+kitchen sink example of all possible properties returned by a use-aragon query.
+
+```typescript
+{
+  const {
+    data,
+    dataUpdatedAt,
+    error,
+    errorUpdatedAt,
+    failureCount,
+    isError,
+    isFetched,
+    isFetchedAfterMount,
+    isFetching,
+    isIdle,
+    isLoading,
+    isLoadingError,
+    isPlaceholderData,
+    isPreviousData,
+    isRefetchError,
+    isRefetching,
+    isStale,
+    isSuccess,
+    refetch,
+    remove,
+    status,
+  } useFetchDao({addressOrEns: 'box.dao.eth'})
+}
+```
+
+---
+
+<Properties>
+  <Property name="status" type="string">
+    The current status of the query, which can be idle, loading, error, or
+    success.
+  </Property>
+  <Property name="isIdle" type="boolean">
+    A derived boolean from the status variable, indicating if the query is
+    currently idle.
+  </Property>
+  <Property name="isLoading" type="boolean">
+    A derived boolean from the status variable, indicating if the query is
+    currently loading.
+  </Property>
+  <Property name="isSuccess" type="boolean">
+    A derived boolean from the status variable, indicating if the query has
+    successfully loaded data.
+  </Property>
+  <Property name="isError" type="boolean">
+    A derived boolean from the status variable, indicating if the query has
+    encountered an error.
+  </Property>
+  <Property name="isLoadingError" type="boolean">
+    A boolean indicating if the query has failed while fetching for the first
+    time.
+  </Property>
+  <Property name="isRefetchError" type="boolean">
+    A boolean indicating if the query has failed while refetching.
+  </Property>
+  <Property name="data" type="TData">
+    The last successfully resolved data for the query, defaulting to undefined.
+  </Property>
+  <Property name="dataUpdatedAt" type="number">
+    The timestamp for when the query most recently returned the status as
+    "success".
+  </Property>
+  <Property name="error" type="null | TError">
+    The error object for the query, if an error was thrown, defaulting to null.
+  </Property>
+  <Property name="errorUpdatedAt" type="number">
+    The timestamp for when the query most recently returned the status as
+    "error".
+  </Property>
+  <Property name="isStale" type="boolean">
+    A boolean indicating if the data in the cache is invalidated or if the data
+    is older than the given staleTime.
+  </Property>
+  <Property name="isPlaceholderData" type="boolean">
+    A boolean indicating if the data shown is the placeholder data.
+  </Property>
+  <Property name="isPreviousData" type="boolean">
+    A boolean indicating if keepPreviousData is set and data from the previous
+    query is returned.
+  </Property>
+  <Property name="isFetched" type="boolean">
+    A boolean indicating if the query has been fetched.
+  </Property>
+  <Property name="isFetchedAfterMount" type="boolean">
+    A boolean indicating if the query has been fetched after the component
+    mounted.
+  </Property>
+  <Property name="isFetching" type="boolean">
+    A boolean indicating if the query is currently fetching, including
+    background fetching.
+  </Property>
+  <Property name="isRefetching" type="boolean">
+    A boolean indicating if a background refetch is currently in-flight, which
+    does not include initial loading.
+  </Property>
+  <Property name="failureCount" type="number">
+    The failure count for the query, incremented every time the query fails and
+    reset to 0 when the query succeeds.
+  </Property>
+  <Property name="errorUpdateCount" type="number">
+    The sum of all errors.
+  </Property>
+  <Property
+    name="refetch"
+    type="(options: { throwOnError: boolean, cancelRefetch: boolean }) => Promise<UseQueryResult>"
+  >
+    A function to manually refetch the query, with options to throw an error or
+    cancel the current request.
+  </Property>
+  <Property name="remove" type="() => void">
+    A function to remove the query from the cache.
+  </Property>
+</Properties>

@@ -1,0 +1,111 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+export const description = 'Hook for fetching a DAO object'
+
+# useFetchDao <Tag variant="large" href="/useQueryOptions">QUERY</Tag>
+
+Hook for fetching a DAO object
+
+```jsx
+import { useFetchDao } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```jsx
+function Page() {
+  const { data, isLoading, isError } = useFetchDao({
+    // required
+    daoAddressOrEns: 'box.dao.eth',
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <div className="flex flex-col">
+      <pre style={{ whiteSpace: 'pre-wrap' }}>
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </div>
+  )
+}
+
+export default Page
+```
+
+---
+
+## Required Parameters
+
+<Properties sticky>
+  <Property name="daoAddressOrEns" type="string" sticky>
+    The address or ENS name of the DAO to fetch.
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data example
+
+```typescript
+{
+  address: "0x1234567890123456789012345678901234567890",
+  ensDomain: "test.dao.eth",
+  metadata: {
+    name: "test",
+    description: "this is a description",
+    avatar?: "https://wbsite.com/image.jpeg",
+    links: [
+      {
+        name: "Website",
+        url: "https://website..."
+      },
+      {
+        name: "Discord",
+        url: "https://discord.com/..."
+      }
+    ]
+  },
+  creationDate: <Date>,
+  plugins: [
+    {
+      id: token-voting.plugin.dao.eth,
+      instanceAddress: "0x12345..."
+    }
+  ]
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: DaoDetails | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+  refetch: ({ throwOnError: boolean, cancelRefetch: boolean }) => Promise<UseQueryResult>,
+  remove: () => void
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query result properties"
+  />
+</div>

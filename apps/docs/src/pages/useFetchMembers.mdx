@@ -1,0 +1,107 @@
+import { Code } from '@/components/Code'
+import { Tag } from '@/components/Tag'
+
+export const description =
+  'Fetches a list of token holders associated with a `TokenVoting` plugin.'
+
+# useFetchMembers <Tag variant="large"  href="/useQueryOptions">QUERY</Tag>
+
+Fetches a list of token holders associated with a `TokenVoting` plugin.
+
+```typescript
+import { useFetchMembers } from '@daobox/use-aragon'
+```
+
+<br />
+
+# Usage
+
+```typescript
+import {
+  useFetchMembers,
+  TransferType,
+  TransferSortBy,
+  SortDirection,
+} from '@daobox/use-aragon'
+
+function App() {
+  const { data, isLoading, isError } = useFetchMembers({
+    // required
+    pluginAddress: '0x13c6e4f17bbe606fed867a5cd6389a504724e805',
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error!!!</div>
+
+  return (
+    <pre style={{ whiteSpace: 'pre-wrap' }}>
+      {data.map((member) => (
+        <div key={member}>
+          <p>{member}</p>
+        </div>
+      ))}
+    </pre>
+  )
+}
+```
+
+---
+
+## Required Parameters
+
+<Properties>
+  <Property name="pluginAddress" type="string">
+    The address of the plugin to fetch the members of.
+  </Property>
+</Properties>
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
+
+## Return Data
+
+```typescript
+data: string[]
+```
+
+## Return Data example
+
+```typescript
+{
+  string: [
+    '0x1234567890123456789012345678901234567890',
+    '0x2345678901234567890123456789012345678901',
+    '0x3456789012345678901234567890123456789012',
+    '0x4567890123456789012345678901234567890123',
+    '0x5678901234567890123456789012345678901234',
+  ]
+}
+```
+
+## Return Values
+
+```typescript
+{
+  data: string[] | null,
+  error: Error | null,
+  isSuccess: boolean,
+  isError: boolean,
+  isLoading: boolean,
+  isRefetching: boolean,
+}
+```
+
+<div className="not-prose">
+  <Button
+    href="/useQueryOptions"
+    variant="text"
+    arrow="right"
+    children="Additional query options"
+  />
+</div>
