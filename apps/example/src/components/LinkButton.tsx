@@ -5,10 +5,10 @@ export type LinkButtonProps = {
   label: string;
 };
 
-export const LinkButton = (props: LinkButtonProps) => {
+export const LinkButton = ({ link, label, ...props }: LinkButtonProps) => {
   return (
-    <Link href={props.link}>
-      <button>{props.label}</button>
+    <Link href={link}>
+      <button {...props}>{label}</button>
     </Link>
   );
 };
