@@ -1,23 +1,26 @@
 import { SortDirection, useFetchProposals } from "@daobox/use-aragon";
 import React from "react";
+import { Terminal } from "../../components/Terminal";
+import { daoAddressOrEns } from "../../constants";
 
 const index = () => {
-  const { data, isLoading, status } = useFetchProposals({
-    daoAddressOrEns: "0x6f07aa7af27e0e06a08a1a17e04c4b0eb11300ab",
+  const { data, status } = useFetchProposals({
+    daoAddressOrEns,
     direction: SortDirection.DESC,
     limit: 1,
   });
   return (
     <div>
-      <h1>useFetchProposals</h1>
-      <p>status: {status}</p>
-      <p>isLoading: {isLoading.toString()}</p>
-      {data?.map((proposal) => (
-        <div key={proposal.id}>
-          <p>title: {proposal.metadata.title}</p>
-          <p>id: {proposal.id}</p>
-        </div>
-      ))}
+      <h1 style={{ textAlign: "center" }}>useFetchProposals</h1>
+
+      <Terminal>
+        <h3>DAO Address: {daoAddressOrEns}</h3>
+
+        <h3>Status: {status}</h3>
+        {data?.map((dao) => (
+          <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
+        ))}
+      </Terminal>
     </div>
   );
 };

@@ -11,12 +11,12 @@ const index = () => {
 
   return (
     <div style={{ textAlign: "left" }}>
-      <h1 style={{ textAlign: "center" }}>useFetchMembers</h1>
+      <h1 style={{ textAlign: "center" }}>useFetchProposal</h1>
 
       <Terminal>
         <h3>proposalId: {proposalId}</h3>
         <h3>status: {status}</h3>
-        {JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
+        <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
       </Terminal>
     </div>
   );

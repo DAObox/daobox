@@ -10,12 +10,12 @@ const index = () => {
   });
 
   return (
-    <div style={{ textAlign: "left" }}>
+    <div>
       <h1 style={{ textAlign: "center" }}>useFetchVotingToken</h1>
 
       <Terminal>
-        <h3>proposalId: {pluginAddress}</h3>
-        <h3>status: {status}</h3>
+        <h3>Plugin Address: {pluginAddress}</h3>
+        <h3>Status: {status}</h3>
         <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
       </Terminal>
     </div>

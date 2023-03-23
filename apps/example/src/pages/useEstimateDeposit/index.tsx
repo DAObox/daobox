@@ -1,10 +1,10 @@
 import React from "react";
 import { TokenType, useEstimateDeposit } from "@daobox/use-aragon";
-
-const NATION = "0x333A4823466879eeF910A04D473505da62142069";
+import { Terminal } from "../../components/Terminal";
+import { NATION } from "../../constants";
 
 const index = () => {
-  const { data: antData, status: antStatus } = useEstimateDeposit({
+  const { data: nationData, status: nationStatus } = useEstimateDeposit({
     daoAddressOrEns: "box.dao.eth",
     type: TokenType.ERC20,
     tokenAddress: NATION,
@@ -18,13 +18,22 @@ const index = () => {
   });
 
   return (
-    <div style={{ textAlign: "left" }}>
-      <h1>Estimate Deposit ETH</h1>
-      <p>Status: {ethStatus}</p>
-      {JSON.stringify(ethData, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
-      <h1>Estimate Deposit ANT</h1>
-      <p>Status: {antStatus}</p>
-      {JSON.stringify(antData, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
+    <div>
+      <h1 style={{ textAlign: "center" }}>useEstimateDeposit</h1>
+      <Terminal>
+        <h3>ERC20</h3>
+        <h3>Status: {nationStatus}</h3>
+        <pre>
+          {JSON.stringify(nationData, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
+        </pre>
+      </Terminal>
+      <Terminal>
+        <h3>ETH</h3>
+        <h3>Status: {ethStatus}</h3>
+        <pre>
+          {JSON.stringify(ethData, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
+        </pre>
+      </Terminal>
     </div>
   );
 };

@@ -1,22 +1,22 @@
 import React from "react";
 import { useFetchDao } from "@daobox/use-aragon";
+import { daoAddressOrEns } from "../../constants";
+import { Terminal } from "../../components/Terminal";
 
 const index = () => {
-  const { data, isLoading, isError, status, refetch } = useFetchDao({
-    daoAddressOrEns: "box.dao.eth",
-    queryKey: ["and", "another", "one"],
+  const { data, status } = useFetchDao({
+    daoAddressOrEns,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-
-  if (isError) return <div>Error!</div>;
-
   return (
-    <div style={{ textAlign: "left" }}>
-      <h1>useFetchDao</h1>
-      <p>Status: {status}</p>
+    <div>
+      <h1 style={{ textAlign: "center" }}>useFetchDao</h1>
 
-      <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</pre>
+      <Terminal>
+        <h3>DAO Address: {daoAddressOrEns}</h3>
+        <h3>Status: {status}</h3>
+        <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
+      </Terminal>
     </div>
   );
 };
