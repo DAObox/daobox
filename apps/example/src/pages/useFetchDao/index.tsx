@@ -1,6 +1,5 @@
 import React from "react";
 import { useFetchDao } from "@daobox/use-aragon";
-import { LinkButton } from "../../components/LinkButton";
 
 const index = () => {
   const { data, isLoading, isError, status, refetch } = useFetchDao({
@@ -18,7 +17,6 @@ const index = () => {
       <p>Status: {status}</p>
 
       <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</pre>
-      <button onClick={() => refetch()}>Reload</button>
     </div>
   );
 };
