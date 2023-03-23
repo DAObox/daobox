@@ -1,0 +1,36 @@
+/* General styling */
+body, html {
+  font-family: "Roboto Mono", "IBM Plex Mono", "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+  background-color: black;
+  color: green;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+/* Container for your terminal content */
+.terminal {
+  width: 100%;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 10px 20px;
+  border: 2px solid green;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* Blinking cursor effect */
+.blinking-cursor {
+  border-right: 2px solid green;
+  animation: blinking-cursor 1s infinite;
+}
+
+@keyframes blinking-cursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
