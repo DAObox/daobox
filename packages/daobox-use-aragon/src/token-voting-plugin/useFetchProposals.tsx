@@ -2,42 +2,50 @@ import {
   IProposalQueryParams,
   TokenVotingProposalListItem,
 } from "@aragon/sdk-client";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * Custom hook to fetch a list of proposals based on query parameters.
- * @param {IProposalQueryParams | undefined} queryParams - Optional query parameters.
- * @param {UseFetchProposalsOptions | undefined} options - Optional query options.
- * @returns {FetchProposalsReturnType} - A query result object containing the proposal list and other query metadata.
- */
 export function useFetchProposals(
-  queryParams?: IProposalQueryParams,
-  options?: UseFetchProposalsOptions
+  params: UseFetchProposalsParams
 ): FetchProposalsReturnType {
   const { tokenVotingClient: client } = useAragon();
+  const {
+    daoAddressOrEns,
+    direction,
+    sortBy,
+    skip,
+    limit,
+    enabled = true,
+    queryKey: userQueryKey,
+    ...options
+  } = params;
 
-  return useQuery<TokenVotingProposalListItem[] | null>({
-    queryKey: ["proposals", queryParams],
-    queryFn: async () => client!.methods.getProposals({ ...queryParams }),
-    enabled: !!client,
+  return useQuery<TokenVotingProposalListItem[] | null, unknown>({
+    queryKey: createQueryKey(
+      "proposals",
+      [daoAddressOrEns, limit],
+      userQueryKey
+    ),
+    queryFn: async () =>
+      client!.methods.getProposals({
+        daoAddressOrEns,
+        limit: limit || 10, // optional,
+        sortBy,
+        direction,
+        skip,
+      }),
+    enabled: !!(client && daoAddressOrEns && enabled),
     ...options,
   });
 }
 
+export interface UseFetchProposalsParams
+  extends QueryConfig<TokenVotingProposalListItem[] | null>,
+    Partial<IProposalQueryParams> {}
+
 export type FetchProposalsReturnType = UseQueryResult<
   TokenVotingProposalListItem[] | null,
   unknown
->;
-
-export type UseFetchProposalsOptions = UseQueryOptions<
-  TokenVotingProposalListItem[] | null,
-  unknown,
-  TokenVotingProposalListItem[] | null,
-  QueryKey
 >;
