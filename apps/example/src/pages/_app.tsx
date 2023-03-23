@@ -4,7 +4,7 @@ import { AragonProvider } from "@daobox/use-aragon";
 
 import * as React from "react";
 import { WagmiConfig } from "wagmi";
-import "./index.css";
+import "../index.css";
 import { client } from "../wagmi";
 import { LinkButton } from "../components/LinkButton";
 
@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => setMounted(true), []);
   return (
     <WagmiConfig client={client}>
-      <ConnectKitProvider>
+      <ConnectKitProvider theme="midnight">
         <AragonProvider>
           {mounted && (
             <Layout>
