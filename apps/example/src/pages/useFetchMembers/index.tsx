@@ -1,21 +1,23 @@
 import React from "react";
-import { useFetchDao, useFetchMembers } from "@daobox/use-aragon";
+import { useFetchMembers } from "@daobox/use-aragon";
+import { Terminal } from "../../components/Terminal";
+
+const pluginAddress = "0x8eaf189dbe3524667d25684645aba1c71c02d8db";
 
 const index = () => {
-  const { data, isLoading, isError, status, refetch } = useFetchMembers({
-    pluginAddress: "0x8eaf189dbe3524667d25684645aba1c71c02d8db",
+  const { data, status } = useFetchMembers({
+    pluginAddress,
   });
-
-  if (isLoading) return <div>Loading...</div>;
-
-  if (isError) return <div>Error!</div>;
 
   return (
     <div style={{ textAlign: "left" }}>
-      <h1>useFetchMembers</h1>
-      <p>Status: {status}</p>
+      <h1 style={{ textAlign: "center" }}>useFetchMembers</h1>
 
-      <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</pre>
+      <Terminal>
+        <h3>pluginAddress: {pluginAddress}</h3>
+        <h3>status: {status}</h3>
+        {data && <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</pre>}
+      </Terminal>
     </div>
   );
 };
