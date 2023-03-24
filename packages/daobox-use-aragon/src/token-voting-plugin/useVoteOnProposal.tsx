@@ -36,6 +36,7 @@ export function useVoteOnProposal({
             onVoteTransaction?.(txHash as string);
             setVoteStatus(VoteStatus.CONFIRMING_TRANSACTION);
             txHash = step.txHash;
+            setVoteTxHash(txHash);
             break;
           case VoteProposalStep.DONE:
             setVoteStatus(VoteStatus.SUCCESS);
