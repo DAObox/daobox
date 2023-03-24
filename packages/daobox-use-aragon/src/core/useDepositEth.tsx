@@ -1,5 +1,4 @@
 import { DaoDepositSteps } from "@aragon/sdk-client";
-import { DepositEthParams } from "@aragon/sdk-client/dist/interfaces";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useAragon } from "../context";
@@ -25,10 +24,7 @@ export function useDepositEth({
   onSettled,
   onSuccess,
   onTransaction,
-}: DepositEthParams &
-  MutationConfig<DepositReturnData, Error> & {
-    onTransaction?: (txHash: string) => void;
-  }) {
+}: UseDepositEthParams) {
   const { baseClient: client } = useAragon();
   const [txHash, setTxHash] = useState<string | null>(null);
   const [depositAmount, setDepositAmount] = useState<bigint | null>(null);
@@ -53,7 +49,10 @@ export function useDepositEth({
       setDepositStatus(DepositEthStatus.WAITING_FOR_SIGNER);
 
       // Call the Aragon SDK client deposit method with the provided deposit parameters.
-      const steps = client!.methods.deposit(depositParams);
+      const steps = client!.methods.deposit({
+        ...depositParams,
+        type: TokenType.NATIVE,
+      });
 
       // Iterate through the async iterator steps returned by the deposit method.
       for await (const step of steps) {
@@ -87,10 +86,7 @@ export function useDepositEth({
   const mutation = useMutation({
     mutationKey: ["depositEth", daoAddressOrEns, amount],
     mutationFn: () =>
-      depositWrapper(
-        { type: TokenType.NATIVE, amount, daoAddressOrEns },
-        onTransaction
-      ),
+      depositWrapper({ amount, daoAddressOrEns }, onTransaction),
     onError,
     onMutate,
     onSettled,
@@ -134,10 +130,8 @@ export type DepositReturnData = {
   deposited: bigint | null;
 };
 
-/**
- * Represents the parameters required for depositing Ethereum, excluding the 'type' property.
- * @typedef {Object} UseDepositEthParams
- * @property {string} daoAddressOrEns - The DAO address or ENS name to deposit to.
- * @property {bigint} amount - The amount of Ethereum to deposit in the DAO.
- */
-export type UseDepositEthParams = Omit<DepositEthParams, "type">;
+type UseDepositEthParams = MutationConfig<DepositReturnData, Error> & {
+  onTransaction?: (txHash: string) => void;
+  daoAddressOrEns: string;
+  amount: bigint;
+};
