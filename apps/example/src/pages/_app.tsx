@@ -31,8 +31,14 @@ export default App;
 const Layout = ({ children }) => {
   return (
     <div>
-      <ConnectKitButton />
-      <LinkButton label="Home" link="/" />
+      <header className="header">
+        <div className="link-button">
+          <LinkButton label="Home" link="/" />
+        </div>
+        <div className="connect-button">
+          <ConnectKitButton />
+        </div>
+      </header>
 
       {children}
     </div>

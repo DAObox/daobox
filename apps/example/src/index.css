@@ -34,3 +34,75 @@ body, html {
     opacity: 0;
   }
 }
+
+
+/* Button styling */
+button, input[type="submit"], input[type="reset"], input[type="button"] {
+  background-color: black;
+  color: green;
+  border: 2px solid green;
+  font-family: "Roboto Mono", "IBM Plex Mono", "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700; /* Make the text bold */
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Button hover effect */
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+  background-color: green;
+  color: black;
+}
+
+/* Disabled button styling */
+button:disabled, input[type="submit"]:disabled, input[type="reset"]:disabled, input[type="button"]:disabled {
+  background-color: black;
+  color: #267326;
+  border-color: #267326;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Disabled button hover effect */
+button:disabled:hover, input[type="submit"]:disabled:hover, input[type="reset"]:disabled:hover, input[type="button"]:disabled:hover {
+  background-color: black;
+  color: #267326;
+  border-color: #267326;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: black;
+}
+
+.link-button {
+  margin-right: auto;
+}
+
+.connect-button {
+  margin-left: auto;
+}
+
+
+/* Input box styling */
+.input-box {
+  background-color: black;
+  color: green;
+  border: 2px solid green;
+  font-family: "Roboto Mono", "IBM Plex Mono", "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
+/* Input box focus effect */
+.input-box:focus {
+  outline: none;
+  border-color: lime;
+}
