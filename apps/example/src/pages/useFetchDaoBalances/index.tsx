@@ -12,8 +12,10 @@ const Index: React.FC = () => {
 
       <Terminal>
         <h3>Status: {status}</h3>
-        {data?.map((dao) => (
-          <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
+        {data?.map((dao: any, index: React.Key) => (
+          <pre key={index}>
+            {JSON.stringify(dao, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}
+          </pre>
         ))}
       </Terminal>
     </div>

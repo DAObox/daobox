@@ -13,9 +13,9 @@ function Page() {
       <LinkButton link="/useDepositERC20" label="useDepositERC20" />
       <h1>Token Voting Hooks</h1>
       <LinkButton link="/useFetchProposals" label="useFetchProposals" />
+      <LinkButton link="/useFetchProposal" label="useFetchProposal" />
       <LinkButton link="/useCanVote" label="useCanVote" />
       <LinkButton link="/useFetchMembers" label="useFetchMembers" />
-      <LinkButton link="/useFetchProposal" label="useFetchProposal" />
       <LinkButton link="/useFetchVotingToken" label="useFetchVotingToken" />
       <LinkButton link="/useFetchVotingSettings" label="useFetchVotingSettings" />
       <LinkButton link="/useNewProposal" label="useNewProposal" />

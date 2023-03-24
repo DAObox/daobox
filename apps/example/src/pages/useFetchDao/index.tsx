@@ -3,7 +3,7 @@ import { useFetchDao } from "@daobox/use-aragon";
 import { daoAddressOrEns } from "../../constants";
 import { Terminal } from "../../components/Terminal";
 
-const index = () => {
+const Index = () => {
   const { data, status } = useFetchDao({
     daoAddressOrEns,
   });
@@ -21,4 +21,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

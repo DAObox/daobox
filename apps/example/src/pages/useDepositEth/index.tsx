@@ -3,7 +3,7 @@ import React from "react";
 import { Terminal } from "../../components/Terminal";
 import { daoAddressOrEns, pluginAddress } from "../../constants";
 
-const index = () => {
+const Index = () => {
   const { mutate, depositStatus, error, data } = useDepositEth({
     amount: 42069n,
     daoAddressOrEns,
@@ -31,4 +31,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

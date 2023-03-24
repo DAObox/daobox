@@ -3,7 +3,7 @@ import React from "react";
 import { Terminal } from "../../components/Terminal";
 import { pluginAddress } from "../../constants";
 
-const index = () => {
+const Index = () => {
   const { mutate, data, error, proposalId, proposalStatus } = useNewProposal({
     title: "ok this one should work",
     summary: "another test",
@@ -38,4 +38,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -3,7 +3,7 @@ import React from "react";
 import { Terminal } from "../../components/Terminal";
 import { pluginAddress, proposalId, userAddress } from "../../constants";
 
-const index: React.FC = () => {
+const Index: React.FC = () => {
   const { data, status } = useCanVote({
     voterAddressOrEns: userAddress,
     proposalId,
@@ -23,4 +23,4 @@ const index: React.FC = () => {
   );
 };
 
-export default index;
+export default Index;

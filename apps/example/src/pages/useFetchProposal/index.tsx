@@ -4,7 +4,7 @@ import { Terminal } from "../../components/Terminal";
 
 const proposalId = "0x8eaf189dbe3524667d25684645aba1c71c02d8db_0xf";
 
-const index = () => {
+const Index = () => {
   const { data, status } = useFetchProposal({
     proposalId,
   });
@@ -22,4 +22,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

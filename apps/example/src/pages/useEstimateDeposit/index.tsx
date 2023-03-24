@@ -3,7 +3,7 @@ import { TokenType, useEstimateDeposit } from "@daobox/use-aragon";
 import { Terminal } from "../../components/Terminal";
 import { NATION } from "../../constants";
 
-const index = () => {
+const Index = () => {
   const { data: nationData, status: nationStatus } = useEstimateDeposit({
     daoAddressOrEns: "box.dao.eth",
     type: TokenType.ERC20,
@@ -38,4 +38,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

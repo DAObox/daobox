@@ -4,7 +4,7 @@ import { Terminal } from "../../components/Terminal";
 
 const pluginAddress = "0x8eaf189dbe3524667d25684645aba1c71c02d8db";
 
-const index = () => {
+const Index = () => {
   const { data, status } = useFetchVotingSettings({
     pluginAddress,
   });
@@ -22,4 +22,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
