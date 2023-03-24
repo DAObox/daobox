@@ -1,5 +1,5 @@
 import { GasFeeEstimation } from "@aragon/sdk-client";
-import { DepositParams } from "@aragon/sdk-client/dist/interfaces";
+import { DepositParams, TokenType } from "@aragon/sdk-client/dist/interfaces";
 import { useQuery, UseQueryResult } from "react-query";
 
 import { useAragon } from "../context";
@@ -55,9 +55,3 @@ export function useEstimateDeposit(
 export type UseEstimateDepositOptions = Partial<DepositParams> & {
   tokenAddress?: string | undefined;
 } & QueryConfig<GasFeeEstimation | null>;
-
-export const TokenType = {
-  NATIVE: "native",
-  ERC20: "erc20",
-  ERC721: "erc721",
-} as const;

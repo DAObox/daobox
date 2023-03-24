@@ -1,4 +1,5 @@
 import { DaoDepositSteps } from "@aragon/sdk-client";
+import { DepositEthParams } from "@aragon/sdk-client/dist/interfaces";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useAragon } from "../context";
@@ -39,7 +40,7 @@ export function useDepositEth({
    * @returns {Promise<DepositReturnData>} - A promise that resolves to an object containing the transaction hash and the deposited amount.
    */
   async function depositWrapper(
-    depositParams: DepositEthParams,
+    depositParams: Omit<DepositEthParams, "type">,
     onTransaction?: (txHash: string) => void
   ): Promise<DepositReturnData> {
     let deposited: bigint | null = null;
