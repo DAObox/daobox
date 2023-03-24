@@ -3,10 +3,6 @@ import React from "react";
 import { Terminal } from "../../components/Terminal";
 import { pluginAddress } from "../../constants";
 
-// PINNING_METADATA = "pinningMetadata",
-// CREATING_PROPOSAL = "creatingProposal",
-// CONFIRMING_TRANSACTION = "confirmingTransaction",
-
 const index = () => {
   const { mutate, data, error, proposalId, proposalStatus } = useNewProposal({
     title: "ok this one should work",
@@ -15,7 +11,7 @@ const index = () => {
     pluginAddress,
     resources: [],
     endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7),
-    creatorVote: VoteValues.YES,
+    // creatorVote: VoteValues.YES,
     onProposalTransaction(proposalId: string) {
       console.log("onProposalTransaction", proposalId);
     },
@@ -31,7 +27,7 @@ const index = () => {
           onClick={() => mutate?.()}
           disabled={!["idle", "success", "error"].includes(proposalStatus)}
         >
-          deposit
+          New Proposal
         </button>
         <h3>Status: {proposalStatus}</h3>
         <h3>Proposal Id: {proposalId}</h3>
