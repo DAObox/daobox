@@ -59,6 +59,7 @@ export function useNewProposal({
         metadataUri,
       });
 
+      setProposalStatus(NewProposalStatus.WATING_FOR_SIGER);
       for await (const step of steps) {
         switch (step.key) {
           case ProposalCreationSteps.CREATING:
@@ -115,6 +116,7 @@ export enum NewProposalStatus {
   IDLE = "idle",
   PINNING_METADATA = "pinningMetadata",
   CREATING_PROPOSAL = "creatingProposal",
+  WATING_FOR_SIGER = "waitingForSigner",
   CONFIRMING_TRANSACTION = "confirmingTransaction",
   SUCCESS = "success",
   ERROR = "error",

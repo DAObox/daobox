@@ -1,51 +1,44 @@
 import { AssetBalance } from "@aragon/sdk-client";
 import { DaoBalancesQueryParams } from "@aragon/sdk-client/dist/interfaces";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
-
+import { useQuery, UseQueryResult } from "react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * @param {DaoBalancesQueryParams} [queryParams={}]
- * @param {UseFetchDaoBalancesOptions} [options]
- * @returns {UseFetchDaoBalancesResult}
- */
 export function useFetchDaoBalances(
-  queryParams: DaoBalancesQueryParams = {},
-  options?: UseFetchDaoBalancesOptions
+  params: UseFetchDaoBalancesParams
 ): UseFetchDaoBalancesResult {
   const { baseClient: client } = useAragon();
+  const {
+    daoAddressOrEns,
+    limit,
+    skip,
+    direction,
+    sortBy,
+    enabled,
+    queryKey: userQueryKey,
+    ...options
+  } = params;
 
-  return useQuery<AssetBalance[] | null>({
-    queryKey: ["daoBalance", queryParams.daoAddressOrEns],
+  return useQuery<AssetBalance[] | null, unknown>({
+    queryKey: createQueryKey("daoBalance", [daoAddressOrEns], userQueryKey),
     queryFn: async () =>
       client!.methods.getDaoBalances({
-        ...queryParams,
+        daoAddressOrEns,
+        limit,
+        skip,
+        direction,
+        sortBy,
       }),
-    enabled: !!client && !!queryParams.daoAddressOrEns,
+    enabled: !!client && !!daoAddressOrEns && enabled,
     ...options,
   });
 }
 
-/**
- * @typedef {Object} UseFetchDaoBalancesOptions
- * @extends {UseQueryOptions<AssetBalance[] | null, unknown, AssetBalance[] | null, QueryKey>}
- */
-export type UseFetchDaoBalancesOptions = UseQueryOptions<
-  AssetBalance[] | null,
-  unknown,
-  AssetBalance[] | null,
-  QueryKey
->;
+export interface UseFetchDaoBalancesParams
+  extends QueryConfig<AssetBalance[] | null>,
+    Partial<DaoBalancesQueryParams> {}
 
-/**
- * @typedef {Object} UseFetchDaoBalancesResult
- * @extends {UseQueryResult<AssetBalance[] | null, unknown>}
- */
 export type UseFetchDaoBalancesResult = UseQueryResult<
   AssetBalance[] | null,
   unknown

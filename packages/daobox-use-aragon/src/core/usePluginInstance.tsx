@@ -16,7 +16,7 @@ export function usePluginInstance(
   pluginId: string | undefined,
   number: number = 1
 ): string | null {
-  const { data: daoDetails } = useFetchDao(daoAddressOrEns);
+  const { data: daoDetails } = useFetchDao({ daoAddressOrEns });
 
   if (!daoDetails || !pluginId) {
     return null;

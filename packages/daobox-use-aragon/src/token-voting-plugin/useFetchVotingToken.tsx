@@ -1,31 +1,27 @@
-import { Erc20TokenDetails } from "@aragon/sdk-client";
-import { Erc721TokenDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { Erc20TokenDetails, TokenType } from "@aragon/sdk-client";
+import { TokenBaseDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
+import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * Custom hook to fetch the voting token for a given plugin address.
- * @param {string | undefined} pluginAddress - Optional plugin address.
- * @param {UseFetchVotingTokenOptions | undefined} options - Optional query options.
- * @returns {FetchVotingTokenReturnType} - A query result object containing the voting token details and other query metadata.
- */
 export function useFetchVotingToken(
-  pluginAddress?: string,
-  options?: UseFetchVotingTokenOptions
+  params: UseFetchVotingTokenParams
 ): FetchVotingTokenReturnType {
   const { tokenVotingClient: client } = useAragon();
+  const { pluginAddress, enabled, queryKey: userQueryKey, ...options } = params;
 
-  return useQuery<Erc20TokenDetails | Erc721TokenDetails | null>({
-    queryKey: ["votingToken", pluginAddress],
+  return useQuery<Erc20TokenDetails | Erc721TokenDetails | null, unknown>({
+    queryKey: createQueryKey("votingToken", [pluginAddress], userQueryKey),
     queryFn: async () => client!.methods.getToken(pluginAddress!),
-    enabled: !!client && !!pluginAddress,
+    enabled: !!client && !!pluginAddress && enabled,
     ...options,
   });
+}
+
+export interface UseFetchVotingTokenParams
+  extends QueryConfig<Erc20TokenDetails | Erc721TokenDetails | null> {
+  pluginAddress?: string;
 }
 
 export type FetchVotingTokenReturnType = UseQueryResult<
@@ -33,9 +29,6 @@ export type FetchVotingTokenReturnType = UseQueryResult<
   unknown
 >;
 
-export type UseFetchVotingTokenOptions = UseQueryOptions<
-  Erc20TokenDetails | Erc721TokenDetails | null,
-  unknown,
-  Erc20TokenDetails | Erc721TokenDetails | null,
-  QueryKey
->;
+export declare type Erc721TokenDetails = TokenBaseDetails & {
+  type: TokenType.ERC721;
+};

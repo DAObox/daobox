@@ -1,48 +1,57 @@
 import { GasFeeEstimation } from "@aragon/sdk-client";
-import { DepositParams } from "@aragon/sdk-client";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { DepositParams, TokenType } from "@aragon/sdk-client/dist/interfaces";
+import { useQuery, UseQueryResult } from "react-query";
 
 import { useAragon } from "../context";
-import useConnectedWallet from "../context/useConnectedWallet";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
 /**
  * @function useEstimateDeposit
- * @param {DepositParams} depositParams - The parameters for depositing tokens.
- * @param {UseEstimateDepositEthOptions} [options] - The options for the useEstimateDeposit query.
+ * @param {UseEstimateDepositOptions} [params] - The options for the useEstimateDeposit query.
  * @returns {UseQueryResult<GasFeeEstimation|null>} - The result of the gas fee estimation query.
  */
 export function useEstimateDeposit(
-  depositParams: DepositParams,
-  options?: UseEstimateDepositEthOptions
+  params: UseEstimateDepositOptions
 ): UseQueryResult<GasFeeEstimation | null> {
   const { baseClient: client } = useAragon();
-  const { signer } = useConnectedWallet();
+  const {
+    daoAddressOrEns,
+    amount,
+    type,
+    tokenAddress,
+    enabled = true,
+    queryKey,
+    ...options
+  } = params;
 
+  // The non-null assertion operator (!) is safe to use here because
+  // the query is enabled only when all values are truthy.
   return useQuery<GasFeeEstimation | null>({
-    queryKey: ["estimateDepositEth", depositParams.daoAddressOrEns],
-    queryFn: async () => client!.estimation.deposit(depositParams),
+    queryKey: createQueryKey(
+      "estimateDepositEth",
+      [daoAddressOrEns, amount?.toString(), type, tokenAddress],
+      queryKey
+    ),
+    queryFn: async () =>
+      client!.estimation.deposit({
+        daoAddressOrEns: daoAddressOrEns!,
+        amount: amount!,
+        type: type!,
+        tokenAddress: tokenAddress!,
+      }),
     enabled: !!(
-      signer &&
       client &&
-      depositParams.daoAddressOrEns &&
-      Object.values(depositParams).every(Boolean)
+      daoAddressOrEns &&
+      amount &&
+      type &&
+      !(type === TokenType.ERC20 && !tokenAddress) &&
+      enabled
     ),
     ...options,
   });
 }
 
-/**
- * @typedef {object} UseEstimateDepositEthOptions
- * @extends {UseQueryOptions<GasFeeEstimation|null, unknown, GasFeeEstimation|null, QueryKey>}
- */
-export type UseEstimateDepositEthOptions = UseQueryOptions<
-  GasFeeEstimation | null,
-  unknown,
-  GasFeeEstimation | null,
-  QueryKey
->;
+export type UseEstimateDepositOptions = Partial<DepositParams> & {
+  tokenAddress?: string | undefined;
+} & QueryConfig<GasFeeEstimation | null>;

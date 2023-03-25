@@ -1,27 +1,18 @@
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * Custom hook to fetch members of a voting plugin.
- * @param {string | undefined} pluginAddress - The plugin address to fetch members from.
- * @param {UseFetchMembersOptions | undefined} options - Optional query options.
- * @returns {FetchMembersReturnType} - A query result object containing the members array and other query metadata.
- */
 export function useFetchMembers(
-  pluginAddress?: string,
-  options?: UseFetchMembersOptions
+  params: UseFetchMembersParams
 ): FetchMembersReturnType {
   const { tokenVotingClient: client, context } = useAragon();
+  const { pluginAddress, enabled, queryKey: userQueryKey, ...options } = params;
 
-  return useQuery<string[] | null>({
-    queryKey: ["members", pluginAddress],
+  return useQuery<string[] | null, unknown>({
+    queryKey: createQueryKey("members", [pluginAddress], userQueryKey),
     queryFn: async () => client!.methods.getMembers(pluginAddress!),
-    enabled: !!client && !!pluginAddress,
+    enabled: !!client && enabled,
     refetchOnReconnect: true,
     onError: (error) => {
       console.error({ error, context });
@@ -30,11 +21,8 @@ export function useFetchMembers(
   });
 }
 
-export type FetchMembersReturnType = UseQueryResult<string[] | null, unknown>;
+export interface UseFetchMembersParams extends QueryConfig<string[] | null> {
+  pluginAddress?: string;
+}
 
-export type UseFetchMembersOptions = UseQueryOptions<
-  string[] | null,
-  unknown,
-  string[] | null,
-  QueryKey
->;
+export type FetchMembersReturnType = UseQueryResult<string[] | null, unknown>;
