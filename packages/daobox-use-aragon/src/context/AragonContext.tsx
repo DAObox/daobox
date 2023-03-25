@@ -8,6 +8,7 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { settings } from "../constants";
 import useConnectedWallet from "./useConnectedWallet";
+import { IpfsNode } from "./AragonProvider";
 
 export interface AragonSDKContextValue {
   context?: Context;
@@ -23,8 +24,10 @@ const AragonSDKContext = createContext<AragonSDKContextValue>({});
  */
 export function AragonSDKWrapper({
   children,
+  ipfsNodes,
 }: {
   children: JSX.Element;
+  ipfsNodes?: IpfsNode[];
 }): JSX.Element {
   const { signer, chain } = useConnectedWallet();
   const [context, setContext] = useState<Context | undefined>(undefined);
@@ -38,7 +41,7 @@ export function AragonSDKWrapper({
     const aragonSDKContextParams: ContextParams = {
       network: chain || 5,
       signer,
-      ...settings(chain),
+      ...settings(chain, ipfsNodes),
     };
     const contextInstance = new Context(aragonSDKContextParams);
     const contextPlugin = ContextPlugin.fromContext(contextInstance);

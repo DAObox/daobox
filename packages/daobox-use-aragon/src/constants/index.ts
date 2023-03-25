@@ -1,3 +1,4 @@
+import { IpfsNode } from "./../context/AragonProvider";
 import { activeContractsList } from "@aragon/osx-ethers";
 
 export const SUBGRAPH_API_URL: { [key: number]: string } = {
@@ -21,20 +22,22 @@ export const IPFS_NODES = [
 
 export const SUPPORTED_CHAIN_IDS = [1, 5];
 
-export function settings(network: number) {
+export function settings(network: number, nodes: IpfsNode[] | undefined) {
+  const ipfsNodes = nodes || IPFS_NODES;
+
   if (network === 1) {
     return {
       graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
       web3Providers: WEB3_PROVIDER_URL[network],
       daoFactoryAddress: activeContractsList["mainnet"].DAOFactory,
-      ipfsNodes: IPFS_NODES,
+      ipfsNodes: ipfsNodes,
     };
   } else {
     return {
       graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
       web3Providers: WEB3_PROVIDER_URL[network],
       daoFactoryAddress: activeContractsList["goerli"].DAOFactory,
-      ipfsNodes: IPFS_NODES,
+      ipfsNodes: ipfsNodes,
     };
   }
 }
