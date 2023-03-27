@@ -201,9 +201,9 @@ function SmallPrint() {
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
       <div className="flex gap-4">
-        <SocialLink href="#" icon={TwitterIcon}>
+        {/* <SocialLink href="#" icon={TwitterIcon}>
           Follow us on Twitter
-        </SocialLink>
+        </SocialLink> */}
         <SocialLink href="https://github.com/DAObox/daobox" icon={GitHubIcon}>
           Follow us on GitHub
         </SocialLink>

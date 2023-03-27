@@ -69,7 +69,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
         <nav className="hidden md:block">
           <ul role="list" className="flex items-center gap-8">
             <TopLevelNavItem href="https://github.com/DAObox/daobox">Github</TopLevelNavItem>
-            <TopLevelNavItem href="#">Guides</TopLevelNavItem>
+            {/* <TopLevelNavItem href="#">Guides</TopLevelNavItem> */}
             <TopLevelNavItem href="https://discord.gg/2YGMwxEH7C">Support</TopLevelNavItem>
           </ul>
         </nav>
@@ -79,7 +79,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
           <ModeToggle />
         </div>
         <div className="hidden min-[416px]:contents">
-          <Button href="#">Connect Wallet</Button>
+
         </div>
       </div>
     </motion.div>
