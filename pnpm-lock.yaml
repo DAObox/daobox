@@ -17,7 +17,7 @@ importers:
       eslint: 7.32.0
       eslint-config-daobox: link:packages/eslint-config-daobox
       prettier: 2.8.4
-      turbo: 1.8.3
+      turbo: 1.8.5
 
   apps/client:
     specifiers:
@@ -231,8 +231,8 @@ importers:
 
   packages/daobox-use-aragon:
     specifiers:
-      '@aragon/osx-ethers': ^1.0.0
-      '@aragon/sdk-client': ^1.0.2
+      '@aragon/osx-ethers': ^1.2.0
+      '@aragon/sdk-client': ^1.2.0
       '@daobox/tsconfig': workspace:*
       '@testing-library/jest-dom': ^5.16.5
       '@testing-library/react': ^14.0.0
@@ -258,8 +258,8 @@ importers:
       wagmi: ~0.11.7
       zod: ^3.21.4
     dependencies:
-      '@aragon/osx-ethers': 1.0.0
-      '@aragon/sdk-client': 1.1.0
+      '@aragon/osx-ethers': 1.2.0
+      '@aragon/sdk-client': 1.2.0
       '@testing-library/react-hooks': 8.0.1_zula6vjvt3wdocc4mwcxqa6nzi
       ethers: 5.7.2
       react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
@@ -295,7 +295,7 @@ importers:
     dependencies:
       eslint-config-next: 13.2.4_y3mxkvgm326kifdc6ztczmtrsu
       eslint-config-prettier: 8.7.0_eslint@8.26.0
-      eslint-config-turbo: 0.0.9_eslint@8.26.0
+      eslint-config-turbo: 0.0.10_eslint@8.26.0
       eslint-plugin-react: 7.28.0_eslint@8.26.0
 
 packages:
@@ -422,8 +422,8 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
 
-  /@aragon/osx-ethers/1.0.0:
-    resolution: {integrity: sha512-OmiyXG1TxvRYCLGThkEa2OHNEumWqZFYU8tzyzDFSskWmi70uTkoqR25ayaz8QaYOtYlVw9drzPFjJSX4RhZ/g==}
+  /@aragon/osx-ethers/1.2.0:
+    resolution: {integrity: sha512-XI/tJo5NSjOwtcRRXvlfDFRh6YTTSVLYwlbd+4QlBxbTB2WDwS/4lq7rFwnO1bPufCQ4pSqGsTXFR5pwDLS4Ig==}
     dependencies:
       ethers: 5.7.2
     transitivePeerDependencies:
@@ -431,11 +431,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@aragon/sdk-client/1.1.0:
-    resolution: {integrity: sha512-gZlyF+H+vuVl2kLog8PE1NlHWHtAaJmIFvJSBGqvA5cHsQ3q5CStULfUJOoOOaIPnAb7xBsQHoL2hVIQL4I72Q==}
+  /@aragon/sdk-client/1.2.0:
+    resolution: {integrity: sha512-qWULWvMIFJQBbt1PnOMglA9xPSX2IJ0SO/rfxoiYc7cDZO+9XnPvEccfW/WmyyEhPWdn3cXERm8Lm9Ku8vGXWg==}
     engines: {node: '>=16'}
     dependencies:
-      '@aragon/osx-ethers': 1.0.0
+      '@aragon/osx-ethers': 1.2.0
       '@aragon/sdk-common': 1.1.0
       '@aragon/sdk-ipfs': 1.0.0
       '@ethersproject/abstract-signer': 5.7.0
@@ -5157,13 +5157,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.21.3
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: false
 
   /@types/eslint/8.21.3:
     resolution: {integrity: sha512-fa7GkppZVEByMWGbTtE5MbmXWJTVbrjjaS8K6uQj+XtuuUv1fsuPAxhygfqLmsb/Ufb3CV8deFCpiMfAgi00Sw==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: false
 
@@ -8739,13 +8739,13 @@ packages:
       eslint: 8.26.0
     dev: false
 
-  /eslint-config-turbo/0.0.9_eslint@8.26.0:
-    resolution: {integrity: sha512-j1cTdx3tRmKo0csyfQKhpuT8dynK9oddbK5nmrShoMpXI2qMbxHLYH7MWAid4FmJN8rYympy3VKw5U63Yazycg==}
+  /eslint-config-turbo/0.0.10_eslint@8.26.0:
+    resolution: {integrity: sha512-o4ULFZYM1OihSd63eDGEuy9rt6tW4ma6xnW9grnr44BoJwKaGQko2aka9kfqQs0vtmwD1++Os3ThPHETmzkFzA==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
       eslint: 8.26.0
-      eslint-plugin-turbo: 0.0.9_eslint@8.26.0
+      eslint-plugin-turbo: 0.0.10_eslint@8.26.0
     dev: false
 
   /eslint-import-resolver-node/0.3.7:
@@ -9067,8 +9067,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
-  /eslint-plugin-turbo/0.0.9_eslint@8.26.0:
-    resolution: {integrity: sha512-fEsuSnYU3GLtT+s66mUuzDL1LaSieIx5uk3tPO0ToGv7hI2XzOfP24aPkQItTBGl7kq2JaVkRzPwcnfz8hkp0w==}
+  /eslint-plugin-turbo/0.0.10_eslint@8.26.0:
+    resolution: {integrity: sha512-T7QRwF4rjBQCJD9AHLHn9ShtHCHNkfIZW5Oio92WtQYhoU5jZCU3ynU+ONFXLuvoUx4dJ19WergIyHL+DwL2+g==}
     peerDependencies:
       eslint: '>6.6.0'
     dependencies:
@@ -14859,65 +14859,65 @@ packages:
       yargs: 17.7.1
     dev: true
 
-  /turbo-darwin-64/1.8.3:
-    resolution: {integrity: sha512-bLM084Wr17VAAY/EvCWj7+OwYHvI9s/NdsvlqGp8iT5HEYVimcornCHespgJS/yvZDfC+mX9EQkn3V2JmYgGGw==}
+  /turbo-darwin-64/1.8.5:
+    resolution: {integrity: sha512-CAYh56bzeHfnh7jTm03r29bh8p5a/EjQo1Id5yLUH7hS7msTau/+YpxJWPodLbN0UQsUYivUqHQkglJ+eMJ7xA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.8.3:
-    resolution: {integrity: sha512-4oZjXtzakopMK110kue3z/hqu3WLv+eDLZOX1NGdo49gqca9BeD8GbH+sXpAp6tqyeuzpss+PIliVYuyt7LgbA==}
+  /turbo-darwin-arm64/1.8.5:
+    resolution: {integrity: sha512-R3jCPOv+lu3dcvMhj8b/Defv6dyUwX6W+tbX7d6YUCA46Plf/bGCQ8+MSbxmr/4E1GyGOVFsn1wRfiYk0us/Dg==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.8.3:
-    resolution: {integrity: sha512-uvX2VKotf5PU14FCxJA5iHItPQno2JWzerMd+g3/h/Asay6dvxvtVjc39MQeGT0H5njSvzVKFkT+3/5q8lgOEg==}
+  /turbo-linux-64/1.8.5:
+    resolution: {integrity: sha512-YRc/KNRZeUVvth11UO4SDQZR2IqGgl9MSsbzqoHuFz4B4Q5QXH7onHogv9aXWE/BZBBbcrSBTlwBSG0Gg+J8hg==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.8.3:
-    resolution: {integrity: sha512-E1p+oH3XKMaPS4rqWhYsL4j2Pzc0d/9P5KU7Kn1kqVLo2T3iRA7n2KVULEieUNE0nTH+aIJPXYXOpqCI5wFJaA==}
+  /turbo-linux-arm64/1.8.5:
+    resolution: {integrity: sha512-8exVZb7XBl/V3gHSweuUyG2D9IzfWqwLvlXoeLWlVYSj61Ajgdv+WU7lvUmx+H2s+sSKqmIFmewA5Lw6YY37sg==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.8.3:
-    resolution: {integrity: sha512-cnzAytHtoLXd0J7aNzRpZFpL/GTjcBmkvAPlbOdf/Pl1iwS4qzGrudZQ+OM1lmLgLIfBPIavsGHBknTwTNib4A==}
+  /turbo-windows-64/1.8.5:
+    resolution: {integrity: sha512-fA8PU5ZNoFnQkapG06WiEqfsVQ5wbIPkIqTwUsd/M2Lp+KgxE79SQbuEI+2vQ9SmwM5qoMi515IPjgvXAJXgCw==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.8.3:
-    resolution: {integrity: sha512-ulIiItNm2w/zYJdD5/oAzjzNns1IjbpweRzpsE8tLXaWwo6+fnXXkyloUug0IUhcd2k6fJXfoiDZfygqpOVuXg==}
+  /turbo-windows-arm64/1.8.5:
+    resolution: {integrity: sha512-SW/NvIdhckLsAWjU/iqBbCB0S8kXupKscUK3kEW1DZIr3MYcP/yIuaE/IdPuqcoF3VP0I3TLD4VTYCCKAo3tKA==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.8.3:
-    resolution: {integrity: sha512-zGrkU1EuNFmkq6iky6LcMqD4h0OLE8XysVFxQWRIZbcTNnf0XAycbsbeEyiJpiWeqb7qtg2bVuY9EYcNoNhVuQ==}
+  /turbo/1.8.5:
+    resolution: {integrity: sha512-UBnH2wIFb5g6OQCk8f34Ud15ZXV4xEMmugeDJTU5Ur2LpVRsNEny0isSCYdb3Iu3howoNyyXmtpaxWsAwNYkkg==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.8.3
-      turbo-darwin-arm64: 1.8.3
-      turbo-linux-64: 1.8.3
-      turbo-linux-arm64: 1.8.3
-      turbo-windows-64: 1.8.3
-      turbo-windows-arm64: 1.8.3
+      turbo-darwin-64: 1.8.5
+      turbo-darwin-arm64: 1.8.5
+      turbo-linux-64: 1.8.5
+      turbo-linux-arm64: 1.8.5
+      turbo-windows-64: 1.8.5
+      turbo-windows-arm64: 1.8.5
     dev: true
 
   /type-check/0.3.2:
