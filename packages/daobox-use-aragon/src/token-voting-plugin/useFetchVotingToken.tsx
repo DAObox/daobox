@@ -1,5 +1,5 @@
 import { Erc20TokenDetails } from "@aragon/sdk-client";
-import { Erc721TokenDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
+
 import {
   QueryKey,
   useQuery,
@@ -7,6 +7,7 @@ import {
   UseQueryResult,
 } from "react-query";
 import { useAragon } from "../context";
+import { Erc721TokenDetails } from "../types";
 
 /**
  * Custom hook to fetch the voting token for a given plugin address.

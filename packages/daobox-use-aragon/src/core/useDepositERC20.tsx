@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { DaoDepositSteps } from "@aragon/sdk-client";
-import { DepositErc20Params } from "@aragon/sdk-client/dist/interfaces";
 import { useMutation } from "react-query";
 
 import { useAragon } from "..";
-import { MutationConfig } from "../types";
+import { DepositErc20Params, MutationConfig } from "../types";
 
 // TODO: add the return type to the docs
 /**

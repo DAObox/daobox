@@ -1,9 +1,9 @@
 import { DaoDepositSteps } from "@aragon/sdk-client";
-import { DepositEthParams } from "@aragon/sdk-client/dist/interfaces";
+
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { useAragon } from "../context";
-import { MutationConfig } from "../types";
+import { DepositEthParams, MutationConfig } from "../types";
 
 /**
  * Custom hook for depositing Ethereum into a DAO.
