@@ -29,6 +29,8 @@ export type {
   ProposalMetadata,
   IVoteProposalParams,
   VoteProposalStep,
+  VoteValues,
+  SortDirection,
 } from "@aragon/sdk-client";
 
 export type DepositErc20Params = DepositBaseParams & {
