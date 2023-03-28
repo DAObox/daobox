@@ -1,4 +1,5 @@
 import { UseMutationOptions, UseQueryOptions } from "react-query";
+import { CHAINS } from "../constants";
 
 /**
  * A configuration object used for customizing the behavior of a useMutation hook.
@@ -36,3 +37,6 @@ export type QueryConfig<TData, TSelectData = TData> = Pick<
   | "select"
   | "useErrorBoundary"
 >;
+
+export type SupportedNetworks = keyof typeof CHAINS;
+export type SupportedChainIds = (typeof CHAINS)[SupportedNetworks];

@@ -1,4 +1,5 @@
 import { activeContractsList } from "@aragon/osx-ethers";
+import { SupportedChainIds } from "../types";
 
 export const SUBGRAPH_API_URL: { [key: number]: string } = {
   1: "https://subgraph.satsuma-prod.com/qHR2wGfc5RLi6/aragon/osx-mainnet/api",
@@ -19,9 +20,7 @@ export const IPFS_NODES = [
   },
 ];
 
-export const SUPPORTED_CHAIN_IDS = [1, 5];
-
-export function settings(network: number) {
+export function settings(network: SupportedChainIds) {
   if (network === 1) {
     return {
       graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
@@ -38,3 +37,8 @@ export function settings(network: number) {
     };
   }
 }
+
+export const CHAINS = {
+  mainnet: 1,
+  goerli: 5,
+} as const;
