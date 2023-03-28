@@ -1,5 +1,5 @@
-import { GasFeeEstimation } from "@aragon/sdk-client";
-import { DepositParams, TokenType } from "@aragon/sdk-client/dist/interfaces";
+import { DepositParams, GasFeeEstimation, TokenType } from "@aragon/sdk-client";
+
 import { useQuery, UseQueryResult } from "react-query";
 
 import { useAragon } from "../context";

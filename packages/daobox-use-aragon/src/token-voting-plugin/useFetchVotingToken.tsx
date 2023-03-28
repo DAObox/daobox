@@ -1,13 +1,9 @@
 import { Erc20TokenDetails } from "@aragon/sdk-client";
 
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 import { useAragon } from "../context";
-import { Erc721TokenDetails } from "../types";
+import { Erc721TokenDetails, QueryConfig } from "../types";
+import { createQueryKey } from "../lib/setQueryKey";
 
 export function useFetchVotingToken(
   params: UseFetchVotingTokenParams
@@ -32,7 +28,3 @@ export type FetchVotingTokenReturnType = UseQueryResult<
   Erc20TokenDetails | Erc721TokenDetails | null,
   unknown
 >;
-
-export declare type Erc721TokenDetails = TokenBaseDetails & {
-  type: TokenType.ERC721;
-};

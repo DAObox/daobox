@@ -6,8 +6,9 @@ import {
   TokenVotingClient,
 } from "@aragon/sdk-client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { settings } from "../constants";
+import { CHAINS, settings } from "../constants";
 import useConnectedWallet from "./useConnectedWallet";
+import { SupportedChainIds } from "../types";
 
 export interface AragonSDKContextValue {
   context?: Context;
@@ -35,10 +36,18 @@ export function AragonSDKWrapper({
 
   useEffect(() => {
     if (!signer || !chain) return;
+
+    // check if chain is valid
+    const chainId = CHAINS[chain as unknown as keyof typeof CHAINS];
+    if (!chainId) {
+      console.error(`Invalid chain type: ${chain}`);
+      return;
+    }
+
     const aragonSDKContextParams: ContextParams = {
       network: chain || 5,
       signer,
-      ...settings(chain),
+      ...settings(chain as SupportedChainIds),
     };
     const contextInstance = new Context(aragonSDKContextParams);
     const contextPlugin = ContextPlugin.fromContext(contextInstance);

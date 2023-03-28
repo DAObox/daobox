@@ -1,4 +1,5 @@
-import { UseMutationOptions } from "react-query";
+import { UseMutationOptions, UseQueryOptions } from "react-query";
+import { CHAINS } from "../constants";
 
 /**
  * A configuration object used for customizing the behavior of a useMutation hook.
@@ -20,3 +21,22 @@ export type MutationConfig<Data, Error, Variables = void> = {
   onSettled?: UseMutationOptions<Data, Error, Variables>["onSettled"];
   onSuccess?: UseMutationOptions<Data, Error, Variables>["onSuccess"];
 };
+
+export type QueryConfig<TData, TSelectData = TData> = Pick<
+  UseQueryOptions<TData, unknown, TSelectData>,
+  | "cacheTime"
+  | "enabled"
+  | "isDataEqual"
+  | "staleTime"
+  | "structuralSharing"
+  | "suspense"
+  | "onError"
+  | "onSettled"
+  | "onSuccess"
+  | "queryKey"
+  | "select"
+  | "useErrorBoundary"
+>;
+
+export type SupportedNetworks = keyof typeof CHAINS;
+export type SupportedChainIds = (typeof CHAINS)[SupportedNetworks];
