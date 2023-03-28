@@ -1,9 +1,13 @@
 import { AssetBalance } from "@aragon/sdk-client";
-import { DaoBalancesQueryParams } from "@aragon/sdk-client/dist/interfaces";
-import { useQuery, UseQueryResult } from "react-query";
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
 import { useAragon } from "../context";
-import { createQueryKey } from "../lib/setQueryKey";
-import { QueryConfig } from "../types";
+import { DaoBalancesQueryParams } from "../types";
+
 
 export function useFetchDaoBalances(
   params: UseFetchDaoBalancesParams

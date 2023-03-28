@@ -189,8 +189,8 @@ importers:
 
   packages/daobox-use-aragon:
     specifiers:
-      '@aragon/osx-ethers': ^1.0.0
-      '@aragon/sdk-client': ^1.0.2
+      '@aragon/osx-ethers': ^1.2.0
+      '@aragon/sdk-client': ^1.2.0
       '@daobox/tsconfig': workspace:*
       '@testing-library/jest-dom': ^5.16.5
       '@testing-library/react': ^14.0.0
@@ -216,8 +216,8 @@ importers:
       wagmi: ~0.11.7
       zod: ^3.21.4
     dependencies:
-      '@aragon/osx-ethers': 1.0.0
-      '@aragon/sdk-client': 1.1.0
+      '@aragon/osx-ethers': 1.2.0
+      '@aragon/sdk-client': 1.2.0
       '@testing-library/react-hooks': 8.0.1_zula6vjvt3wdocc4mwcxqa6nzi
       ethers: 5.7.2
       react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
@@ -380,8 +380,8 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
 
-  /@aragon/osx-ethers/1.0.0:
-    resolution: {integrity: sha512-OmiyXG1TxvRYCLGThkEa2OHNEumWqZFYU8tzyzDFSskWmi70uTkoqR25ayaz8QaYOtYlVw9drzPFjJSX4RhZ/g==}
+  /@aragon/osx-ethers/1.2.0:
+    resolution: {integrity: sha512-XI/tJo5NSjOwtcRRXvlfDFRh6YTTSVLYwlbd+4QlBxbTB2WDwS/4lq7rFwnO1bPufCQ4pSqGsTXFR5pwDLS4Ig==}
     dependencies:
       ethers: 5.7.2
     transitivePeerDependencies:
@@ -389,11 +389,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@aragon/sdk-client/1.1.0:
-    resolution: {integrity: sha512-gZlyF+H+vuVl2kLog8PE1NlHWHtAaJmIFvJSBGqvA5cHsQ3q5CStULfUJOoOOaIPnAb7xBsQHoL2hVIQL4I72Q==}
+  /@aragon/sdk-client/1.2.0:
+    resolution: {integrity: sha512-qWULWvMIFJQBbt1PnOMglA9xPSX2IJ0SO/rfxoiYc7cDZO+9XnPvEccfW/WmyyEhPWdn3cXERm8Lm9Ku8vGXWg==}
     engines: {node: '>=16'}
     dependencies:
-      '@aragon/osx-ethers': 1.0.0
+      '@aragon/osx-ethers': 1.2.0
       '@aragon/sdk-common': 1.1.0
       '@aragon/sdk-ipfs': 1.0.0
       '@ethersproject/abstract-signer': 5.7.0

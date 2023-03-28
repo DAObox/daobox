@@ -1,9 +1,13 @@
-import { Erc20TokenDetails, TokenType } from "@aragon/sdk-client";
-import { TokenBaseDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
+import { Erc20TokenDetails } from "@aragon/sdk-client";
+
+import {
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "react-query";
 import { useAragon } from "../context";
-import { createQueryKey } from "../lib/setQueryKey";
-import { QueryConfig } from "../types";
+import { Erc721TokenDetails } from "../types";
 
 export function useFetchVotingToken(
   params: UseFetchVotingTokenParams

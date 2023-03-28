@@ -1,6 +1,6 @@
 {
   "name": "@daobox/use-aragon",
-  "version": "0.0.0",
+  "version": "0.0.3-beta-7",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,8 +18,8 @@
     "watch": "jest --watch"
   },
   "dependencies": {
-    "@aragon/osx-ethers": "^1.0.0",
-    "@aragon/sdk-client": "^1.0.2",
+    "@aragon/osx-ethers": "^1.2.0",
+    "@aragon/sdk-client": "^1.2.0",
     "@testing-library/react-hooks": "^8.0.1",
     "ethers": "^5.7.2",
     "react-query": "^3.39.3",
