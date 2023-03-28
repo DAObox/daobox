@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.0.3-beta-8] - 2023-03-27
 
+### Fix
+- added missing types from `@aragon/sdk-client`
+    `VoteValues`
+    `SortDirection`
+
 ### Added
 - `tokenVotingInstallItem`: encodes data to install the plugin in a DAO
 - `arbitratorPluginInstallItem`: encodes data to install an Aragon plugin in a DAO
