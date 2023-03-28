@@ -1,6 +1,6 @@
 {
   "name": "@daobox/use-aragon",
-  "version": "0.0.3-beta-7",
+  "version": "0.0.3-beta-8",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
