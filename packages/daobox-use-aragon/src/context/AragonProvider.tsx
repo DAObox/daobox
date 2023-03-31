@@ -4,13 +4,27 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import { AragonSDKWrapper } from "./AragonContext";
 
+export interface IpfsNode {
+  url: string;
+  headers: {
+    "X-API-KEY": string;
+  };
+}
+export interface Config {
+  ipfsNodes?: IpfsNode[] | undefined;
+}
+
+export interface AragonProviderProps {
+  children: ReactNode;
+  config?: Config;
+}
+
 export function AragonProvider({
   children,
-}: {
-  children: ReactNode | false;
-}): JSX.Element {
+  config,
+}: AragonProviderProps): JSX.Element {
   return (
-    <AragonSDKWrapper>
+    <AragonSDKWrapper ipfsNodes={config?.ipfsNodes}>
       <QueryClientProvider client={new QueryClient()}>
         <>
           {children}

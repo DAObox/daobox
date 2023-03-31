@@ -9,6 +9,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { CHAINS, settings } from "../constants";
 import useConnectedWallet from "./useConnectedWallet";
 import { SupportedChainIds } from "../types";
+import { IpfsNode } from "./AragonProvider";
 
 export interface AragonSDKContextValue {
   context?: Context;
@@ -24,8 +25,10 @@ const AragonSDKContext = createContext<AragonSDKContextValue>({});
  */
 export function AragonSDKWrapper({
   children,
+  ipfsNodes,
 }: {
   children: JSX.Element;
+  ipfsNodes?: IpfsNode[];
 }): JSX.Element {
   const { signer, chain } = useConnectedWallet();
   const [context, setContext] = useState<Context | undefined>(undefined);
@@ -38,8 +41,7 @@ export function AragonSDKWrapper({
     if (!signer || !chain) return;
 
     // check if chain is valid
-    const chainId = CHAINS[chain as unknown as keyof typeof CHAINS];
-    if (!chainId) {
+    if (!Object.values(CHAINS).includes(chain as SupportedChainIds)) {
       console.error(`Invalid chain type: ${chain}`);
       return;
     }
@@ -47,7 +49,7 @@ export function AragonSDKWrapper({
     const aragonSDKContextParams: ContextParams = {
       network: chain || 5,
       signer,
-      ...settings(chain as SupportedChainIds),
+      ...settings(chain as SupportedChainIds, ipfsNodes),
     };
     const contextInstance = new Context(aragonSDKContextParams);
     const contextPlugin = ContextPlugin.fromContext(contextInstance);
