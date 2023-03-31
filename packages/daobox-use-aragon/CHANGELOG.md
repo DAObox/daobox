@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.3-beta-12] - 2023-03-31
+- added missing enum from `@aragon/sdk-client`
+    `DaoSortBy`
+
+### Added
+- support for Polygon and Mumbai
+- user defined IPFS nodes
+
+
 ## [0.0.3-beta-8] - 2023-03-27
 
 ### Fix
@@ -16,6 +25,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `tokenVotingInstallItem`: encodes data to install the plugin in a DAO
 - `arbitratorPluginInstallItem`: encodes data to install an Aragon plugin in a DAO
 - `daoActionEncoder`: creates a list of actions the DAO should make
+
+### Changed
+- `encodeTokenVotingPlugin`: implemented internally, no longer relies on the SDK
+
 ## [0.0.3-beta-7] - 2023-03-27
 
 ### Added
