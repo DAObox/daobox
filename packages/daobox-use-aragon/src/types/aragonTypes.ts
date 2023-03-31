@@ -2,9 +2,6 @@ import { Pagination } from "@aragon/sdk-client";
 
 export type {
   ContextParams,
-  ContextPlugin,
-  TokenVotingClient,
-  DaoDepositSteps,
   DepositParams,
   DaoDetails,
   AssetBalance,
@@ -12,7 +9,6 @@ export type {
   IDaoQueryParams,
   ITransferQueryParams,
   Transfer,
-  DaoCreationSteps,
   DaoMetadata,
   IPluginInstallItem,
   InstalledPluginListItem,
@@ -25,11 +21,19 @@ export type {
   VotingSettings,
   Erc20TokenDetails,
   CreateMajorityVotingProposalParams,
-  ProposalCreationSteps,
   ProposalMetadata,
   IVoteProposalParams,
+} from "@aragon/sdk-client";
+
+export {
+  ContextPlugin,
+  TokenVotingClient,
+  DaoDepositSteps,
+  DaoCreationSteps,
+  ProposalCreationSteps,
   VoteProposalStep,
   VoteValues,
+  DaoSortBy,
   SortDirection,
 } from "@aragon/sdk-client";
 
