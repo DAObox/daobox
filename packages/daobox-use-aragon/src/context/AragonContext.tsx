@@ -56,7 +56,7 @@ export function AragonSDKWrapper({
     setContext(contextInstance);
     setBaseClient(new Client(contextInstance));
     setTokenVotingClient(new TokenVotingClient(contextPlugin));
-  }, [signer, chain]);
+  }, [signer, chain, ipfsNodes]);
 
   return (
     <AragonSDKContext.Provider
