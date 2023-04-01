@@ -1,4 +1,4 @@
-name: DAO Box CI
+name: UseAragon Docs CI
 
 on:
   push:
