@@ -20,6 +20,10 @@ function Page() {
       <LinkButton link="/useFetchVotingSettings" label="useFetchVotingSettings" />
       <LinkButton link="/useNewProposal" label="useNewProposal" />
       <LinkButton link="/useVoteOnProposal" label="useVoteOnProposal" />
+      <h1>DAOs</h1>
+      <LinkButton link="/adminDao" label="Admin DAO" />
+      <LinkButton link="/lensDao" label="Lens DAO" />
+      <LinkButton link="/tokenVotingDao" label="TokenVoting DAO" />
     </div>
   );
 }

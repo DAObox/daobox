@@ -33,6 +33,7 @@ export {
   ProposalCreationSteps,
   VoteProposalStep,
   VoteValues,
+  VotingMode,
   DaoSortBy,
   SortDirection,
 } from "@aragon/sdk-client";

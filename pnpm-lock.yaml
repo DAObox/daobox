@@ -155,6 +155,7 @@ importers:
 
   apps/example:
     specifiers:
+      '@aragon/osx-ethers': ^1.2.1
       '@daobox/use-aragon': workspace:*
       '@types/node': ^17.0.31
       '@types/react': ^18.0.9
@@ -169,6 +170,7 @@ importers:
       typescript: ^4.9.4
       wagmi: ~0.11.0
     dependencies:
+      '@aragon/osx-ethers': 1.2.1
       '@daobox/use-aragon': link:../../packages/daobox-use-aragon
       connectkit: 1.2.1_ufky3dosvyyqgog52465u4ziay
       ethers: 5.7.2

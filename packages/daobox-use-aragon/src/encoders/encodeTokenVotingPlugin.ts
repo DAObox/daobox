@@ -11,14 +11,16 @@ import { activeContractsList } from "@aragon/osx-ethers";
 import { hexToBytes } from "../lib";
 
 export const encodeTokenVotingPlugin = (
-  pluginInitParams: ITokenVotingPluginInstall,
-  network: SupportedNetworks
+  pluginInitParams: ITokenVotingPluginInstall & {
+    network: SupportedNetworks;
+  }
 ) => {
+  const { network, ...rest } = pluginInitParams;
   if (!Object.keys(CHAINS).includes(network)) {
-    throw new Error(`Unsupported network ID: ${network}`);
+    console.error(`Unsupported network ID: ${network}`);
   }
 
-  const args = tokenVotingInitParamsToContract(pluginInitParams);
+  const args = tokenVotingInitParamsToContract(rest);
   const hexBytes = defaultAbiCoder.encode(
     [
       "tuple(uint8 votingMode, uint64 supportThreshold, uint64 minParticipation, uint64 minDuration, uint256 minProposerVotingPower) votingSettings",

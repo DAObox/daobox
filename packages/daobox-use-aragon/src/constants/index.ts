@@ -37,28 +37,28 @@ export function settings(
         graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
         web3Providers: WEB3_PROVIDER_URL[network],
         daoFactoryAddress: activeContractsList["mainnet"].DAOFactory,
-        ipfsNodes: IPFS_NODES,
+        ipfsNodes,
       };
     case 5:
       return {
         graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
         web3Providers: WEB3_PROVIDER_URL[network],
         daoFactoryAddress: activeContractsList["goerli"].DAOFactory,
-        ipfsNodes: IPFS_NODES,
+        ipfsNodes,
       };
     case 137:
       return {
         graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
         web3Providers: WEB3_PROVIDER_URL[network],
         daoFactoryAddress: activeContractsList["polygon"].DAOFactory,
-        ipfsNodes: IPFS_NODES,
+        ipfsNodes,
       };
     case 80001:
       return {
         graphqlNodes: [{ url: SUBGRAPH_API_URL[network] }],
         web3Providers: WEB3_PROVIDER_URL[network],
         daoFactoryAddress: activeContractsList["mumbai"].DAOFactory,
-        ipfsNodes: IPFS_NODES,
+        ipfsNodes,
       };
     default:
       throw new Error(`Unsupported network ID: ${network}`);
@@ -73,3 +73,13 @@ export const CHAINS = {
 } as const;
 
 export const AddressZero = "0x" + "0".repeat(40);
+
+// DAO BOX Plugins
+export const DAOBOX_PLUGIN_REPOS = {
+  network: {
+    goerli: {},
+    mainnet: {},
+    mumbai: { lensVoting: "0xD42Aa286DD6c5610FAF4D402B055f35dDb446432" },
+    polygon: { lensVoting: "0x0650EE961514C90D927F302b374d52344E8C62BF" },
+  },
+} as const;

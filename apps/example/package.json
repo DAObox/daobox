@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aragon/osx-ethers": "^1.2.1",
     "@daobox/use-aragon": "workspace:*",
     "connectkit": "^1.1.1",
     "ethers": "^5.7.0",
