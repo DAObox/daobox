@@ -17,15 +17,15 @@ jobs:
       run:
         working-directory: ./apps/docs
     steps:
+      - run: npm install --global pnpm
+      - run: pnpm install
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-          cache-dependency-path: "./pnpm-lock.yml"
-      - run: npm install --global pnpm
-      - run: pnpm install
+          cache-dependency-path: "./apps/docs/pnpm-lock.yml"
       - run: pnpm run lint
   build:
     strategy:
