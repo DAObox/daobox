@@ -1,4 +1,4 @@
-name: DAO Box CI
+name: UseAragon Docs CI
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: ./packages/daobox-use-aragon
+        working-directory: ./apps/docs
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }} and pnpm
@@ -33,7 +33,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: ./packages/daobox-use-aragon
+        working-directory: ./apps/docs
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }} and pnpm
