@@ -4,3 +4,4 @@ export * from "./validators";
 export * from "./hexTools";
 export * from "./setQueryKey";
 export * from "./convertChain";
+export * from "./encodeRatio";
