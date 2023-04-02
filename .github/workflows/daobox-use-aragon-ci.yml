@@ -27,7 +27,7 @@ jobs:
       - run: npm install --global yarn
       - run: yarn install
       - run: yarn lint:check
-      build:
+  build:
     strategy:
       matrix:
         os: [ubuntu-latest]
