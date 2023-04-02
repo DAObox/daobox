@@ -22,12 +22,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./yarn.lock"
-      - run: npm install --global yarn
-      - run: yarn install
-      - run: yarn lint:check
-      build:
+          cache: "pnpm"
+          cache-dependency-path: "./pnpm-lock.yml"
+      - run: npm install --global pnpm
+      - run: pnpm install
+      - run: pnpm run lint
+  build:
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -42,8 +42,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./yarn.lock"
-      - run: npm install --global yarn
-      - run: yarn install
-      - run: yarn build
+          cache: "pnpm"
+          cache-dependency-path: "./apps/docs/pnpm-lock.yaml"
+      - run: npm install --global pnpm
+      - run: pnpm install
+      - run: pnpm run build
