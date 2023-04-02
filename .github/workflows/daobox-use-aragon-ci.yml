@@ -2,9 +2,9 @@ name: DAO Box CI
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "oktonystark8/dao-34-setup-cicd-pipeline"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "oktonystark8/dao-34-setup-cicd-pipeline"]
 
 jobs:
   lint:
