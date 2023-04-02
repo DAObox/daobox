@@ -18,15 +18,13 @@ jobs:
         working-directory: ./packages/daobox-use-aragon
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }} and pnpm
+        uses: pnpm/action-setup@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./yarn.lock"
-      - run: npm install --global yarn
-      - run: yarn install
-      - run: yarn lint:check
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run lint:check
   build:
     strategy:
       matrix:
@@ -38,12 +36,10 @@ jobs:
         working-directory: ./packages/daobox-use-aragon
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }} and pnpm
+        uses: pnpm/action-setup@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./yarn.lock"
-      - run: npm install --global yarn
-      - run: yarn install
-      - run: yarn build
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run build
