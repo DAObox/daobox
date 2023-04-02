@@ -18,7 +18,7 @@ const Index = () => {
     },
   });
 
-  const handleVote = (voteValue) => {
+  const handleVote = (voteValue: any) => {
     setVote(voteValue);
     console.log(voteValue);
     mutate?.();

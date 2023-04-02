@@ -9,7 +9,7 @@ const Index = () => {
 
   const { mutate, depositStatus, error, data } = useDepositERC20({
     tokenAddress,
-    amount,
+    amount: BigInt(amount),
     daoAddressOrEns,
     onAllowanceTransaction(hash: string) {
       alert(`Allowance Hash: ${hash}`);

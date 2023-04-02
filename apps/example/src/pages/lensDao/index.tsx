@@ -1,35 +1,13 @@
-import { VotingMode, encodeTokenVotingPlugin, useNewDao } from "@daobox/use-aragon";
+import { encodeLensVotingPlugin, useNewDao } from "@daobox/use-aragon";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useAccount } from "wagmi";
+
 import { Terminal } from "../../components/Terminal";
+
+const votingToken = "0xD3596C81FcAb699192dc79C8e25f1362E3dFf89A";
 
 const Index = () => {
   const [name, setName] = useState("");
-  const { address } = useAccount();
-
-  const plugin = encodeTokenVotingPlugin({
-    votingSettings: {
-      minDuration: 60 * 60 * 24 * 2, // seconds (minimum amount is 3600)
-      minParticipation: 0.25, // 25%
-      supportThreshold: 0.5, // 50%
-      minProposerVotingPower: BigInt("5000"), // default 0
-      votingMode: VotingMode.EARLY_EXECUTION, // default is STANDARD. other options: EARLY_EXECUTION, VOTE_REPLACEMENT
-    },
-    newToken: {
-      name: "Token", // the name of your token
-      symbol: "TOK", // the symbol for your token. shouldn't be more than 5 letters
-      decimals: 18, // the number of decimals your token uses
-      balances: [
-        {
-          // Defines the initial balances of the new token
-          address: address!, // address of the account to receive the newly minted tokens
-          balance: BigInt(10), // amount of tokens that address should receive
-        },
-      ],
-    },
-    network: "goerli",
-  });
 
   const { mutate, creationStatus, data, error } = useNewDao({
     daoMetadata: {
@@ -38,7 +16,12 @@ const Index = () => {
       links: [],
     },
     ensSubdomain: name,
-    plugins: [plugin],
+    plugins: [
+      encodeLensVotingPlugin({
+        lensFollowNFT: votingToken,
+        network: "polygon",
+      }),
+    ],
   });
 
   const handleNewDao = () => {
@@ -47,7 +30,8 @@ const Index = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Token Voting Dao</h1>
+      <h1 style={{ textAlign: "center" }}>Lens Dao</h1>
+      <h3 style={{ textAlign: "center" }}>USE ON POLYGON or MUMBAI</h3>
       <Terminal>
         <h3>Enter dao name:</h3>
         <input
@@ -82,3 +66,12 @@ const Index = () => {
 };
 
 export default Index;
+
+export function encodeRatio(ratio: number, digits: number): number {
+  if (ratio < 0 || ratio > 1) {
+    throw new Error("The ratio value should range between 0 and 1");
+  } else if (!Number.isInteger(digits) || digits < 1 || digits > 15) {
+    throw new Error("The number of digits should range between 1 and 15");
+  }
+  return Math.round(ratio * 10 ** digits);
+}

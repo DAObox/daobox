@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
 
 export default App;
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: { children: JSX.Element }) => {
   return (
     <div>
       <header className="header">

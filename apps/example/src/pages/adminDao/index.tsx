@@ -1,14 +1,16 @@
 import { encodePluginInstallItem, useNewDao } from "@daobox/use-aragon";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import { Terminal } from "../../components/Terminal";
-import { adminRepo__goerli } from "../../constants";
-
+import { activeContractsList } from "@aragon/osx-ethers";
 
 const Index = () => {
   const [name, setName] = useState("");
-  const { address } = useAccount()
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+
+  const chainName = chain?.name.toLowerCase() as string;
 
   const { mutate, creationStatus, data, error } = useNewDao({
     daoMetadata: {
@@ -17,14 +19,15 @@ const Index = () => {
       links: [],
     },
     ensSubdomain: name,
-    plugins: [encodePluginInstallItem(
-      {
+    plugins: [
+      encodePluginInstallItem({
         types: ["address admin"],
         parameters: [address],
-        repoAddress: adminRepo__goerli
-      }
-    )]
-  })
+        repoAddress:
+          activeContractsList[chainName as keyof typeof activeContractsList]["admin-repo"],
+      }),
+    ],
+  });
 
   const handleNewDao = () => {
     mutate?.();
@@ -32,7 +35,7 @@ const Index = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Token Voting Dao</h1>
+      <h1 style={{ textAlign: "center" }}>Admin Dao</h1>
       <Terminal>
         <h3>Enter dao name:</h3>
         <input
@@ -45,7 +48,8 @@ const Index = () => {
         <div>
           <button
             onClick={handleNewDao}
-            disabled={["pinningMetadata", "creatingDao"].includes(creationStatus)}>
+            disabled={["pinningMetadata", "creatingDao"].includes(creationStatus)}
+          >
             Create
           </button>
         </div>
@@ -54,7 +58,11 @@ const Index = () => {
           data:
           <pre>{JSON.stringify(data, (_, v) => (typeof v === "bigint" ? v.toString() : v), 2)}</pre>
         </h3>
-        {data && <Link href={`https://app.aragon.org/#/daos/goerli/${data.daoAddress}/dashboard`}>Goto Dao</Link>}
+        {data && (
+          <Link href={`https://app.aragon.org/#/daos/${chainName}/${data.daoAddress}/dashboard`}>
+            Goto Dao
+          </Link>
+        )}
         {error && <h3>Error: {error?.message}</h3>}
       </Terminal>
     </div>
