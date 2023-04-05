@@ -1,4 +1,4 @@
-import { UseMutationOptions, UseQueryOptions } from "react-query";
+import { UseMutationOptions, UseQueryOptions } from "@tanstack/react-query";
 import { CHAINS } from "../constants";
 
 /**
@@ -26,16 +26,16 @@ export type QueryConfig<TData, TSelectData = TData> = Pick<
   UseQueryOptions<TData, unknown, TSelectData>,
   | "cacheTime"
   | "enabled"
-  | "isDataEqual"
+  // | "isDataEqual"
   | "staleTime"
-  | "structuralSharing"
+  // | "structuralSharing"
   | "suspense"
   | "onError"
   | "onSettled"
   | "onSuccess"
   | "queryKey"
   | "select"
-  | "useErrorBoundary"
+  // | "useErrorBoundary"
 >;
 
 export type SupportedNetworks = keyof typeof CHAINS;

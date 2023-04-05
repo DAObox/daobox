@@ -16,6 +16,7 @@ function Page() {
       <LinkButton link="/useFetchProposal" label="useFetchProposal" />
       <LinkButton link="/useCanVote" label="useCanVote" />
       <LinkButton link="/useFetchMembers" label="useFetchMembers" />
+      <LinkButton link="/useFetchMembersAndBalances" label="useFetchMembersAndBalances" />
       <LinkButton link="/useFetchVotingToken" label="useFetchVotingToken" />
       <LinkButton link="/useFetchVotingSettings" label="useFetchVotingSettings" />
       <LinkButton link="/useNewProposal" label="useNewProposal" />

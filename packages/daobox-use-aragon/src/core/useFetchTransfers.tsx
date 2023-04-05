@@ -1,5 +1,5 @@
 import { ITransferQueryParams, Transfer } from "@aragon/sdk-client";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useAragon } from "../context";
 import { createQueryKey } from "../lib/setQueryKey";
 import { QueryConfig } from "../types";

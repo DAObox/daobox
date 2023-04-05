@@ -1,5 +1,5 @@
 import { AssetBalance } from "@aragon/sdk-client";
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useAragon } from "../context";
 import { DaoBalancesQueryParams, QueryConfig } from "../types";
 import { createQueryKey } from "../lib/setQueryKey";

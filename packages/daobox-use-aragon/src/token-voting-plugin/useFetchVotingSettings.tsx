@@ -1,5 +1,9 @@
 import { VotingSettings } from "@aragon/sdk-client";
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
+import {
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { useAragon } from "../context";
 import { createQueryKey } from "../lib/setQueryKey";
 import { QueryConfig } from "../types";
