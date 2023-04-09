@@ -22,7 +22,9 @@ export type {
   Erc20TokenDetails,
   CreateMajorityVotingProposalParams,
   ProposalMetadata,
+  ProposalSortBy,
   IVoteProposalParams,
+  DaoAction,
 } from "@aragon/sdk-client";
 
 export {
@@ -76,3 +78,22 @@ export declare type TokenBaseDetails = {
   name: string;
   symbol: string;
 };
+
+// NOTE: we are only supporting addresses no ens names
+export declare type WithdrawParamsBase = {
+  type: TokenType;
+  recipientAddress: string;
+};
+
+export declare type WithdrawEthParams = WithdrawParamsBase & {
+  type: TokenType.NATIVE;
+  amount: bigint;
+};
+
+export declare type WithdrawErc20Params = WithdrawParamsBase & {
+  type: TokenType.ERC20;
+  amount: bigint;
+  tokenAddress: string;
+};
+
+export declare type WithdrawParams = WithdrawEthParams | WithdrawErc20Params;
