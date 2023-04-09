@@ -31,6 +31,7 @@ export {
   DaoDepositSteps,
   DaoCreationSteps,
   ProposalCreationSteps,
+  ProposalStatus,
   VoteProposalStep,
   VoteValues,
   VotingMode,

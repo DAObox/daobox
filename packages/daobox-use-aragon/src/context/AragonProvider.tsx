@@ -6,9 +6,7 @@ import { AragonSDKWrapper } from "./AragonContext";
 
 export interface IpfsNode {
   url: string;
-  headers: {
-    "X-API-KEY": string;
-  };
+  headers: any;
 }
 export interface Config {
   ipfsNodes?: IpfsNode[] | undefined;
