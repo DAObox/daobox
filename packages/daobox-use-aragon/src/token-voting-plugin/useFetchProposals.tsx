@@ -21,6 +21,7 @@ export function useFetchProposals(
     sortBy,
     skip,
     limit,
+    status,
     enabled = true,
     queryKey: userQueryKey,
     ...options
@@ -29,7 +30,7 @@ export function useFetchProposals(
   return useQuery<TokenVotingProposalListItem[] | null, unknown>({
     queryKey: createQueryKey(
       "proposals",
-      [daoAddressOrEns, limit, sortBy, direction, skip],
+      [daoAddressOrEns, limit, sortBy, direction, status, skip],
       userQueryKey
     ),
     queryFn: async () =>

@@ -1,15 +1,28 @@
-import { useNewProposal, VoteValues } from "@daobox/use-aragon";
+import {
+  TokenType,
+  encodeMintToken,
+  encodeWithdrawAction,
+  useNewProposal,
+} from "@daobox/use-aragon";
 import React from "react";
 import { Terminal } from "../../components/Terminal";
-import { pluginAddress } from "../../constants";
+import { daoToken, pluginAddress, userAddress } from "../../constants";
 
 const Index = () => {
+  const mintAction = encodeMintToken({
+    tokenAddress: daoToken,
+    amount: 420n,
+    recipientAddress: userAddress,
+  });
+
+  console.log("mintAction", mintAction);
   const { mutate, data, error, proposalId, proposalStatus } = useNewProposal({
     title: "ok this one should work",
     summary: "another test",
     description: "another test",
     pluginAddress,
     resources: [],
+    actions: [mintAction],
     endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7),
     // creatorVote: VoteValues.YES,
     onProposalTransaction(proposalId: string) {
