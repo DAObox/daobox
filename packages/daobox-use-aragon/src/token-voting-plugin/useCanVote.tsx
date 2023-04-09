@@ -1,37 +1,44 @@
 import { CanVoteParams } from "@aragon/sdk-client";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
+import { useEffect } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * Custom hook to check if an address can vote.
- * @param {CanVoteParams | undefined} canVoteParams - The parameters to check if an address can vote.
- * @param {UseCanVoteOptions | undefined} options - Optional query options.
- * @returns {CanVoteReturnType} - A query result object containing the canVote status and other query metadata.
- */
-export function useCanVote(
-  canVoteParams?: CanVoteParams,
-  options?: UseCanVoteOptions
-): CanVoteReturnType {
+export function useCanVote(params: UseCanVoteParams): CanVoteReturnType {
   const { tokenVotingClient: client } = useAragon();
+  const {
+    vote,
+    proposalId,
+    voterAddressOrEns,
+    enabled = true,
+    queryKey: userQueryKey,
+    ...options
+  } = params;
 
-  return useQuery<boolean | null>({
-    queryKey: ["canVote", canVoteParams],
-    queryFn: async () => client!.methods.canVote(canVoteParams!),
-    enabled: !!client && !!canVoteParams,
+  console.log({ client, vote, proposalId, voterAddressOrEns, enabled });
+  useEffect(() => {
+    console.log({ client, vote, proposalId, voterAddressOrEns, enabled });
+  }, [client, vote, proposalId, voterAddressOrEns, enabled]);
+  return useQuery<boolean | null, unknown>({
+    queryKey: createQueryKey(
+      "canVote",
+      [proposalId, voterAddressOrEns, vote],
+      userQueryKey
+    ),
+    queryFn: async () =>
+      client!.methods.canVote({
+        vote: vote!,
+        proposalId: proposalId!,
+        voterAddressOrEns: voterAddressOrEns!,
+      }),
+    enabled: !!(client && vote && proposalId && voterAddressOrEns && enabled),
     ...options,
   });
 }
 
-export type CanVoteReturnType = UseQueryResult<boolean | null, unknown>;
+export interface UseCanVoteParams
+  extends Partial<CanVoteParams>,
+    QueryConfig<boolean | null> {}
 
-export type UseCanVoteOptions = UseQueryOptions<
-  boolean | null,
-  unknown,
-  boolean | null,
-  QueryKey
->;
+export type CanVoteReturnType = UseQueryResult<boolean | null, unknown>;

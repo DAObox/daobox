@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { IVoteProposalParams, VoteProposalStep } from "@aragon/sdk-client";
 
 import { useAragon } from "../context";
@@ -36,6 +36,7 @@ export function useVoteOnProposal({
             onVoteTransaction?.(txHash as string);
             setVoteStatus(VoteStatus.CONFIRMING_TRANSACTION);
             txHash = step.txHash;
+            setVoteTxHash(txHash);
             break;
           case VoteProposalStep.DONE:
             setVoteStatus(VoteStatus.SUCCESS);

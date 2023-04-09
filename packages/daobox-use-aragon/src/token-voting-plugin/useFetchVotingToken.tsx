@@ -1,41 +1,30 @@
 import { Erc20TokenDetails } from "@aragon/sdk-client";
-import { Erc721TokenDetails } from "@aragon/sdk-client/dist/tokenVoting/interfaces";
-import {
-  QueryKey,
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "react-query";
-import { useAragon } from "../context";
 
-/**
- * Custom hook to fetch the voting token for a given plugin address.
- * @param {string | undefined} pluginAddress - Optional plugin address.
- * @param {UseFetchVotingTokenOptions | undefined} options - Optional query options.
- * @returns {FetchVotingTokenReturnType} - A query result object containing the voting token details and other query metadata.
- */
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useAragon } from "../context";
+import { Erc721TokenDetails, QueryConfig } from "../types";
+import { createQueryKey } from "../lib/setQueryKey";
+
 export function useFetchVotingToken(
-  pluginAddress?: string,
-  options?: UseFetchVotingTokenOptions
+  params: UseFetchVotingTokenParams
 ): FetchVotingTokenReturnType {
   const { tokenVotingClient: client } = useAragon();
+  const { pluginAddress, enabled, queryKey: userQueryKey, ...options } = params;
 
-  return useQuery<Erc20TokenDetails | Erc721TokenDetails | null>({
-    queryKey: ["votingToken", pluginAddress],
+  return useQuery<Erc20TokenDetails | Erc721TokenDetails | null, unknown>({
+    queryKey: createQueryKey("votingToken", [pluginAddress], userQueryKey),
     queryFn: async () => client!.methods.getToken(pluginAddress!),
-    enabled: !!client && !!pluginAddress,
+    enabled: !!client && !!pluginAddress && enabled,
     ...options,
   });
+}
+
+export interface UseFetchVotingTokenParams
+  extends QueryConfig<Erc20TokenDetails | Erc721TokenDetails | null> {
+  pluginAddress?: string;
 }
 
 export type FetchVotingTokenReturnType = UseQueryResult<
   Erc20TokenDetails | Erc721TokenDetails | null,
   unknown
->;
-
-export type UseFetchVotingTokenOptions = UseQueryOptions<
-  Erc20TokenDetails | Erc721TokenDetails | null,
-  unknown,
-  Erc20TokenDetails | Erc721TokenDetails | null,
-  QueryKey
 >;

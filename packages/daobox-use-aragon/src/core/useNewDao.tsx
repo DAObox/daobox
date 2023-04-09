@@ -4,7 +4,7 @@ import {
   IPluginInstallItem,
 } from "@aragon/sdk-client";
 import { useState } from "react";
-import { useMutation, UseMutationResult } from "react-query";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 
 import { useAragon } from "..";
 import { MutationConfig } from "../types";

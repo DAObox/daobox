@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   CreateMajorityVotingProposalParams,
   ProposalCreationSteps,
@@ -59,6 +59,7 @@ export function useNewProposal({
         metadataUri,
       });
 
+      setProposalStatus(NewProposalStatus.WATING_FOR_SIGER);
       for await (const step of steps) {
         switch (step.key) {
           case ProposalCreationSteps.CREATING:
@@ -115,6 +116,7 @@ export enum NewProposalStatus {
   IDLE = "idle",
   PINNING_METADATA = "pinningMetadata",
   CREATING_PROPOSAL = "creatingProposal",
+  WATING_FOR_SIGER = "waitingForSigner",
   CONFIRMING_TRANSACTION = "confirmingTransaction",
   SUCCESS = "success",
   ERROR = "error",
@@ -122,7 +124,7 @@ export enum NewProposalStatus {
 
 export type UseNewProposalParams = ProposalMetadata &
   Omit<CreateMajorityVotingProposalParams, "metadataUri"> & {
-    onProposalTransaction?: (proposalId: string) => void;
+    onProposalTransaction?: (txHash: string) => void;
   } & MutationConfig<NewProposalReturnData, Error>;
 
 export type NewProposalReturnData = {

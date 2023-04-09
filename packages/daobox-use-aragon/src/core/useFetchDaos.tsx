@@ -1,42 +1,37 @@
 import { DaoListItem, IDaoQueryParams } from "@aragon/sdk-client";
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
-
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useAragon } from "../context";
+import { createQueryKey } from "../lib/setQueryKey";
+import { QueryConfig } from "../types";
 
-/**
- * @function useFetchDaos
- * @param {IDaoQueryParams} queryParams - The query parameters for fetching DAOs.
- * @param {UseFetchDaosOptions} [options] - The options for the useFetchDaos query.
- * @returns {UseFetchDaosResults} - The result of the DAOs fetching query.
- */
-export function useFetchDaos(
-  queryParams?: IDaoQueryParams,
-  options?: UseFetchDaosOptions
-): UseFetchDaosResults {
+export function useFetchDaos(params: UseFetchDaosParams): UseFetchDaosResults {
   const { baseClient: client } = useAragon();
+  const {
+    enabled,
+    queryKey: userQueryKey,
+    sortBy,
+    direction,
+    limit,
+    skip,
+    ...options
+  } = params;
 
   return useQuery<DaoListItem[] | null, unknown>({
-    queryKey: ["dao", queryParams],
+    queryKey: createQueryKey("daos", [params], userQueryKey),
     queryFn: async () =>
       client!.methods.getDaos({
-        ...queryParams,
+        limit: limit || 10, // optional,
+        sortBy,
+        direction,
+        skip,
       }),
-    enabled: !!client,
+    enabled: !!client && enabled,
     ...options,
   });
 }
 
-/**
- * @typedef {object} UseFetchDaosOptions
- * @extends {Omit<UseQueryOptions<DaoListItem[]|null, unknown, DaoListItem[]|null>, "queryKey"|"queryFn">}
- */
-export type UseFetchDaosOptions = Omit<
-  UseQueryOptions<DaoListItem[] | null, unknown, DaoListItem[] | null>,
-  "queryKey" | "queryFn"
->;
+export interface UseFetchDaosParams
+  extends Partial<IDaoQueryParams>,
+    QueryConfig<DaoListItem[] | null> {}
 
-/**
- * @typedef {object} UseFetchDaosResults
- * @extends {UseQueryResult<DaoListItem[]|null, unknown>}
- */
 export type UseFetchDaosResults = UseQueryResult<DaoListItem[] | null, unknown>;

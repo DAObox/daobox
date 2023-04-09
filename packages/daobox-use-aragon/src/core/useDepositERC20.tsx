@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { DaoDepositSteps } from "@aragon/sdk-client";
-import { DepositErc20Params } from "@aragon/sdk-client/dist/interfaces";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { useAragon } from "..";
-import { MutationConfig } from "../types";
+import { DepositErc20Params, MutationConfig, TokenType } from "../types";
 
 // TODO: add the return type to the docs
 /**
@@ -167,9 +166,3 @@ export type DepositERC20ReturnData = {
   depositTxHash: string | null;
   depositAmount: bigint | null;
 };
-
-enum TokenType {
-  NATIVE = "native",
-  ERC20 = "erc20",
-  ERC721 = "erc721",
-}

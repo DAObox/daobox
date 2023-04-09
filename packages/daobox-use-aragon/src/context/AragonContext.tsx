@@ -6,8 +6,10 @@ import {
   TokenVotingClient,
 } from "@aragon/sdk-client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { settings } from "../constants";
+import { CHAINS, settings } from "../constants";
 import useConnectedWallet from "./useConnectedWallet";
+import { SupportedChainIds } from "../types";
+import { IpfsNode } from "./AragonProvider";
 
 export interface AragonSDKContextValue {
   context?: Context;
@@ -23,8 +25,10 @@ const AragonSDKContext = createContext<AragonSDKContextValue>({});
  */
 export function AragonSDKWrapper({
   children,
+  ipfsNodes,
 }: {
   children: JSX.Element;
+  ipfsNodes?: IpfsNode[];
 }): JSX.Element {
   const { signer, chain } = useConnectedWallet();
   const [context, setContext] = useState<Context | undefined>(undefined);
@@ -35,17 +39,24 @@ export function AragonSDKWrapper({
 
   useEffect(() => {
     if (!signer || !chain) return;
+
+    // check if chain is valid
+    if (!Object.values(CHAINS).includes(chain as SupportedChainIds)) {
+      console.error(`Invalid chain type: ${chain}`);
+      return;
+    }
+
     const aragonSDKContextParams: ContextParams = {
       network: chain || 5,
       signer,
-      ...settings(chain),
+      ...settings(chain as SupportedChainIds, ipfsNodes),
     };
     const contextInstance = new Context(aragonSDKContextParams);
     const contextPlugin = ContextPlugin.fromContext(contextInstance);
     setContext(contextInstance);
     setBaseClient(new Client(contextInstance));
     setTokenVotingClient(new TokenVotingClient(contextPlugin));
-  }, [signer, chain]);
+  }, [signer, chain, ipfsNodes]);
 
   return (
     <AragonSDKContext.Provider
