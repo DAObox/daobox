@@ -43,13 +43,14 @@ export function useNewProposal({
     if (!client) return Promise.reject("No client");
     try {
       setProposalStatus(NewProposalStatus.PINNING_METADATA);
-      const metadata: ProposalMetadata = ({
+      const metadata: ProposalMetadata = {
         title,
         summary,
         description,
         resources,
         media,
-      } = newProposalParams);
+      };
+      console.log({ metadata });
       const metadataUri = (await client.methods.pinMetadata(
         metadata
       )) as string;
