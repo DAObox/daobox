@@ -28,7 +28,7 @@ export const IPFS_NODES = [
 
 export function settings(
   network: SupportedChainIds,
-  nodes: IpfsNode[] | undefined
+  nodes?: IpfsNode[] | undefined
 ) {
   const ipfsNodes = nodes || IPFS_NODES;
   switch (network) {

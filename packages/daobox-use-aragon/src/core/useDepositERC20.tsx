@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DaoDepositSteps } from "@aragon/sdk-client";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { useAragon } from "..";
 import { DepositErc20Params, MutationConfig, TokenType } from "../types";

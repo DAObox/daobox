@@ -1,4 +1,4 @@
-import { QueryKey } from "react-query";
+import { QueryKey } from "@tanstack/react-query";
 
 export function createQueryKey(
   rootKey: string,

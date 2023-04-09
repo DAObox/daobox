@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   CreateMajorityVotingProposalParams,
   ProposalCreationSteps,
@@ -124,7 +124,7 @@ export enum NewProposalStatus {
 
 export type UseNewProposalParams = ProposalMetadata &
   Omit<CreateMajorityVotingProposalParams, "metadataUri"> & {
-    onProposalTransaction?: (proposalId: string) => void;
+    onProposalTransaction?: (txHash: string) => void;
   } & MutationConfig<NewProposalReturnData, Error>;
 
 export type NewProposalReturnData = {

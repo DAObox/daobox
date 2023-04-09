@@ -1,6 +1,6 @@
 import { Erc20TokenDetails } from "@aragon/sdk-client";
 
-import { useQuery, UseQueryResult } from "react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useAragon } from "../context";
 import { Erc721TokenDetails, QueryConfig } from "../types";
 import { createQueryKey } from "../lib/setQueryKey";

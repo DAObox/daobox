@@ -2,7 +2,11 @@ import {
   IProposalQueryParams,
   TokenVotingProposalListItem,
 } from "@aragon/sdk-client";
-import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
+import {
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { useAragon } from "../context";
 import { createQueryKey } from "../lib/setQueryKey";
 import { QueryConfig } from "../types";
@@ -25,7 +29,7 @@ export function useFetchProposals(
   return useQuery<TokenVotingProposalListItem[] | null, unknown>({
     queryKey: createQueryKey(
       "proposals",
-      [daoAddressOrEns, limit],
+      [daoAddressOrEns, limit, sortBy, direction, skip],
       userQueryKey
     ),
     queryFn: async () =>
