@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.5-beta-3] - 2023-04-09
+
+### Fixed
+
+    - bug in `useNewProposal` that would cause proposal metadata to not pin
+    - missing query key in `useFetchProposals`
+
+### Added
+
+    - encoder for minting DAO tokens
+    - encoder for transfering tokens/eth
+
 ## [0.0.5-beta-1] - 2023-04-08
 
 ### Fixed
