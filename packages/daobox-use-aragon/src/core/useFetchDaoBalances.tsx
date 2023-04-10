@@ -30,6 +30,7 @@ export function useFetchDaoBalances(
         sortBy,
       }),
     enabled: !!client && !!daoAddressOrEns && enabled,
+    keepPreviousData: true,
     ...options,
   });
 }

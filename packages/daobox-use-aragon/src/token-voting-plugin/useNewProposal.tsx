@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   CreateMajorityVotingProposalParams,
   ProposalCreationSteps,
@@ -34,6 +34,7 @@ export function useNewProposal({
     NewProposalStatus.IDLE
   );
   const { tokenVotingClient: client } = useAragon();
+  const queryClient = useQueryClient();
 
   async function createProposalWrapper(
     newProposalParams: UseNewProposalParams
@@ -102,9 +103,10 @@ export function useNewProposal({
           failSafeActions,
           onProposalTransaction,
         }),
+      onSettled: () =>
+        queryClient.invalidateQueries({ queryKey: ["proposals"] }),
       onError,
       onMutate,
-      onSettled,
       onSuccess,
     }),
     proposalId,
