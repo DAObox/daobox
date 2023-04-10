@@ -33,6 +33,7 @@ export function useFetchTransfers(
         direction,
       }),
     enabled: !!client && !!daoAddressOrEns && enabled,
+    keepPreviousData: true,
     ...options,
   });
 }

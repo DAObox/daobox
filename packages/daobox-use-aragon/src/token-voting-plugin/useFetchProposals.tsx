@@ -42,6 +42,7 @@ export function useFetchProposals(
         skip,
       }),
     enabled: !!(client && daoAddressOrEns && enabled),
+    keepPreviousData: true,
     ...options,
   });
 }

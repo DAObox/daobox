@@ -4,7 +4,9 @@ import { useAragon } from "../context";
 import { createQueryKey } from "../lib/setQueryKey";
 import { QueryConfig } from "../types";
 
-export function useFetchDaos(params: UseFetchDaosParams): UseFetchDaosResults {
+export function useFetchDaos(
+  params: UseFetchDaosParams = {}
+): UseFetchDaosResults {
   const { baseClient: client } = useAragon();
   const {
     enabled,
@@ -26,6 +28,7 @@ export function useFetchDaos(params: UseFetchDaosParams): UseFetchDaosResults {
         skip,
       }),
     enabled: !!client && enabled,
+    keepPreviousData: true,
     ...options,
   });
 }
