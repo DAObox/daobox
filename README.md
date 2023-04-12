@@ -1,10 +1,20 @@
-# Turborepo Design System starter with Changesets
+<h1 align="center">DAOBox - use-aragon</h1>
 
-This is an official React design system starter powered by Turborepo. Versioning and package publishing is handled by [Changesets](https://github.com/changesets/changesets) and fully automated with GitHub Actions.
+<p align="center">
+    <img src="./assets/banner.png" alt="daobox-banner" />
+    <br>
+    <i>DAOBox - use-aragon is a library of react hooks that enables seamless creation of frontends on AragonOSx for React developers.</i>
+    <br>
+</p>
 
-## What's inside?
-
-This Turborepo includes the following:
+<p align="center">
+  <a href="use-aragon.daobox.app">Doc</a>
+  •
+  <a href="https://discord.gg/EWRMHjqQVf">DAOBox: DAO Development Discord</a>
+  <br>
+  <br>
+</p>
+<hr>
 
 ### Apps and Packages
 
@@ -74,3 +84,4 @@ To publish packages to a private npm organization scope, **remove** the followin
 ### GitHub Package Registry
 
 See [Working with the npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#publishing-a-package-using-publishconfig-in-the-packagejson-file)
+
