@@ -18,20 +18,20 @@
 
 ## Apps and Packages
 
-- `docs`: `use-aragon` documentation site powered by [Next.js](https://nextjs.org/)
-- `@daobox/ui`: core React components
-- `@daobox/utils`: shared React utilities
-- `@daobox/tsconfig`: shared `tsconfig.json`s used throughout the monorepo
-- `eslint-config-daobox`: ESLint preset
+- `apps/docs`: `use-aragon` documentation site powered by [Next.js](https://nextjs.org/)
+- `apps/example`: sample of applied `use-aragon` hooks.
+- `packages/daobox-use-aragon`: core library of aragon hooks.
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ## Development Setup
 
+- [Contributing Guidelines](docs/CONTRIBUTING.md)
+
 ### Prerequisites
 
 - Install [Node.js 16.x](https://nodejs.org/en/) which includes [Node Package Manager](https://docs.npmjs.com/getting-started)
-- Install [Yarn 1.x](https://classic.yarnpkg.com/lang/en/docs/install)
+- Install [pnpm 7.x](https://pnpm.io/installation)
 
 ### Running on Localhost
 
