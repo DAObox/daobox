@@ -1,7 +1,6 @@
 import {
 	DaoCreationSteps,
 	DaoMetadata,
-	TokenVotingPluginInstall,
 } from "@aragon/sdk-client";
 import { useState } from "react";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
@@ -108,7 +107,7 @@ export type NewDaoParams = MutationConfig<NewDaoReturnData, Error> & {
   daoUri?: string;
   ensSubdomain: string;
   trustedForwarder?: string;
-  plugins: TokenVotingPluginInstall[];
+  plugins: [];
   onCreateDaoTransaction?: (txHash: string) => void;
 };
 
