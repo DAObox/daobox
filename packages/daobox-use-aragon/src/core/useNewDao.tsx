@@ -1,7 +1,6 @@
 import {
-  DaoCreationSteps,
-  DaoMetadata,
-  IPluginInstallItem,
+	DaoCreationSteps,
+	DaoMetadata,
 } from "@aragon/sdk-client";
 import { useState } from "react";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
@@ -100,7 +99,7 @@ export function useNewDao({
  * @property {string} [daoUri] - The URI for the new DAO.
  * @property {string} ensSubdomain - The ENS subdomain for the new DAO.
  * @property {string} [trustedForwarder] - The trusted forwarder address for the new DAO.
- * @property {IPluginInstallItem[]} plugins - The plugins to be installed in the new DAO.
+ * @property {TokenVotingPluginInstall[]} plugins - The plugins to be installed in the new DAO.
  * @property {(txHash: string) => void} [onCreateDaoTransaction] - A callback to be called when the DAO creation transaction is created.
  */
 export type NewDaoParams = MutationConfig<NewDaoReturnData, Error> & {
@@ -108,7 +107,7 @@ export type NewDaoParams = MutationConfig<NewDaoReturnData, Error> & {
   daoUri?: string;
   ensSubdomain: string;
   trustedForwarder?: string;
-  plugins: IPluginInstallItem[];
+  plugins: [];
   onCreateDaoTransaction?: (txHash: string) => void;
 };
 
