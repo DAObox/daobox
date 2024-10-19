@@ -55,7 +55,7 @@ This command starts a local Ethereum network using Foundry. The network runs on 
 3. On a second terminal, deploy the test contract:
 
 ```
-bun deploy
+bun run deploy
 ```
 
 This command deploys a test smart contract to the local network. The contract is located in `packages/foundry/contracts` and can be modified to suit your needs. The `bun deploy` command uses the deploy script located in `packages/foundry/script` to deploy the contract to the network. You can also customize the deploy script.
