@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { PaginationButton, SearchBar, TransactionsTable } from "./_components";
 import type { NextPage } from "next";
 import { hardhat } from "viem/chains";
-import { useFetchBlocks } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { notification } from "~~/utils/scaffold-eth";
+import { useFetchBlocks } from "~~/hooks/daobox";
+import { useTargetNetwork } from "~~/hooks/daobox/useTargetNetwork";
+import { notification } from "~~/utils/daobox";
 
 const BlockExplorer: NextPage = () => {
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage, error } = useFetchBlocks();
@@ -60,7 +60,7 @@ const BlockExplorer: NextPage = () => {
         <>
           <p className="font-bold mt-0 mb-1">Cannot connect to local provider</p>
           <p className="m-0">
-            - Did you forget to run <code className="italic bg-base-300 text-base font-bold">yarn chain</code> ?
+            - Did you forget to run <code className="italic bg-base-300 text-base font-bold">bun chain</code> ?
           </p>
           <p className="mt-1 break-normal">
             - Or you can change <code className="italic bg-base-300 text-base font-bold">targetNetwork</code> in{" "}

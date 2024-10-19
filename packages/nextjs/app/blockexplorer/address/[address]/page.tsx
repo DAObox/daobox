@@ -3,8 +3,8 @@ import path from "path";
 import { foundry } from "viem/chains";
 import { AddressComponent } from "~~/app/blockexplorer/_components/AddressComponent";
 import deployedContracts from "~~/contracts/deployedContracts";
-import { isZeroAddress } from "~~/utils/scaffold-eth/common";
-import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
+import { isZeroAddress } from "~~/utils/daobox/common";
+import { GenericContractsDeclaration } from "~~/utils/daobox/contract";
 
 type PageProps = {
   params: { address: string };

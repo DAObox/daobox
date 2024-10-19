@@ -2,8 +2,8 @@
 
 # setup wallet for anvil
 setup-anvil-wallet:
-	shx rm ~/.foundry/keystores/scaffold-eth-default 2>/dev/null; \
-	cast wallet import --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6 --unsafe-password 'localhost' scaffold-eth-default
+	shx rm ~/.foundry/keystores/daobox-default 2>/dev/null; \
+	cast wallet import --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6 --unsafe-password 'localhost' daobox-default
 
 # Start local chain
 chain: setup-anvil-wallet
@@ -33,7 +33,7 @@ generate-abis:
 	node scripts-js/generateTsAbis.js
 
 verify-keystore:
-	if grep -q "scaffold-eth-default" .env; then \
+	if grep -q "daobox-default" .env; then \
 		cast wallet address --password localhost; \
   else \
 		cast wallet address; \

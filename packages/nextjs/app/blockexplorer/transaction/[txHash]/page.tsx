@@ -1,7 +1,7 @@
 import TransactionComp from "../_components/TransactionComp";
 import type { NextPage } from "next";
 import { Hash } from "viem";
-import { isZeroAddress } from "~~/utils/scaffold-eth/common";
+import { isZeroAddress } from "~~/utils/daobox/common";
 
 type PageProps = {
   params: { txHash?: Hash };

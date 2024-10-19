@@ -13,8 +13,8 @@ import {
   getParsedContractFunctionArgs,
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { getParsedError, notification } from "~~/utils/scaffold-eth";
+import { useTargetNetwork } from "~~/hooks/daobox/useTargetNetwork";
+import { getParsedError, notification } from "~~/utils/daobox";
 
 type ReadOnlyFunctionFormProps = {
   contractAddress: Address;

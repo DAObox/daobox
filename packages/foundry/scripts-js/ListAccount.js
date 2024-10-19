@@ -66,7 +66,7 @@ function findAddressFromArgs(args) {
   return args.find((arg) => arg.startsWith("0x") && arg.length === 42);
 }
 
-const DEFAULT_KEYSTORE_ACCOUNT = "scaffold-eth-default";
+const DEFAULT_KEYSTORE_ACCOUNT = "daobox-default";
 async function main() {
   const address = findAddressFromArgs(process.argv);
 
@@ -81,12 +81,12 @@ async function main() {
 
     if (isDefaultAccount) {
       console.log(
-        "\n🏠 It seems you are trying to access the localhost account. Did you forget to update ETH_KEYSTORE_ACCOUNT=scaffold-eth-custom in the .env file?\n"
+        "\n🏠 It seems you are trying to access the localhost account. Did you forget to update ETH_KEYSTORE_ACCOUNT=daobox-custom in the .env file?\n"
       );
     }
 
     console.log(
-      "\n💡 If you haven't generated a deployer keystore account yet, please run `yarn account:generate`. Then update the `.env` file with `ETH_KEYSTORE_ACCOUNT=scaffold-eth-custom`"
+      "\n💡 If you haven't generated a deployer keystore account yet, please run `bun account:generate`. Then update the `.env` file with `ETH_KEYSTORE_ACCOUNT=daobox-custom`"
     );
     return;
   }
@@ -94,7 +94,7 @@ async function main() {
   if (isValidAddress && isDefaultAccount) {
     console.log("\n⚠️ Displaying balance for default account");
     console.log(
-      "\n❓ Did you forget to update ETH_KEYSTORE_ACCOUNT=scaffold-eth-custom in the .env file?\n"
+      "\n❓ Did you forget to update ETH_KEYSTORE_ACCOUNT=daobox-custom in the .env file?\n"
     );
   }
 

@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/daobox";
+import { useOutsideClick } from "~~/hooks/daobox";
 
 type HeaderMenuLink = {
   label: string;
@@ -94,7 +94,7 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-ETH</span>
+            <span className="font-bold leading-tight">DAO Box</span>
             <span className="text-xs">Ethereum dev stack</span>
           </div>
         </Link>

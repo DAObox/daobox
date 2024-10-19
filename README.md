@@ -23,7 +23,7 @@
 - 🛡️ Passkeys, Session Keys, and Social Recovery: Provides a true Web2 user experience with enhanced security features.
 - ⚡ Optimized for DeFi Products: Quickly build and deploy DeFi applications.
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![Debug Contracts tab](https://github.com/daoboxdaobox-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
 ## Requirements
 
@@ -84,4 +84,4 @@ To know more about its features, check out our [website](https://scaffoldeth.io)
 
 We welcome contributions to DAOBox!
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to DAOBox.
+Please see [CONTRIBUTING.MD](https://github.com/daobox/daobox/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to DAOBox.

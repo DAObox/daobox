@@ -1,9 +1,9 @@
 import { TransactionHash } from "./TransactionHash";
 import { formatEther } from "viem";
-import { Address } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { TransactionWithFunction } from "~~/utils/scaffold-eth";
-import { TransactionsTableProps } from "~~/utils/scaffold-eth/";
+import { Address } from "~~/components/daobox";
+import { useTargetNetwork } from "~~/hooks/daobox/useTargetNetwork";
+import { TransactionWithFunction } from "~~/utils/daobox";
+import { TransactionsTableProps } from "~~/utils/daobox/";
 
 export const TransactionsTable = ({ blocks, transactionReceipts }: TransactionsTableProps) => {
   const { targetNetwork } = useTargetNetwork();

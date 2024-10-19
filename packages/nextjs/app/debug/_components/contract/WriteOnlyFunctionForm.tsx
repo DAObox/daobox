@@ -13,9 +13,9 @@ import {
   getParsedContractFunctionArgs,
   transformAbiFunction,
 } from "~~/app/debug/_components/contract";
-import { IntegerInput } from "~~/components/scaffold-eth";
-import { useTransactor } from "~~/hooks/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { IntegerInput } from "~~/components/daobox";
+import { useTransactor } from "~~/hooks/daobox";
+import { useTargetNetwork } from "~~/hooks/daobox/useTargetNetwork";
 
 type WriteOnlyFunctionFormProps = {
   abi: Abi;
