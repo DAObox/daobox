@@ -2,44 +2,42 @@
   "name": "se-2",
   "version": "0.0.1",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/hardhat",
-      "packages/nextjs"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "account": "yarn workspace @se-2/hardhat account",
-    "chain": "yarn workspace @se-2/hardhat chain",
-    "fork": "yarn workspace @se-2/hardhat fork",
-    "deploy": "yarn workspace @se-2/hardhat deploy",
-    "verify": "yarn workspace @se-2/hardhat verify",
-    "hardhat-verify": "yarn workspace @se-2/hardhat hardhat-verify",
-    "compile": "yarn workspace @se-2/hardhat compile",
-    "generate": "yarn workspace @se-2/hardhat generate",
-    "flatten": "yarn workspace @se-2/hardhat flatten",
-    "hardhat:lint": "yarn workspace @se-2/hardhat lint",
-    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
-    "hardhat:format": "yarn workspace @se-2/hardhat format",
-    "hardhat:test": "yarn workspace @se-2/hardhat test",
-    "test": "yarn hardhat:test",
-    "format": "yarn next:format && yarn hardhat:format",
-    "start": "yarn workspace @se-2/nextjs dev",
-    "next:lint": "yarn workspace @se-2/nextjs lint",
-    "next:format": "yarn workspace @se-2/nextjs format",
-    "next:check-types": "yarn workspace @se-2/nextjs check-types",
-    "next:build": "yarn workspace @se-2/nextjs build",
-    "next:serve": "yarn workspace @se-2/nextjs serve",
+    "account": "bun run --filter @se-2/foundry account",
+    "account:generate": "bun run --filter @se-2/foundry account:generate",
+    "account:import": "bun run --filter @se-2/foundry account:import",
+    "chain": "bun run --filter @se-2/foundry chain",
+    "compile": "bun run --filter @se-2/foundry compile",
+    "deploy": "bun run --filter @se-2/foundry deploy",
+    "deploy:verify": "bun run --filter @se-2/foundry deploy:verify",
+    "flatten": "bun run --filter @se-2/foundry flatten",
+    "fork": "bun run --filter @se-2/foundry fork",
+    "format": "bun run next:format && bun run foundry:format",
+    "foundry:format": "bun run --filter @se-2/foundry format",
+    "foundry:lint": "bun run --filter @se-2/foundry lint",
+    "foundry:test": "bun run --filter @se-2/foundry test",
+    "generate": "bun run account:generate",
     "postinstall": "husky install",
+    "next:build": "bun run --filter @se-2/nextjs build",
+    "next:check-types": "bun run --filter @se-2/nextjs check-types",
+    "next:format": "bun run --filter @se-2/nextjs format",
+    "next:lint": "bun run --filter @se-2/nextjs lint",
+    "next:serve": "bun run --filter @se-2/nextjs serve",
     "precommit": "lint-staged",
-    "vercel": "yarn workspace @se-2/nextjs vercel",
-    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo"
+    "start": "bun run --filter @se-2/nextjs dev",
+    "test": "bun run foundry:test",
+    "vercel": "bun run --filter @se-2/nextjs vercel",
+    "vercel:yolo": "bun run --filter @se-2/nextjs vercel:yolo",
+    "verify": "bun run --filter @se-2/foundry verify"
   },
-  "packageManager": "yarn@3.2.3",
   "devDependencies": {
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3"
+    "husky": "~8.0.3",
+    "lint-staged": "~13.2.2"
   },
+  "packageManager": "bun@latest",
   "engines": {
     "node": ">=18.18.0"
   }
